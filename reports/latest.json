@@ -2,8 +2,8 @@
   {
     "ticker": "ORCL",
     "date": "2026-06-29",
-    "close": 147.54,
-    "rsi": 29.3,
+    "close": 148.01,
+    "rsi": 29.4,
     "confirmed": 0,
     "mandatory_met": false,
     "BUY_TRIGGER": false,
@@ -18,11 +18,11 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=195.32)",
-      "2_moving_averages": "close>169.51(MA10) & >192.76(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-11.85 vs Signal=-5.36 (above=False), hist=-6.48 rising=False",
-      "4_rsi": "RSI=29.26 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.81, up>downVol=False",
-      "6_volume_profile": "close=147.54 vs POC=153.75 (above=False)"
+      "2_moving_averages": "close>169.56(MA10) & >192.79(MA20)=False, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-11.81 vs Signal=-5.36 (above=False), hist=-6.45 rising=False",
+      "4_rsi": "RSI=29.42 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=0.83, up>downVol=False",
+      "6_volume_profile": "close=148.01 vs POC=153.75 (above=False)"
     }
   }
 ]
