@@ -1,10 +1,10 @@
 [
   {
     "ticker": "ORCL",
-    "date": "2026-06-30",
-    "close": 146.55,
-    "rsi": 28.9,
-    "confirmed": 1,
+    "date": "2026-07-01",
+    "close": 142.5,
+    "rsi": 27.5,
+    "confirmed": 0,
     "mandatory_met": false,
     "BUY_TRIGGER": false,
     "context": "",
@@ -13,16 +13,16 @@
       "2_moving_averages": false,
       "3_macd": false,
       "4_rsi": false,
-      "5_volume": true,
+      "5_volume": false,
       "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=195.32)",
-      "2_moving_averages": "close>164.92(MA10) & >187.70(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-12.83 vs Signal=-6.85 (above=False), hist=-5.98 rising=True",
-      "4_rsi": "RSI=28.92 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.89, up>downVol=True",
-      "6_volume_profile": "close=146.55 vs POC=153.75 (above=False)"
+      "2_moving_averages": "close>160.34(MA10) & >182.59(MA20)=False, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-13.79 vs Signal=-8.24 (above=False), hist=-5.55 rising=True",
+      "4_rsi": "RSI=27.50 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=1.46, up>downVol=False",
+      "6_volume_profile": "close=142.50 vs POC=153.75 (above=False)"
     }
   }
 ]
