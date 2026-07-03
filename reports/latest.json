@@ -21,7 +21,7 @@
       "2_moving_averages": "close>156.01(MA10) & >178.09(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-14.56 vs Signal=-9.51 (above=False), hist=-5.06 rising=True",
       "4_rsi": "RSI=26.72 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.17, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.37, up>downVol=False",
       "6_volume_profile": "close=140.27 vs POC=153.75 (above=False)"
     }
   }
