@@ -3,7 +3,8 @@
 # להשבתה זמנית: הוסף # בתחילת השורה.
 
 ORCL
-# RKLB
-# QCOM
-# TEM
-# GEHC
+htfl
+QCOM
+TEM
+GEHC
+atkr
