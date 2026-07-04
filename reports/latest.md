@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-07-04 12:33 UTC [END-OF-DAY]
+# Reversal Checker — 2026-07-04 12:47 UTC [END-OF-DAY]
 (needs >= 4/6 + mandatory structure & volume)
 
 ## ORCL  (2026-07-02)  close=140.27  RSI=26.7
