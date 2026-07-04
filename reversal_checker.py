@@ -22,6 +22,7 @@ import os
 import json
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
@@ -195,14 +196,19 @@ def analyze(ticker, morning=False):
 
 
 # ---------------- Email ----------------
-def send_email(subject, body):
+def send_email(subject, text_body, html_body=None):
     user = os.environ.get("GMAIL_USER")
     pw = os.environ.get("GMAIL_APP_PASSWORD")
     to = os.environ.get("MAIL_TO", user)
     if not (user and pw):
         print("Email skipped: GMAIL_USER / GMAIL_APP_PASSWORD not set.")
         return
-    msg = MIMEText(body, "plain", "utf-8")
+    if html_body:
+        msg = MIMEMultipart("alternative")
+        msg.attach(MIMEText(text_body, "plain", "utf-8"))   # fallback
+        msg.attach(MIMEText(html_body, "html", "utf-8"))     # preferred
+    else:
+        msg = MIMEText(text_body, "plain", "utf-8")
     msg["Subject"], msg["From"], msg["To"] = subject, user, to
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
@@ -235,6 +241,93 @@ def render(r):
     return "\n".join(lines)
 
 
+# ---- Hebrew labels + explanations for the HTML email table ----
+HE = {
+    "1_price_structure": ("מבנה מחיר (שפל/פסגה עולים)",
+        "עובר רק כשנוצר שפל גבוה מהקודם ונשברת פסגה קודמת. זה הסימן היחיד להיפוך אמיתי — חובה."),
+    "2_moving_averages": ("ממוצעים נעים 10/20/50",
+        "עובר כשהמחיר סוגר מעל MA10 ו-MA20 וה-MA10 מתחיל לעלות (ביטול המבנה היורד)."),
+    "3_macd": ("MACD (12,26,9)",
+        "עובר כש-MACD חוצה מעל הסיגנל וההיסטוגרמה עולה. היסטוגרמה שעולה לבדה = האטה בלבד, לא אישור."),
+    "4_rsi": ("RSI (14)",
+        "עובר כש-RSI מעל 50 או שיש דיברגנס שורי. RSI נמוך (oversold) לבדו אינו אות קנייה."),
+    "5_volume": ("נפח / RVOL",
+        "עובר ביום היפוך במחזור גבוה (RVOL מעל 1.5) או כשמחזור העליות גובר על הירידות. חובה."),
+    "6_volume_profile": ("פרופיל נפח (POC)",
+        "עובר כשהמחיר מחזיק מעל אזור הנפח הכבד — כלומר יש קרקע (תמיכה) מתחת לרגליים."),
+}
+
+
+def render_html(r):
+    if "error" in r:
+        return f"<h3>{r['ticker']}</h3><p style='color:#b00'>שגיאה: {r['error']}</p>"
+
+    rows = ""
+    for k, (label, expl) in HE.items():
+        ok = r["checks"][k]
+        pill_bg = "#0a7d33" if ok else "#b02a2a"
+        pill_txt = "עבר ✓" if ok else "נכשל ✗"
+        rows += (
+            "<tr>"
+            f"<td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>{label}</td>"
+            f"<td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'>"
+            f"<span style='background:{pill_bg};color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>{pill_txt}</span></td>"
+            f"<td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;"
+            f"font-family:monospace;font-size:12px;color:#333'>{r['detail'][k]}</td>"
+            f"<td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>{expl}</td>"
+            "</tr>"
+        )
+
+    buy = r["BUY_TRIGGER"]
+    banner_bg = "#0a7d33" if buy else "#b02a2a"
+    banner_txt = (f"טריגר כניסה — ההיפוך אושר ({r['confirmed']}/6)"
+                  if buy else
+                  f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)")
+
+    return f"""
+    <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:18px">
+      <div style="background:#111;color:#fff;padding:14px 16px">
+        <span style="font-size:20px;font-weight:700">{r['ticker']}</span>
+        <span style="opacity:.8;font-size:13px">&nbsp;·&nbsp;נכון ל-{r['date']}</span>
+        <span style="float:left;direction:ltr;font-family:monospace">close {r['close']} | RSI {r['rsi']}</span>
+      </div>
+      <table style="border-collapse:collapse;width:100%;background:#fff">
+        <thead>
+          <tr style="background:#f4f4f4;font-size:13px;color:#555">
+            <th style="padding:8px 10px;text-align:right">פרמטר</th>
+            <th style="padding:8px 10px;text-align:center">סטטוס</th>
+            <th style="padding:8px 10px;text-align:right">ערכים בפועל</th>
+            <th style="padding:8px 10px;text-align:right">מה זה אומר</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+      <div style="background:{banner_bg};color:#fff;padding:12px 16px;font-size:16px;font-weight:700;text-align:center">
+        {banner_txt}
+      </div>
+    </div>
+    """
+
+
+def build_html(results, mode_he):
+    body = "".join(render_html(r) for r in results)
+    stamp = f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC"
+    return f"""<!DOCTYPE html>
+<html dir="rtl" lang="he"><head><meta charset="utf-8"></head>
+<body style="font-family:Arial,Helvetica,sans-serif;background:#fafafa;margin:0;padding:18px;direction:rtl;text-align:right">
+  <div style="max-width:760px;margin:0 auto">
+    <h2 style="margin:0 0 4px">דוח בודק היפוך מגמה</h2>
+    <p style="color:#666;margin:0 0 16px;font-size:13px">
+      {stamp} · מצב: {mode_he} · תנאי כניסה: לפחות {MIN_SIGNALS} מתוך 6, וחובה מבנה מחיר + נפח.
+    </p>
+    {body}
+    <p style="color:#999;font-size:11px;margin-top:16px">
+      כלי ניתוח אוטומטי, אינו ייעוץ השקעות. ✓=הפרמטר תומך בהיפוך, ✗=עדיין לא.
+    </p>
+  </div>
+</body></html>"""
+
+
 def main():
     results = [analyze(t, morning=MORNING_MODE) for t in TICKERS]
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
@@ -252,10 +345,15 @@ def main():
     with open(os.path.join(REPORT_DIR, "latest.json"), "w") as f:
         json.dump(results, f, indent=2, default=str)
 
+    mode_he = "בוקר (עד סגירה מלאה אחרונה)" if MORNING_MODE else "סוף יום"
+    html = build_html(results, mode_he)
+    with open(os.path.join(REPORT_DIR, "latest.html"), "w") as f:
+        f.write(html)
+
     trigger = any(r.get("BUY_TRIGGER") for r in results)
     if not EMAIL_ONLY_ON_TRIGGER or trigger:
         tag = "TRIGGER" if trigger else "report"
-        send_email(f"[Reversal] {tag} {stamp} - {','.join(TICKERS)}", text)
+        send_email(f"[Reversal] {tag} {stamp} - {','.join(TICKERS)}", text, html_body=html)
 
 
 if __name__ == "__main__":
