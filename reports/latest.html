@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he"><head><meta charset="utf-8"></head>
+<body style="font-family:Arial,Helvetica,sans-serif;background:#fafafa;margin:0;padding:18px;direction:rtl;text-align:right">
+  <div style="max-width:760px;margin:0 auto">
+    <h2 style="margin:0 0 4px">דוח בודק היפוך מגמה</h2>
+    <p style="color:#666;margin:0 0 16px;font-size:13px">
+      2026-07-04 13:00 UTC · מצב: סוף יום · תנאי כניסה: לפחות 4 מתוך 6, וחובה מבנה מחיר + נפח.
+    </p>
+    
+    <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:18px">
+      <div style="background:#111;color:#fff;padding:14px 16px">
+        <span style="font-size:20px;font-weight:700">ORCL</span>
+        <span style="opacity:.8;font-size:13px">&nbsp;·&nbsp;נכון ל-2026-07-02</span>
+        <span style="float:left;direction:ltr;font-family:monospace">close 140.27 | RSI 26.7</span>
+      </div>
+      <table style="border-collapse:collapse;width:100%;background:#fff">
+        <thead>
+          <tr style="background:#f4f4f4;font-size:13px;color:#555">
+            <th style="padding:8px 10px;text-align:right">פרמטר</th>
+            <th style="padding:8px 10px;text-align:center">סטטוס</th>
+            <th style="padding:8px 10px;text-align:right">ערכים בפועל</th>
+            <th style="padding:8px 10px;text-align:right">מה זה אומר</th>
+          </tr>
+        </thead>
+        <tbody><tr><td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>מבנה מחיר (שפל/פסגה עולים)</td><td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'><span style='background:#b02a2a;color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>נכשל ✗</span></td><td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;font-family:monospace;font-size:12px;color:#333'>HigherLow=False, brokeSwingHigh=False (last swing high=195.32)</td><td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>עובר רק כשנוצר שפל גבוה מהקודם ונשברת פסגה קודמת. זה הסימן היחיד להיפוך אמיתי — חובה.</td></tr><tr><td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>ממוצעים נעים 10/20/50</td><td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'><span style='background:#b02a2a;color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>נכשל ✗</span></td><td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;font-family:monospace;font-size:12px;color:#333'>close>156.01(MA10) & >178.09(MA20)=False, MA10 rising=False, MA10>MA50=False</td><td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>עובר כשהמחיר סוגר מעל MA10 ו-MA20 וה-MA10 מתחיל לעלות (ביטול המבנה היורד).</td></tr><tr><td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>MACD (12,26,9)</td><td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'><span style='background:#b02a2a;color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>נכשל ✗</span></td><td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;font-family:monospace;font-size:12px;color:#333'>MACD=-14.56 vs Signal=-9.51 (above=False), hist=-5.06 rising=True</td><td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>עובר כש-MACD חוצה מעל הסיגנל וההיסטוגרמה עולה. היסטוגרמה שעולה לבדה = האטה בלבד, לא אישור.</td></tr><tr><td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>RSI (14)</td><td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'><span style='background:#b02a2a;color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>נכשל ✗</span></td><td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;font-family:monospace;font-size:12px;color:#333'>RSI=26.72 rising=False, bullishDivergence=False</td><td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>עובר כש-RSI מעל 50 או שיש דיברגנס שורי. RSI נמוך (oversold) לבדו אינו אות קנייה.</td></tr><tr><td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>נפח / RVOL</td><td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'><span style='background:#b02a2a;color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>נכשל ✗</span></td><td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;font-family:monospace;font-size:12px;color:#333'>day up=False, RVOL=1.37, up>downVol=False</td><td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>עובר ביום היפוך במחזור גבוה (RVOL מעל 1.5) או כשמחזור העליות גובר על הירידות. חובה.</td></tr><tr><td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>פרופיל נפח (POC)</td><td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'><span style='background:#b02a2a;color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>נכשל ✗</span></td><td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;font-family:monospace;font-size:12px;color:#333'>close=140.27 vs POC=153.75 (above=False)</td><td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>עובר כשהמחיר מחזיק מעל אזור הנפח הכבד — כלומר יש קרקע (תמיכה) מתחת לרגליים.</td></tr></tbody>
+      </table>
+      <div style="background:#b02a2a;color:#fff;padding:12px 16px;font-size:16px;font-weight:700;text-align:center">
+        אין כניסה — להמתין לאישור (0/6 בלבד)
+      </div>
+    </div>
+    
+    <p style="color:#999;font-size:11px;margin-top:16px">
+      כלי ניתוח אוטומטי, אינו ייעוץ השקעות. ✓=הפרמטר תומך בהיפוך, ✗=עדיין לא.
+    </p>
+  </div>
+</body></html>
