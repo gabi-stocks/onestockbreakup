@@ -38,6 +38,20 @@ MORNING_MODE = os.environ.get("MORNING_MODE", "false").lower() == "true"
 EMAIL_ONLY_ON_TRIGGER = os.environ.get("EMAIL_ONLY_ON_TRIGGER", "false").lower() == "true"
 PIVOT_L, PIVOT_R = 3, 3
 REPORT_DIR = "reports"
+TICKERS_FILE = "tickers.txt"
+
+
+def load_tickers():
+    """Priority: tickers.txt (one symbol per line, '#'=comment) -> TICKERS env -> ORCL."""
+    if os.path.exists(TICKERS_FILE):
+        syms = []
+        for line in open(TICKERS_FILE, encoding="utf-8"):
+            line = line.split("#")[0].strip().upper()
+            if line:
+                syms.append(line)
+        if syms:
+            return syms
+    return [t.strip().upper() for t in os.environ.get("TICKERS", "ORCL").split(",") if t.strip()]
 
 
 # ---------------- Indicators ----------------
@@ -181,6 +195,26 @@ def analyze(ticker, morning=False):
     mandatory = checks["1_price_structure"] and checks["5_volume"]
     buy = n_conf >= MIN_SIGNALS and mandatory
 
+    # --- Proximity score per parameter (0..1, higher = closer to passing) ---
+    # Based on how many sub-conditions are met + light momentum credit.
+    def c01(x):
+        return max(0.0, min(1.0, float(x)))
+
+    progress = {
+        "1_price_structure": np.mean([bool(higher_low), bool(broke_high)]),
+        "2_moving_averages": np.mean([last_close > ma10.iloc[-1],
+                                      last_close > ma20.iloc[-1], bool(ma10_rising)]),
+        "3_macd": np.mean([bool(macd_above), bool(hist_rising)]),
+        "4_rsi": np.mean([rsi_now > 50, bool(rsi_rising), bool(bull_div)]),
+        "5_volume": np.mean([bool(latest_up and rvol_today > 1.5),
+                             bool(up_gt_down), rvol_today > 1.2]),
+        "6_volume_profile": 1.0 if last_close > poc else 0.5 * c01(last_close / poc),
+    }
+    progress = {k: round(float(v), 3) for k, v in progress.items()}
+    # closest FAILING parameter (what to watch next)
+    failing = {k: progress[k] for k in checks if not checks[k]}
+    closest = max(failing, key=failing.get) if failing else None
+
     return {
         "ticker": ticker,
         "date": df.index[-1].strftime("%Y-%m-%d"),
@@ -192,6 +226,8 @@ def analyze(ticker, morning=False):
         "context": ctx,
         "checks": checks,
         "detail": detail,
+        "progress": progress,
+        "closest": closest,
     }
 
 
@@ -257,6 +293,16 @@ HE = {
         "עובר כשהמחיר מחזיק מעל אזור הנפח הכבד — כלומר יש קרקע (תמיכה) מתחת לרגליים."),
 }
 
+# Short "what to watch next" hint for the closest-to-passing parameter
+CLOSEST_HINT = {
+    "1_price_structure": "המבנה היורד עדיין שולט — צריך שפל גבוה יותר ושבירת פסגה קודמת.",
+    "2_moving_averages": "המחיר מתחת לממוצעים — צריך סגירה מעל MA10 ואז MA20.",
+    "3_macd": "ההיסטוגרמה מתחילה להאט — האזהרה המוקדמת. עקוב אחר חציית MACD מעל הסיגנל.",
+    "4_rsi": "ה-RSI עוד לא מתאושש — צריך עלייה מעל 50 או דיברגנס שורי.",
+    "5_volume": "הנפח כמעט מספיק — צריך יום עלייה במחזור גבוה (RVOL מעל 1.5).",
+    "6_volume_profile": "המחיר מתקרב לאזור הנפח הכבד — צריך סגירה מעליו כדי לקבל תמיכה.",
+}
+
 
 def render_html(r):
     if "error" in r:
@@ -284,12 +330,26 @@ def render_html(r):
                   if buy else
                   f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)")
 
+    # "closest to passing" strip
+    if buy:
+        strip = "<b>כל הפרמטרים תומכים בהיפוך.</b>"
+    elif r.get("closest"):
+        ck = r["closest"]
+        pct = int(round(r["progress"][ck] * 100))
+        strip = (f"🔎 <b>הכי קרוב לעבור:</b> {HE[ck][0]} "
+                 f"(~{pct}%) — {CLOSEST_HINT[ck]}")
+    else:
+        strip = "אף פרמטר עדיין לא קרוב — הטרנד היורד חזק."
+
     return f"""
     <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:18px">
       <div style="background:#111;color:#fff;padding:14px 16px">
         <span style="font-size:20px;font-weight:700">{r['ticker']}</span>
         <span style="opacity:.8;font-size:13px">&nbsp;·&nbsp;נכון ל-{r['date']}</span>
         <span style="float:left;direction:ltr;font-family:monospace">close {r['close']} | RSI {r['rsi']}</span>
+      </div>
+      <div style="background:#fff7e6;border-bottom:1px solid #eee;padding:10px 16px;font-size:13px;color:#7a5900">
+        {strip}
       </div>
       <table style="border-collapse:collapse;width:100%;background:#fff">
         <thead>
@@ -329,7 +389,8 @@ def build_html(results, mode_he):
 
 
 def main():
-    results = [analyze(t, morning=MORNING_MODE) for t in TICKERS]
+    tickers = load_tickers()
+    results = [analyze(t, morning=MORNING_MODE) for t in tickers]
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     text = (f"# Reversal Checker — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} [{mode}]\n"
@@ -353,7 +414,7 @@ def main():
     trigger = any(r.get("BUY_TRIGGER") for r in results)
     if not EMAIL_ONLY_ON_TRIGGER or trigger:
         tag = "TRIGGER" if trigger else "report"
-        send_email(f"[Reversal] {tag} {stamp} - {','.join(TICKERS)}", text, html_body=html)
+        send_email(f"[Reversal] {tag} {stamp} - {','.join(tickers)}", text, html_body=html)
 
 
 if __name__ == "__main__":
