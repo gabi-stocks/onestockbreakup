@@ -8,3 +8,4 @@ QCOM
 TEM
 GEHC
 atkr
+amsc
