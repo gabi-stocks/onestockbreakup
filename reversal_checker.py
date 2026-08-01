@@ -8,11 +8,14 @@ Checks per ticker:
   1. Price structure  -> Higher Low + break of last swing High (Higher High)
   2. Moving averages  -> close above MA10 & MA20, MA10 rising
   3. MACD (12,26,9)   -> MACD above Signal AND histogram rising
-  4. RSI (14)         -> RSI > 50  OR  bullish divergence with RSI rising
-  5. Volume / RVOL    -> reversal day on high RVOL  OR  up-volume > down-volume
+  4. RSI (14)         -> RSI > RSI_THRESHOLD  OR  bullish divergence with RSI rising
+  5. Volume / RVOL    -> reversal day on high RVOL  OR  up-volume > down-volume (with an RVOL floor)
   6. Volume Profile   -> close holding above the POC (heaviest-volume price)
 
-BUY trigger only if >= MIN_SIGNALS confirm AND (#1 structure) AND (#5 volume).
+BUY trigger only if >= MIN_SIGNALS confirm AND (#1 structure) AND (#5 volume)
+AND (if REQUIRE_MARKET_REGIME) SPY is above its 200d MA.
+All thresholds are env-configurable -- see the Config section below for current
+defaults and reports/backtest_results.md for why they're set where they are.
 
 Optional email (Gmail SMTP) + optional MORNING_MODE.
 Analysis tooling, not investment advice.
@@ -127,6 +130,55 @@ def fetch_market_regime():
     except Exception as e:
         print(f"WARNING: market regime check failed ({e}); not gating on it this run.")
         return True
+
+
+BACKTEST_RESULTS_FILE = os.path.join(REPORT_DIR, "backtest_results.json")
+
+
+def load_reliability():
+    """Per-ticker historical reliability from the last backtest.py run, read from
+    the IMPROVED variant (it matches the thresholds actually in use here). Returns
+    {ticker: {n_triggers, winrate_20d_%, avg_fwd_20d_%, ...}}, or {} if no backtest
+    has been run yet / the file can't be read."""
+    if not os.path.exists(BACKTEST_RESULTS_FILE):
+        return {}
+    try:
+        with open(BACKTEST_RESULTS_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"WARNING: could not read {BACKTEST_RESULTS_FILE} ({e}); skipping reliability tags.")
+        return {}
+    out = {}
+    for row in data.get("per_ticker", []):
+        if row.get("variant") == "IMPROVED":
+            out[row["ticker"]] = row
+    return out
+
+
+def reliability_label(row):
+    """(short tier label, one-line explanation) from a ticker's backtested stats.
+    Always names the actual n and win rate behind the label -- never just a bare
+    tier -- so the reader can judge the label's own reliability too."""
+    if not row or not row.get("n_triggers"):
+        return ("אין נתוני בקטסט",
+                "לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).")
+    n = row["n_triggers"]
+    win20 = row.get("winrate_20d_%")
+    avg20 = row.get("avg_fwd_20d_%")
+    if n < 5:
+        return (f"מדגם קטן מדי ({n} עסקאות)",
+                f"רק {n} טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.")
+    if win20 is None:
+        return (f"נתונים חלקיים ({n} עסקאות)", "לא היה מספיק דאטה קדימה כדי לחשב win rate.")
+    if win20 >= 55 and n >= 10:
+        tier = "אמינות גבוהה יחסית"
+    elif win20 >= 50:
+        tier = "אמינות בינונית"
+    else:
+        tier = "אמינות נמוכה"
+    detail = (f"בבקטסט (5 שנים אחורה): {n} עסקאות בלתי-תלויות, "
+              f"win rate ל-20 יום={win20}%, תשואה ממוצעת ל-20 יום={avg20}%.")
+    return (tier, detail)
 
 
 def intraday_context(ticker):
@@ -244,9 +296,9 @@ def analyze(ticker, morning=False, market_ok=True):
         "2_moving_averages": np.mean([last_close > ma10.iloc[-1],
                                       last_close > ma20.iloc[-1], bool(ma10_rising)]),
         "3_macd": np.mean([bool(macd_above), bool(hist_rising)]),
-        "4_rsi": np.mean([rsi_now > 50, bool(rsi_rising), bool(bull_div)]),
-        "5_volume": np.mean([bool(latest_up and rvol_today > 1.5),
-                             bool(up_gt_down), rvol_today > 1.2]),
+        "4_rsi": np.mean([rsi_now > RSI_THRESHOLD, bool(rsi_rising), bool(bull_div)]),
+        "5_volume": np.mean([bool(latest_up and rvol_today > RVOL_THRESHOLD),
+                             bool(up_gt_down), rvol_today > RVOL_SOFT_FLOOR]),
         "6_volume_profile": 1.0 if last_close > poc else 0.5 * c01(last_close / poc),
     }
     progress = {k: round(float(v), 3) for k, v in progress.items()}
@@ -308,6 +360,8 @@ def render(r):
         "6_volume_profile": "6. Volume Profile POC",
     }
     lines = [f"## {r['ticker']}  ({r['date']})  close={r['close']}  RSI={r['rsi']}{r['context']}"]
+    tier, rel_detail = reliability_label(r.get("reliability"))
+    lines.append(f"  [אמינות היסטורית: {tier}] {rel_detail}")
     for k, label in names.items():
         mark = "PASS" if r["checks"][k] else "----"
         lines.append(f"  [{mark}] {label}\n         {r['detail'][k]}")
@@ -320,36 +374,44 @@ def render(r):
 
 
 # ---- Hebrew labels + explanations for the HTML email table ----
-HE = {
-    "1_price_structure": ("מבנה מחיר (שפל/פסגה עולים)",
-        "עובר רק כשנוצר שפל גבוה מהקודם ונשברת פסגה קודמת. זה הסימן היחיד להיפוך אמיתי — חובה."),
-    "2_moving_averages": ("ממוצעים נעים 10/20/50",
-        "עובר כשהמחיר סוגר מעל MA10 ו-MA20 וה-MA10 מתחיל לעלות (ביטול המבנה היורד)."),
-    "3_macd": ("MACD (12,26,9)",
-        "עובר כש-MACD חוצה מעל הסיגנל וההיסטוגרמה עולה. היסטוגרמה שעולה לבדה = האטה בלבד, לא אישור."),
-    "4_rsi": ("RSI (14)",
-        "עובר כש-RSI מעל 50 או שיש דיברגנס שורי. RSI נמוך (oversold) לבדו אינו אות קנייה."),
-    "5_volume": ("נפח / RVOL",
-        "עובר ביום היפוך במחזור גבוה (RVOL מעל 1.5) או כשמחזור העליות גובר על הירידות. חובה."),
-    "6_volume_profile": ("פרופיל נפח (POC)",
-        "עובר כשהמחיר מחזיק מעל אזור הנפח הכבד — כלומר יש קרקע (תמיכה) מתחת לרגליים."),
-}
+# Built dynamically (not a static dict) so the explanation text always matches
+# the thresholds actually in effect (RSI_THRESHOLD etc.), even if you tune them
+# via env vars later without touching this file.
+def build_he():
+    poc_desc = f"{POC_WINDOW} הימים האחרונים" if POC_WINDOW else "כל ההיסטוריה הזמינה"
+    return {
+        "1_price_structure": ("מבנה מחיר (שפל/פסגה עולים)",
+            "עובר רק כשנוצר שפל גבוה מהקודם ונשברת פסגה קודמת. זה הסימן היחיד להיפוך אמיתי — חובה."),
+        "2_moving_averages": ("ממוצעים נעים 10/20/50",
+            "עובר כשהמחיר סוגר מעל MA10 ו-MA20 וה-MA10 מתחיל לעלות (ביטול המבנה היורד)."),
+        "3_macd": ("MACD (12,26,9)",
+            "עובר כש-MACD חוצה מעל הסיגנל וההיסטוגרמה עולה. היסטוגרמה שעולה לבדה = האטה בלבד, לא אישור."),
+        "4_rsi": ("RSI (14)",
+            f"עובר כש-RSI מעל {RSI_THRESHOLD:g} או שיש דיברגנס שורי. RSI נמוך (oversold) לבדו אינו אות קנייה."),
+        "5_volume": ("נפח / RVOL",
+            f"עובר ביום היפוך במחזור גבוה (RVOL מעל {RVOL_THRESHOLD:g}), או כשמחזור העליות גובר על הירידות "
+            f"וה-RVOL מעל {RVOL_SOFT_FLOOR:g} (רצפת פעילות מינימלית — שבוע שקט לא מספיק). חובה."),
+        "6_volume_profile": ("פרופיל נפח (POC)",
+            f"עובר כשהמחיר מחזיק מעל אזור הנפח הכבד, מחושב על {poc_desc} — כלומר יש תמיכה טרייה מתחת לרגליים."),
+    }
 
 # Short "what to watch next" hint for the closest-to-passing parameter
-CLOSEST_HINT = {
-    "1_price_structure": "המבנה היורד עדיין שולט — צריך שפל גבוה יותר ושבירת פסגה קודמת.",
-    "2_moving_averages": "המחיר מתחת לממוצעים — צריך סגירה מעל MA10 ואז MA20.",
-    "3_macd": "ההיסטוגרמה מתחילה להאט — האזהרה המוקדמת. עקוב אחר חציית MACD מעל הסיגנל.",
-    "4_rsi": "ה-RSI עוד לא מתאושש — צריך עלייה מעל 50 או דיברגנס שורי.",
-    "5_volume": "הנפח כמעט מספיק — צריך יום עלייה במחזור גבוה (RVOL מעל 1.5).",
-    "6_volume_profile": "המחיר מתקרב לאזור הנפח הכבד — צריך סגירה מעליו כדי לקבל תמיכה.",
-}
+def build_closest_hint():
+    return {
+        "1_price_structure": "המבנה היורד עדיין שולט — צריך שפל גבוה יותר ושבירת פסגה קודמת.",
+        "2_moving_averages": "המחיר מתחת לממוצעים — צריך סגירה מעל MA10 ואז MA20.",
+        "3_macd": "ההיסטוגרמה מתחילה להאט — האזהרה המוקדמת. עקוב אחר חציית MACD מעל הסיגנל.",
+        "4_rsi": f"ה-RSI עוד לא מתאושש — צריך עלייה מעל {RSI_THRESHOLD:g} או דיברגנס שורי.",
+        "5_volume": f"הנפח כמעט מספיק — צריך יום עלייה במחזור גבוה (RVOL מעל {RVOL_THRESHOLD:g}).",
+        "6_volume_profile": "המחיר מתקרב לאזור הנפח הכבד — צריך סגירה מעליו כדי לקבל תמיכה.",
+    }
 
 
 def render_html(r):
     if "error" in r:
         return f"<h3>{r['ticker']}</h3><p style='color:#b00'>שגיאה: {r['error']}</p>"
 
+    HE = build_he()
     rows = ""
     for k, (label, expl) in HE.items():
         ok = r["checks"][k]
@@ -382,9 +444,11 @@ def render_html(r):
         ck = r["closest"]
         pct = int(round(r["progress"][ck] * 100))
         strip = (f"🔎 <b>הכי קרוב לעבור:</b> {HE[ck][0]} "
-                 f"(~{pct}%) — {CLOSEST_HINT[ck]}")
+                 f"(~{pct}%) — {build_closest_hint()[ck]}")
     else:
         strip = "אף פרמטר עדיין לא קרוב — הטרנד היורד חזק."
+
+    tier, rel_detail = reliability_label(r.get("reliability"))
 
     return f"""
     <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:18px">
@@ -392,6 +456,9 @@ def render_html(r):
         <span style="font-size:20px;font-weight:700">{r['ticker']}</span>
         <span style="opacity:.8;font-size:13px">&nbsp;·&nbsp;נכון ל-{r['date']}</span>
         <span style="float:left;direction:ltr;font-family:monospace">close {r['close']} | RSI {r['rsi']}</span>
+      </div>
+      <div style="background:#eef2ff;border-bottom:1px solid #dde3fb;padding:8px 16px;font-size:12px;color:#333">
+        📊 <b>אמינות היסטורית של האות במניה זו:</b> {tier}. {rel_detail}
       </div>
       <div style="background:#fff7e6;border-bottom:1px solid #eee;padding:10px 16px;font-size:13px;color:#7a5900">
         {strip}
@@ -417,14 +484,31 @@ def render_html(r):
 def build_html(results, mode_he):
     body = "".join(render_html(r) for r in results)
     stamp = f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC"
+    regime_line = ("נדרש: מדד SPY מעל ממוצע 200 יום שלו (אחרת הטריגר נחסם)"
+                    if REQUIRE_MARKET_REGIME else "לא נבדק מצב שוק כללי")
+    poc_desc = f"{POC_WINDOW} הימים האחרונים" if POC_WINDOW else "כל ההיסטוריה הזמינה"
+    legend = f"""
+    <div style="border:1px solid #dde3fb;background:#f7f9ff;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#333">
+      <b>מקרא ההגדרות של הריצה הזו</b> (לחישוב מדויק ראה detail בכל שורה למטה):
+      <ul style="margin:8px 0 0;padding-right:18px;line-height:1.7">
+        <li><b>סף כניסה:</b> לפחות {MIN_SIGNALS} מתוך 6 פרמטרים, וחובה שיעברו מבנה מחיר (#1) ונפח (#5).</li>
+        <li><b>סף RSI:</b> {RSI_THRESHOLD:g} (ולא 50 — הועלה כדי לצמצם אותות חלשים, ראו backtest).</li>
+        <li><b>סף RVOL:</b> {RVOL_THRESHOLD:g} ליום היפוך בנפח גבוה; רצפת פעילות {RVOL_SOFT_FLOOR:g} לענף החלופי.</li>
+        <li><b>חלון פרופיל נפח (POC):</b> {poc_desc}.</li>
+        <li><b>מצב שוק כללי:</b> {regime_line}.</li>
+        <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
+      </ul>
+    </div>
+    """
     return f"""<!DOCTYPE html>
 <html dir="rtl" lang="he"><head><meta charset="utf-8"></head>
 <body style="font-family:Arial,Helvetica,sans-serif;background:#fafafa;margin:0;padding:18px;direction:rtl;text-align:right">
   <div style="max-width:760px;margin:0 auto">
     <h2 style="margin:0 0 4px">דוח בודק היפוך מגמה</h2>
     <p style="color:#666;margin:0 0 16px;font-size:13px">
-      {stamp} · מצב: {mode_he} · תנאי כניסה: לפחות {MIN_SIGNALS} מתוך 6, וחובה מבנה מחיר + נפח.
+      {stamp} · מצב: {mode_he}
     </p>
+    {legend}
     {body}
     <p style="color:#999;font-size:11px;margin-top:16px">
       כלי ניתוח אוטומטי, אינו ייעוץ השקעות. ✓=הפרמטר תומך בהיפוך, ✗=עדיין לא.
@@ -438,7 +522,11 @@ def main():
     market_ok = fetch_market_regime()
     if REQUIRE_MARKET_REGIME:
         print(f"Market regime (SPY > 200d MA): {market_ok}")
+    reliability = load_reliability()
     results = [analyze(t, morning=MORNING_MODE, market_ok=market_ok) for t in tickers]
+    for r in results:
+        if "error" not in r:
+            r["reliability"] = reliability.get(r["ticker"])
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     text = (f"# Reversal Checker — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} [{mode}]\n"
