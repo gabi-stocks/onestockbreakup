@@ -40,6 +40,20 @@ PIVOT_L, PIVOT_R = 3, 3
 REPORT_DIR = "reports"
 TICKERS_FILE = "tickers.txt"
 
+# --- Backtested thresholds (2026-08-01, backtest.py on 6 tickers / 5y) ---
+# Defaults below match the "IMPROVED" variant, which beat the original
+# ("BASELINE": RSI_THRESHOLD=50, RVOL_SOFT_FLOOR=0, POC_WINDOW=full-history,
+# REQUIRE_MARKET_REGIME=false) on 10d/20d winrate and avg forward return,
+# at the cost of ~fewer, more selective signals. See reports/backtest_results.md
+# for the numbers and rerun backtest.py if tickers.txt changes materially.
+# Set any of these env vars in the workflow to override / revert to baseline.
+RSI_THRESHOLD = float(os.environ.get("RSI_THRESHOLD", "55"))
+RVOL_THRESHOLD = float(os.environ.get("RVOL_THRESHOLD", "1.5"))
+RVOL_SOFT_FLOOR = float(os.environ.get("RVOL_SOFT_FLOOR", "1.1"))
+_poc_window_env = os.environ.get("POC_WINDOW", "120")
+POC_WINDOW = int(_poc_window_env) if _poc_window_env.strip() else None
+REQUIRE_MARKET_REGIME = os.environ.get("REQUIRE_MARKET_REGIME", "true").lower() == "true"
+
 
 def load_tickers():
     """Priority: tickers.txt (one symbol per line, '#'=comment) -> TICKERS env -> ORCL."""
@@ -98,6 +112,23 @@ def volume_profile_poc(close, volume, bins=50):
     return float((edges[poc] + edges[poc + 1]) / 2)
 
 
+def fetch_market_regime():
+    """True if SPY is above its 200d MA (the 'IMPROVED' backtest variant's
+    market-regime filter). Falls back to True (i.e. don't block) if the SPY
+    fetch fails, so a network hiccup on the index never crashes the whole run."""
+    if not REQUIRE_MARKET_REGIME:
+        return True
+    try:
+        spy = yf.Ticker("SPY").history(period="1y", auto_adjust=False).dropna()
+        if len(spy) < 200:
+            return True
+        ma200 = spy["Close"].rolling(200).mean()
+        return bool(spy["Close"].iloc[-1] > ma200.iloc[-1])
+    except Exception as e:
+        print(f"WARNING: market regime check failed ({e}); not gating on it this run.")
+        return True
+
+
 def intraday_context(ticker):
     """Best-effort: today's open -> latest price (delayed). Used in morning mode."""
     try:
@@ -112,7 +143,7 @@ def intraday_context(ticker):
 
 
 # ---------------- Core analysis ----------------
-def analyze(ticker, morning=False):
+def analyze(ticker, morning=False, market_ok=True):
     try:
         df = yf.Ticker(ticker).history(period=PERIOD, auto_adjust=False).dropna()
     except Exception as e:
@@ -176,7 +207,7 @@ def analyze(ticker, morning=False):
         bull_div = (low.iloc[p2] < low.iloc[p1]) and (rsi_s.iloc[p2] > rsi_s.iloc[p1])
     rsi_now = float(rsi_s.iloc[-1])
     rsi_rising = rsi_s.iloc[-1] > rsi_s.iloc[-2]
-    checks["4_rsi"] = bool(rsi_now > 50 or (bull_div and rsi_rising))
+    checks["4_rsi"] = bool(rsi_now > RSI_THRESHOLD or (bull_div and rsi_rising))
     detail["4_rsi"] = f"RSI={rsi_now:.2f} rising={rsi_rising}, bullishDivergence={bull_div}"
 
     # 5) Volume / RVOL
@@ -186,17 +217,22 @@ def analyze(ticker, morning=False):
     up_vol = recent.loc[recent["Close"] >= recent["Open"], "Volume"].mean()
     down_vol = recent.loc[recent["Close"] < recent["Open"], "Volume"].mean()
     up_gt_down = np.nan_to_num(up_vol) > np.nan_to_num(down_vol)
-    checks["5_volume"] = bool((latest_up and rvol_today > 1.5) or up_gt_down)
+    checks["5_volume"] = bool(
+        (latest_up and rvol_today > RVOL_THRESHOLD)
+        or (up_gt_down and rvol_today > RVOL_SOFT_FLOOR)
+    )
     detail["5_volume"] = f"day up={latest_up}, RVOL={rvol_today:.2f}, up>downVol={up_gt_down}"
 
-    # 6) Volume Profile POC
-    poc = volume_profile_poc(close, vol)
+    # 6) Volume Profile POC (rolling window if POC_WINDOW is set, else full history)
+    poc_close = close.tail(POC_WINDOW) if POC_WINDOW else close
+    poc_vol = vol.tail(POC_WINDOW) if POC_WINDOW else vol
+    poc = volume_profile_poc(poc_close, poc_vol)
     checks["6_volume_profile"] = bool(last_close > poc)
     detail["6_volume_profile"] = f"close={last_close:.2f} vs POC={poc:.2f} (above={last_close > poc})"
 
     n_conf = sum(checks.values())
     mandatory = checks["1_price_structure"] and checks["5_volume"]
-    buy = n_conf >= MIN_SIGNALS and mandatory
+    buy = n_conf >= MIN_SIGNALS and mandatory and market_ok
 
     # --- Proximity score per parameter (0..1, higher = closer to passing) ---
     # Based on how many sub-conditions are met + light momentum credit.
@@ -225,6 +261,7 @@ def analyze(ticker, morning=False):
         "rsi": round(rsi_now, 1),
         "confirmed": n_conf,
         "mandatory_met": mandatory,
+        "market_regime_ok": market_ok,
         "BUY_TRIGGER": buy,
         "context": ctx,
         "checks": checks,
@@ -276,6 +313,8 @@ def render(r):
         lines.append(f"  [{mark}] {label}\n         {r['detail'][k]}")
     verdict = "BUY TRIGGER - reversal confirmed" if r["BUY_TRIGGER"] else "NO ENTRY - wait for confirmation"
     lines.append(f"  >> {r['confirmed']}/6 confirmed | mandatory(structure+volume)={r['mandatory_met']}")
+    if not r.get("market_regime_ok", True) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS:
+        lines.append("  >> (would have triggered, but blocked: SPY below its 200d MA)")
     lines.append(f"  >> {verdict}\n")
     return "\n".join(lines)
 
@@ -334,8 +373,11 @@ def render_html(r):
                   f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)")
 
     # "closest to passing" strip
+    blocked_by_regime = (not r.get("market_regime_ok", True)) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS
     if buy:
         strip = "<b>כל הפרמטרים תומכים בהיפוך.</b>"
+    elif blocked_by_regime:
+        strip = "⚠️ <b>כל הפרמטרים עברו, אך החסימה היא מצב השוק</b> — מדד ה-SPY מתחת לממוצע 200 יום, אז הטריגר נחסם."
     elif r.get("closest"):
         ck = r["closest"]
         pct = int(round(r["progress"][ck] * 100))
@@ -393,7 +435,10 @@ def build_html(results, mode_he):
 
 def main():
     tickers = load_tickers()
-    results = [analyze(t, morning=MORNING_MODE) for t in tickers]
+    market_ok = fetch_market_regime()
+    if REQUIRE_MARKET_REGIME:
+        print(f"Market regime (SPY > 200d MA): {market_ok}")
+    results = [analyze(t, morning=MORNING_MODE, market_ok=market_ok) for t in tickers]
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     text = (f"# Reversal Checker — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} [{mode}]\n"
