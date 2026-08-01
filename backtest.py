@@ -32,13 +32,19 @@ what its output tells you. Read both columns in reports/backtest_results.md
 before changing reversal_checker.py's thresholds.
 
 Important caveats baked into the results, read before trusting them:
-  - Sample sizes can be small. 7 tickers x a few years of daily bars means
-    some tickers may fire only a handful of triggers (or zero). Winrates
-    on <10 trades are not statistically meaningful -- look at n_triggers.
+  - Overlapping trades are de-duplicated: after a trade triggers, there's a
+    cooldown (default = longest horizon, 20 trading days) before another
+    trade can be recorded, so no two trades share a forward-return window.
+    n_triggers is therefore a count of INDEPENDENT trades; n_raw_signal_days
+    (reported alongside) shows how many raw signal-days that was collapsed
+    from, so you can see how much a ticker's signal tends to "stay on".
+  - Sample sizes can still be small even after de-duplication. Winrates on
+    <10 independent trades are not statistically meaningful -- look at
+    n_triggers before trusting a winrate.
   - This backtests the SIGNAL only, not a trading strategy: no position
-    sizing, no stop-loss, no transaction costs/slippage, no handling of
-    overlapping trades. A positive average forward return does not mean a
-    strategy built on this signal would be profitable after costs.
+    sizing, no stop-loss, no transaction costs/slippage. A positive average
+    forward return does not mean a strategy built on this signal would be
+    profitable after costs.
   - Survivorship / selection bias: tickers in tickers.txt were picked by
     hand (partly because they already look interesting), not sampled
     neutrally, so results here may not generalize to other stocks.
@@ -171,9 +177,26 @@ def forward_return(close_series, i, horizon):
     return (p1 / p0 - 1) * 100
 
 
-def run_variant(df, regime_by_date, params):
+def run_variant(df, regime_by_date, params, cooldown_days=None):
+    """Walk forward and record BUY_TRIGGER days.
+
+    IMPORTANT: a signal that stays True for several consecutive days (very
+    common -- the same reversal move keeps re-qualifying) is NOT several
+    independent trades. Counting each day separately inflates n_triggers
+    and biases winrate/avg-return toward whatever regime happened to be
+    trending at the time. To get an honest, independence-respecting count:
+    after a trigger fires, we go into a cooldown of `cooldown_days` (default:
+    the longest forward-return horizon) during which new triggers are not
+    recorded, so no two recorded trades have overlapping forward-return
+    windows. `n_raw_signal_days` is kept alongside for transparency, showing
+    how much de-duplication happened.
+    """
+    if cooldown_days is None:
+        cooldown_days = max(HORIZONS)
     triggers = []
+    raw_signal_days = 0
     close_series = df["Close"]
+    next_eligible_i = WARMUP
     for i in range(WARMUP, len(df) - 1):
         if params.get("require_market_regime"):
             date = df.index[i]
@@ -181,11 +204,15 @@ def run_variant(df, regime_by_date, params):
                 continue
         sub = df.iloc[:i + 1]
         if evaluate_day(sub, params):
+            raw_signal_days += 1
+            if i < next_eligible_i:
+                continue  # still in cooldown from a previous independent trade
             row = {"date": str(df.index[i].date()), "close": float(close_series.iloc[i])}
             for h in HORIZONS:
                 row[f"fwd_{h}d_%"] = forward_return(close_series, i, h)
             triggers.append(row)
-    return triggers
+            next_eligible_i = i + cooldown_days + 1
+    return triggers, raw_signal_days
 
 
 BASELINE_PARAMS = {
@@ -261,14 +288,15 @@ def main():
 
         detail_lines.append(f"\n## {ticker}")
         for label, params in (("BASELINE", BASELINE_PARAMS), ("IMPROVED", IMPROVED_PARAMS)):
-            triggers = run_variant(df, regime_by_date, params)
+            triggers, raw_days = run_variant(df, regime_by_date, params)
             pooled_by_variant[label] += triggers
             stats = pooled_stats(triggers)
+            stats["n_raw_signal_days"] = raw_days
             per_ticker_json.append({"ticker": ticker, "variant": label, **stats})
             if stats["n_triggers"] == 0:
-                detail_lines.append(f"  {label}: 0 triggers in sample period")
+                detail_lines.append(f"  {label}: 0 independent trades ({raw_days} raw signal-days) in sample period")
                 continue
-            parts = [f"{label}: {stats['n_triggers']} triggers"]
+            parts = [f"{label}: {stats['n_triggers']} independent trades (from {raw_days} raw signal-days)"]
             for h in HORIZONS:
                 parts.append(f"{h}d avg={stats[f'avg_fwd_{h}d_%']}% winrate={stats[f'winrate_{h}d_%']}%")
             detail_lines.append(" | ".join(parts))
@@ -288,11 +316,12 @@ def main():
         detail_lines.append(" | ".join(parts))
 
     detail_lines.append(
-        "\nHow to read this: compare BASELINE vs IMPROVED n_triggers and winrate/avg return "
-        "at each horizon. More triggers with similar or better winrate/avg return = the change "
-        "helped. Fewer triggers with much better winrate can also be a legitimate improvement "
-        "(higher-quality, rarer signals) \u2014 that's a judgment call, not something the numbers "
-        "alone decide."
+        "\nHow to read this: n_triggers = independent trades (overlapping signal-days on the "
+        "same move are collapsed into one, see n_raw_signal_days in the JSON for the raw count). "
+        "Compare BASELINE vs IMPROVED n_triggers and winrate/avg return at each horizon. More "
+        "trades with similar or better winrate/avg return = the change helped. Fewer trades with "
+        "much better winrate can also be a legitimate improvement (higher-quality, rarer signals) "
+        "\u2014 that's a judgment call, not something the numbers alone decide."
     )
 
     os.makedirs("reports", exist_ok=True)
