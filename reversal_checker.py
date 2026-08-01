@@ -113,7 +113,10 @@ def intraday_context(ticker):
 
 # ---------------- Core analysis ----------------
 def analyze(ticker, morning=False):
-    df = yf.Ticker(ticker).history(period=PERIOD, auto_adjust=False).dropna()
+    try:
+        df = yf.Ticker(ticker).history(period=PERIOD, auto_adjust=False).dropna()
+    except Exception as e:
+        return {"ticker": ticker, "error": f"data fetch failed: {e}"}
     if len(df) < 60:
         return {"ticker": ticker, "error": "not enough data"}
 
