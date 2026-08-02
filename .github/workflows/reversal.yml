@@ -2,10 +2,12 @@ name: Reversal Checker
 
 on:
   schedule:
-    # 22:00 UTC Mon-Fri = AFTER US close (recommended, full daily candle).
-    - cron: '0 22 * * 1-5'
-    # MORNING option (~1h after open, EDT). Uncomment + set MORNING_MODE: "true".
-    # - cron: '30 14 * * 1-5'
+    # All times UTC (GitHub Actions cron doesn't shift for DST -- these are
+    # tuned for US market hours; expect ~30-60min drift around US DST changes
+    # in Mar/Nov since NYSE open is fixed in ET, not UTC).
+    - cron: '45 14 * * 1-5'   # ~market open (soon after 9:30 ET)
+    - cron: '0 17 * * 1-5'    # midday check
+    - cron: '0 22 * * 1-5'    # after close -- full daily candle, most reliable read
   workflow_dispatch:        # manual run from the Actions tab
 
 permissions:
@@ -27,8 +29,14 @@ jobs:
         env:
           TICKERS: "ORCL"                 # e.g. "ORCL,RKLB,QCOM,TEM,GEHC"
           MIN_SIGNALS: "4"
-          MORNING_MODE: "false"           # "true" if you use the morning cron
-          EMAIL_ONLY_ON_TRIGGER: "false"  # "true" = email only when a BUY triggers
+          # Intraday runs (market-open / midday) analyze only the last COMPLETED
+          # daily candle + a delayed intraday context line; the 22:00 UTC run
+          # uses today's full closed candle. Manual (workflow_dispatch) runs
+          # default to MORNING_MODE=true since there's no finished candle yet
+          # mid-session -- switch to a full end-of-day run any time via inputs
+          # or just wait for the 22:00 UTC scheduled run.
+          MORNING_MODE: ${{ (github.event.schedule == '0 22 * * 1-5') && 'false' || 'true' }}
+          EMAIL_ONLY_ON_TRIGGER: "true"   # only email when a BUY_TRIGGER actually fires
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
@@ -39,5 +47,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add reports/ || true
-          git commit -m "reversal report $(date -u +%F)" || echo "no changes"
+          git commit -m "reversal report $(date -u +%F) $(date -u +%H:%M)" || echo "no changes"
           git push || echo "nothing to push"
