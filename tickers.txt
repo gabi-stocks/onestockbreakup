@@ -3,9 +3,17 @@
 # להשבתה זמנית: הוסף # בתחילת השורה.
 
 ORCL
-htfl
+HTFL
 QCOM
 TEM
 GEHC
-atkr
-amsc
+ATKR
+AMSC
+REGN
+CBRS
+ODD
+RKLB
+IBM
+MRVL
+QBTS
+CHWY
