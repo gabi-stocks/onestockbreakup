@@ -115,6 +115,64 @@ def volume_profile_poc(close, volume, bins=50):
     return float((edges[poc] + edges[poc + 1]) / 2)
 
 
+MAX_NEWS_ITEMS = int(os.environ.get("MAX_NEWS_ITEMS", "3"))
+NEWS_LOOKBACK_DAYS = int(os.environ.get("NEWS_LOOKBACK_DAYS", "30"))
+
+
+def fetch_recent_headlines(ticker, max_items=MAX_NEWS_ITEMS, lookback_days=NEWS_LOOKBACK_DAYS):
+    """Free headline pull from Yahoo Finance via yfinance -- no API key, no cost.
+    Returns a list of {title, publisher, link, date} for the most recent items
+    within lookback_days, newest first. Returns [] on any failure (format
+    changes, network hiccup, no news available) so this never blocks the run.
+    yfinance's .news shape has changed across versions, so this handles both
+    the flat dict format and the newer nested 'content' format defensively."""
+    try:
+        raw = yf.Ticker(ticker).news or []
+    except Exception as e:
+        print(f"WARNING: headline fetch failed for {ticker} ({e}); skipping.")
+        return []
+
+    cutoff = datetime.now(timezone.utc).timestamp() - lookback_days * 86400
+    items = []
+    for entry in raw:
+        node = entry.get("content", entry) if isinstance(entry, dict) else {}
+        title = node.get("title") or entry.get("title")
+        if not title:
+            continue
+        publisher = (
+            (node.get("provider") or {}).get("displayName")
+            or node.get("publisher")
+            or entry.get("publisher")
+            or ""
+        )
+        link = (
+            (node.get("canonicalUrl") or {}).get("url")
+            or (node.get("clickThroughUrl") or {}).get("url")
+            or entry.get("link")
+            or ""
+        )
+        ts = entry.get("providerPublishTime")
+        pub_date = node.get("pubDate") or node.get("displayTime")
+        epoch = None
+        if isinstance(ts, (int, float)):
+            epoch = ts
+        elif isinstance(pub_date, str):
+            try:
+                epoch = datetime.fromisoformat(pub_date.replace("Z", "+00:00")).timestamp()
+            except Exception:
+                epoch = None
+        if epoch is not None and epoch < cutoff:
+            continue
+        date_str = (
+            datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%d")
+            if epoch is not None else ""
+        )
+        items.append({"title": title, "publisher": publisher, "link": link, "date": date_str})
+
+    items.sort(key=lambda x: x["date"], reverse=True)
+    return items[:max_items]
+
+
 def fetch_market_regime():
     """True if SPY is above its 200d MA (the 'IMPROVED' backtest variant's
     market-regime filter). Falls back to True (i.e. don't block) if the SPY
@@ -362,6 +420,11 @@ def render(r):
     lines = [f"## {r['ticker']}  ({r['date']})  close={r['close']}  RSI={r['rsi']}{r['context']}"]
     tier, rel_detail = reliability_label(r.get("reliability"))
     lines.append(f"  [אמינות היסטורית: {tier}] {rel_detail}")
+    if r.get("headlines"):
+        lines.append("  [חדשות אחרונות]")
+        for h in r["headlines"]:
+            date_part = f"{h['date']} " if h["date"] else ""
+            lines.append(f"         - {date_part}{h['title']} ({h['publisher']})")
     for k, label in names.items():
         mark = "PASS" if r["checks"][k] else "----"
         lines.append(f"  [{mark}] {label}\n         {r['detail'][k]}")
@@ -449,6 +512,21 @@ def render_html(r):
         strip = "אף פרמטר עדיין לא קרוב — הטרנד היורד חזק."
 
     tier, rel_detail = reliability_label(r.get("reliability"))
+    news_html = ""
+    if r.get("headlines"):
+        items_html = "".join(
+            f"<li style='margin-bottom:4px'>"
+            f"<span style='color:#888;font-size:11px'>{h['date']}</span> "
+            + (f"<a href='{h['link']}' style='color:#1a4d1a;text-decoration:underline'>{h['title']}</a>"
+               if h["link"] else h["title"])
+            + f" <span style='color:#888;font-size:11px'>({h['publisher']})</span></li>"
+            for h in r["headlines"]
+        )
+        news_html = f"""
+      <div style="background:#f0f9f0;border-bottom:1px solid #dceedc;padding:8px 16px;font-size:12px;color:#1a4d1a">
+        📰 <b>חדשות אחרונות (Yahoo Finance):</b>
+        <ul style="margin:4px 0 0;padding-right:18px">{items_html}</ul>
+      </div>"""
 
     return f"""
     <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:18px">
@@ -459,7 +537,7 @@ def render_html(r):
       </div>
       <div style="background:#eef2ff;border-bottom:1px solid #dde3fb;padding:8px 16px;font-size:12px;color:#333">
         📊 <b>אמינות היסטורית של האות במניה זו:</b> {tier}. {rel_detail}
-      </div>
+      </div>{news_html}
       <div style="background:#fff7e6;border-bottom:1px solid #eee;padding:10px 16px;font-size:13px;color:#7a5900">
         {strip}
       </div>
@@ -497,6 +575,7 @@ def build_html(results, mode_he):
         <li><b>חלון פרופיל נפח (POC):</b> {poc_desc}.</li>
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
         <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
+        <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים (חינמי, בלי סיכום AI).</li>
       </ul>
     </div>
     """
@@ -527,6 +606,11 @@ def main():
     for r in results:
         if "error" not in r:
             r["reliability"] = reliability.get(r["ticker"])
+    news_calls = 0
+    for r in results:
+        if r.get("BUY_TRIGGER") and news_calls < 10:
+            r["headlines"] = fetch_recent_headlines(r["ticker"])
+            news_calls += 1
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     text = (f"# Reversal Checker — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} [{mode}]\n"
