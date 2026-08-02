@@ -122,10 +122,12 @@ NEWS_LOOKBACK_DAYS = int(os.environ.get("NEWS_LOOKBACK_DAYS", "30"))
 def fetch_recent_headlines(ticker, max_items=MAX_NEWS_ITEMS, lookback_days=NEWS_LOOKBACK_DAYS):
     """Free headline pull from Yahoo Finance via yfinance -- no API key, no cost.
     Returns a list of {title, publisher, link, date} for the most recent items
-    within lookback_days, newest first. Returns [] on any failure (format
-    changes, network hiccup, no news available) so this never blocks the run.
-    yfinance's .news shape has changed across versions, so this handles both
-    the flat dict format and the newer nested 'content' format defensively."""
+    within lookback_days, newest first (sorted by exact publish timestamp, not
+    just by day, so same-day items are still ordered correctly). Returns [] on
+    any failure (format changes, network hiccup, no news available) so this
+    never blocks the run. yfinance's .news shape has changed across versions,
+    so this handles both the flat dict format and the newer nested 'content'
+    format defensively."""
     try:
         raw = yf.Ticker(ticker).news or []
     except Exception as e:
@@ -164,12 +166,17 @@ def fetch_recent_headlines(ticker, max_items=MAX_NEWS_ITEMS, lookback_days=NEWS_
         if epoch is not None and epoch < cutoff:
             continue
         date_str = (
-            datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%d")
+            datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
             if epoch is not None else ""
         )
-        items.append({"title": title, "publisher": publisher, "link": link, "date": date_str})
+        # Items with no timestamp sort last (treated as oldest) rather than
+        # landing wherever the API happened to return them.
+        items.append({"title": title, "publisher": publisher, "link": link,
+                       "date": date_str, "_epoch": epoch if epoch is not None else -1})
 
-    items.sort(key=lambda x: x["date"], reverse=True)
+    items.sort(key=lambda x: x["_epoch"], reverse=True)
+    for it in items:
+        del it["_epoch"]
     return items[:max_items]
 
 
@@ -421,7 +428,7 @@ def render(r):
     tier, rel_detail = reliability_label(r.get("reliability"))
     lines.append(f"  [אמינות היסטורית: {tier}] {rel_detail}")
     if r.get("headlines"):
-        lines.append("  [חדשות אחרונות]")
+        lines.append("  [חדשות אחרונות, מהחדש לישן]")
         for h in r["headlines"]:
             date_part = f"{h['date']} " if h["date"] else ""
             lines.append(f"         - {date_part}{h['title']} ({h['publisher']})")
@@ -524,7 +531,7 @@ def render_html(r):
         )
         news_html = f"""
       <div style="background:#f0f9f0;border-bottom:1px solid #dceedc;padding:8px 16px;font-size:12px;color:#1a4d1a">
-        📰 <b>חדשות אחרונות (Yahoo Finance):</b>
+        📰 <b>חדשות אחרונות (Yahoo Finance, מהחדש לישן):</b>
         <ul style="margin:4px 0 0;padding-right:18px">{items_html}</ul>
       </div>"""
 
@@ -575,7 +582,7 @@ def build_html(results, mode_he):
         <li><b>חלון פרופיל נפח (POC):</b> {poc_desc}.</li>
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
         <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
-        <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים (חינמי, בלי סיכום AI).</li>
+        <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
       </ul>
     </div>
     """
