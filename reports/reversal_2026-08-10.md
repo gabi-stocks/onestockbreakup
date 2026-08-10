@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-08-10 15:35 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-08-10 17:48 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume)
 
-## ORCL  (2026-08-07)  close=147.02  RSI=56.6  [today so far: open 148.26 -> 149.32 (+0.71%) | DELAYED]
+## ORCL  (2026-08-07)  close=147.02  RSI=56.6  [today so far: open 148.26 -> 151.35 (+2.08%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=5.13%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=148.70)
@@ -18,7 +18,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## HTFL  (2026-08-07)  close=28.82  RSI=58.0  [today so far: open 28.67 -> 30.00 (+4.64%) | DELAYED]
+## HTFL  (2026-08-07)  close=28.82  RSI=58.0  [today so far: open 28.67 -> 29.70 (+3.59%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=28.35)
@@ -35,7 +35,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## QCOM  (2026-08-07)  close=167.86  RSI=47.6  [today so far: open 168.52 -> 163.57 (-2.94%) | DELAYED]
+## QCOM  (2026-08-07)  close=167.86  RSI=47.6  [today so far: open 168.52 -> 163.86 (-2.77%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=3.81%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=178.65)
@@ -52,7 +52,7 @@
   >> 2/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## TEM  (2026-08-07)  close=52.05  RSI=56.3  [today so far: open 51.79 -> 55.73 (+7.61%) | DELAYED]
+## TEM  (2026-08-07)  close=52.05  RSI=56.3  [today so far: open 51.79 -> 55.39 (+6.95%) | DELAYED]
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=62.95)
@@ -69,7 +69,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## GEHC  (2026-08-07)  close=71.77  RSI=64.7  [today so far: open 71.23 -> 72.93 (+2.39%) | DELAYED]
+## GEHC  (2026-08-07)  close=71.77  RSI=64.7  [today so far: open 71.23 -> 73.17 (+2.72%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 8 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=0.16%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=72.04)
@@ -86,7 +86,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ATKR  (2026-08-07)  close=93.71  RSI=72.7  [today so far: open 93.75 -> 93.78 (+0.03%) | DELAYED]
+## ATKR  (2026-08-07)  close=93.71  RSI=72.7  [today so far: open 93.75 -> 93.81 (+0.06%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=60.0%, תשואה ממוצעת ל-20 יום=1.64%.
   [חדשות אחרונות, מהחדש לישן]
          - 2026-08-10 11:01 UTC 3 Hyped Up  Stocks That Fall Short (StockStory)
@@ -107,7 +107,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## AMSC  (2026-08-07)  close=32.77  RSI=46.5  [today so far: open 32.77 -> 31.86 (-2.78%) | DELAYED]
+## AMSC  (2026-08-07)  close=32.77  RSI=46.5  [today so far: open 32.77 -> 31.83 (-2.87%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 16 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=11.61%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=34.99)
@@ -124,7 +124,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## REGN  (2026-08-07)  close=784.36  RSI=80.3  [today so far: open 781.72 -> 796.59 (+1.90%) | DELAYED]
+## REGN  (2026-08-07)  close=784.36  RSI=80.3  [today so far: open 781.72 -> 803.17 (+2.74%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=70.0%, תשואה ממוצעת ל-20 יום=3.57%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=691.13)
@@ -141,7 +141,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## CBRS  (2026-08-07)  close=226.73  RSI=54.1  [today so far: open 227.35 -> 230.88 (+1.55%) | DELAYED]
+## CBRS  (2026-08-07)  close=226.73  RSI=54.1  [today so far: open 227.35 -> 233.23 (+2.59%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=230.99)
@@ -158,7 +158,7 @@
   >> 2/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ODD  (2026-08-07)  close=14.12  RSI=44.0  [today so far: open 13.99 -> 12.97 (-7.29%) | DELAYED]
+## ODD  (2026-08-07)  close=14.12  RSI=44.0  [today so far: open 13.99 -> 13.07 (-6.58%) | DELAYED]
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=17.34)
@@ -175,7 +175,7 @@
   >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## RKLB  (2026-08-07)  close=82.83  RSI=56.2  [today so far: open 84.04 -> 80.87 (-3.78%) | DELAYED]
+## RKLB  (2026-08-07)  close=82.83  RSI=56.2  [today so far: open 84.04 -> 80.92 (-3.71%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=13.84%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=72.94)
@@ -192,7 +192,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## IBM  (2026-08-07)  close=237.28  RSI=49.8  [today so far: open 235.00 -> 237.78 (+1.18%) | DELAYED]
+## IBM  (2026-08-07)  close=237.28  RSI=49.8  [today so far: open 235.00 -> 236.21 (+0.51%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=1.15%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=230.97)
@@ -209,7 +209,7 @@
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## MRVL  (2026-08-07)  close=218.72  RSI=52.4  [today so far: open 227.96 -> 214.35 (-5.97%) | DELAYED]
+## MRVL  (2026-08-07)  close=218.72  RSI=52.4  [today so far: open 227.96 -> 213.29 (-6.44%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=8.38%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=222.67)
@@ -226,7 +226,7 @@
   >> 2/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## QBTS  (2026-08-07)  close=20.76  RSI=53.2  [today so far: open 20.39 -> 20.42 (+0.15%) | DELAYED]
+## QBTS  (2026-08-07)  close=20.76  RSI=53.2  [today so far: open 20.39 -> 20.26 (-0.61%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 13 עסקאות בלתי-תלויות, win rate ל-20 יום=53.8%, תשואה ממוצעת ל-20 יום=31.38%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=19.54)
@@ -243,7 +243,7 @@
   >> 2/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## CHWY  (2026-08-07)  close=23.53  RSI=61.3  [today so far: open 23.34 -> 23.00 (-1.48%) | DELAYED]
+## CHWY  (2026-08-07)  close=23.53  RSI=61.3  [today so far: open 23.34 -> 22.81 (-2.29%) | DELAYED]
   [אמינות היסטורית: אמינות נמוכה] בבקטסט (5 שנים אחורה): 7 עסקאות בלתי-תלויות, win rate ל-20 יום=28.6%, תשואה ממוצעת ל-20 יום=1.62%.
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=23.61)
