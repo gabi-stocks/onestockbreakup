@@ -8,7 +8,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 155.84 -> 153.55 (-1.47%) | DELAYED]",
+    "context": "  [today so far: open 155.84 -> 151.88 (-2.54%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -59,7 +59,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 39.06 -> 41.51 (+6.27%) | DELAYED]",
+    "context": "  [today so far: open 39.06 -> 41.81 (+7.05%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -96,7 +96,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 165.63 -> 163.77 (-1.12%) | DELAYED]",
+    "context": "  [today so far: open 165.63 -> 164.07 (-0.94%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -147,7 +147,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 53.90 -> 52.64 (-2.34%) | DELAYED]",
+    "context": "  [today so far: open 53.90 -> 52.26 (-3.04%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -198,7 +198,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 73.90 -> 73.61 (-0.40%) | DELAYED]",
+    "context": "  [today so far: open 73.90 -> 73.62 (-0.38%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -300,7 +300,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 31.99 -> 31.61 (-1.17%) | DELAYED]",
+    "context": "  [today so far: open 31.99 -> 31.88 (-0.34%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -351,7 +351,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 802.35 -> 801.08 (-0.16%) | DELAYED]",
+    "context": "  [today so far: open 802.35 -> 803.42 (+0.13%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -402,7 +402,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "  [today so far: open 226.65 -> 217.49 (-4.04%) | DELAYED]",
+    "context": "  [today so far: open 226.65 -> 219.49 (-3.16%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -431,6 +431,12 @@
     "reliability": null,
     "headlines": [
       {
+        "title": "Cerebras Drops 12% Post Q2 Earnings: Buy the Stock on the Dip?",
+        "publisher": "Zacks",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/cerebras-drops-12-post-q2-151900254.html",
+        "date": "2026-08-14 15:19 UTC"
+      },
+      {
         "title": "Cathie Wood's ARK Invest Buys $28M Of Nvidia Rival Cerebras Amid Earnings Selloff",
         "publisher": "Stocktwits",
         "link": "https://stocktwits.com/news-articles/markets/equity/cathie-wood-ark-invest-buys-28-m-of-nvidia-rival-cerebras-amid-earnings-selloff/cZotlBYRJ0W",
@@ -441,12 +447,6 @@
         "publisher": "Investor's Business Daily",
         "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-sp-500-high-workday-sandisk-oil-prices-applied-materials-earnings/?src=A00220&yptr=yahoo",
         "date": "2026-08-14 12:20 UTC"
-      },
-      {
-        "title": "Latest News In AI Chips - Cerebras Expands Amidst Rising Demand For AI Innovation",
-        "publisher": "Simply Wall St.",
-        "link": "https://finance.yahoo.com/technology/ai/articles/latest-news-ai-chips-cerebras-113751324.html",
-        "date": "2026-08-14 11:37 UTC"
       }
     ]
   },
@@ -459,7 +459,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 13.30 -> 13.44 (+1.05%) | DELAYED]",
+    "context": "  [today so far: open 13.30 -> 13.20 (-0.75%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -510,7 +510,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 79.77 -> 79.12 (-0.81%) | DELAYED]",
+    "context": "  [today so far: open 79.77 -> 80.31 (+0.68%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -561,7 +561,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 238.37 -> 234.26 (-1.72%) | DELAYED]",
+    "context": "  [today so far: open 238.37 -> 235.29 (-1.29%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -612,7 +612,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 221.40 -> 218.46 (-1.33%) | DELAYED]",
+    "context": "  [today so far: open 221.40 -> 219.53 (-0.84%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -663,7 +663,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 20.62 -> 20.96 (+1.64%) | DELAYED]",
+    "context": "  [today so far: open 20.62 -> 21.20 (+2.83%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -714,7 +714,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 22.28 -> 22.32 (+0.16%) | DELAYED]",
+    "context": "  [today so far: open 22.28 -> 22.28 (+0.02%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
