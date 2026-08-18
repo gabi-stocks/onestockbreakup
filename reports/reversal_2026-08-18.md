@@ -1,257 +1,257 @@
-# Reversal Checker — 2026-08-18 17:22 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-08-18 22:24 UTC [END-OF-DAY]
 (needs >= 4/6 + mandatory structure & volume)
 
-## ORCL  (2026-08-17)  close=146.65  RSI=52.7  [today so far: open 143.25 -> 143.62 (+0.26%) | DELAYED]
+## ORCL  (2026-08-18)  close=142.79  RSI=49.5
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=5.13%.
   [----] 1. Price structure (HL+HH)
-         HigherLow=False, brokeSwingHigh=False (last swing high=148.70)
+         HigherLow=False, brokeSwingHigh=False (last swing high=159.26)
   [----] 2. Moving averages
-         close>148.38(MA10) & >136.43(MA20)=False, MA10 rising=True, MA10>MA50=False
+         close>148.09(MA10) & >137.22(MA20)=False, MA10 rising=True, MA10>MA50=False
   [----] 3. MACD
-         MACD=2.03 vs Signal=-1.05 (above=True), hist=3.08 rising=False
+         MACD=1.68 vs Signal=-0.50 (above=True), hist=2.18 rising=False
   [----] 4. RSI
-         RSI=52.67 rising=False, bullishDivergence=True
+         RSI=49.48 rising=False, bullishDivergence=True
   [----] 5. Volume / RVOL
-         day up=False, RVOL=0.66, up>downVol=True
+         day up=False, RVOL=0.55, up>downVol=True
   [----] 6. Volume Profile POC
-         close=146.65 vs POC=148.28 (above=False)
+         close=142.79 vs POC=142.95 (above=False)
   >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## HTFL  (2026-08-17)  close=41.94  RSI=83.3  [today so far: open 41.49 -> 44.60 (+7.48%) | DELAYED]
+## HTFL  (2026-08-18)  close=45.23  RSI=85.0
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=28.35)
   [PASS] 2. Moving averages
-         close>31.42(MA10) & >28.28(MA20)=True, MA10 rising=True, MA10>MA50=True
+         close>32.99(MA10) & >29.11(MA20)=True, MA10 rising=True, MA10>MA50=True
   [PASS] 3. MACD
-         MACD=2.35 vs Signal=0.57 (above=True), hist=1.78 rising=True
+         MACD=3.21 vs Signal=1.04 (above=True), hist=2.18 rising=True
   [PASS] 4. RSI
-         RSI=83.29 rising=False, bullishDivergence=False
+         RSI=85.03 rising=True, bullishDivergence=True
   [PASS] 5. Volume / RVOL
-         day up=True, RVOL=2.57, up>downVol=True
+         day up=True, RVOL=2.36, up>downVol=True
   [PASS] 6. Volume Profile POC
-         close=41.94 vs POC=29.34 (above=True)
+         close=45.23 vs POC=25.69 (above=True)
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## QCOM  (2026-08-17)  close=162.18  RSI=44.3  [today so far: open 157.89 -> 158.91 (+0.65%) | DELAYED]
+## QCOM  (2026-08-18)  close=160.19  RSI=42.8
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=3.81%.
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=168.87)
   [----] 2. Moving averages
-         close>162.91(MA10) & >162.79(MA20)=False, MA10 rising=True, MA10>MA50=False
+         close>162.66(MA10) & >162.12(MA20)=False, MA10 rising=True, MA10>MA50=False
   [----] 3. MACD
-         MACD=-4.92 vs Signal=-6.82 (above=True), hist=1.90 rising=False
+         MACD=-4.79 vs Signal=-6.41 (above=True), hist=1.62 rising=False
   [----] 4. RSI
-         RSI=44.29 rising=False, bullishDivergence=False
+         RSI=42.76 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=False, RVOL=0.78, up>downVol=True
+         day up=True, RVOL=0.90, up>downVol=False
   [PASS] 6. Volume Profile POC
-         close=162.18 vs POC=130.42 (above=True)
+         close=160.19 vs POC=130.42 (above=True)
   >> 1/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## TEM  (2026-08-17)  close=51.64  RSI=52.3  [today so far: open 50.21 -> 49.68 (-1.06%) | DELAYED]
+## TEM  (2026-08-18)  close=49.36  RSI=47.3
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=57.03)
-  [PASS] 2. Moving averages
-         close>51.53(MA10) & >48.08(MA20)=True, MA10 rising=True, MA10>MA50=True
+  [----] 2. Moving averages
+         close>51.76(MA10) & >48.09(MA20)=False, MA10 rising=True, MA10>MA50=True
   [----] 3. MACD
-         MACD=0.56 vs Signal=-0.32 (above=True), hist=0.88 rising=False
+         MACD=0.37 vs Signal=-0.18 (above=True), hist=0.55 rising=False
   [----] 4. RSI
-         RSI=52.27 rising=False, bullishDivergence=False
+         RSI=47.27 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.60, up>downVol=True
+         day up=False, RVOL=0.75, up>downVol=True
   [----] 6. Volume Profile POC
-         close=51.64 vs POC=52.18 (above=False)
-  >> 1/6 confirmed | mandatory(structure+volume)=False
+         close=49.36 vs POC=52.18 (above=False)
+  >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## GEHC  (2026-08-17)  close=72.37  RSI=61.7  [today so far: open 73.04 -> 72.89 (-0.21%) | DELAYED]
+## GEHC  (2026-08-18)  close=72.63  RSI=62.5
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 8 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=0.16%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=72.04)
   [PASS] 2. Moving averages
-         close>72.04(MA10) & >68.56(MA20)=True, MA10 rising=True, MA10>MA50=True
+         close>72.03(MA10) & >68.56(MA20)=True, MA10 rising=True, MA10>MA50=True
   [----] 3. MACD
-         MACD=2.39 vs Signal=2.02 (above=True), hist=0.37 rising=False
+         MACD=2.36 vs Signal=2.02 (above=True), hist=0.34 rising=False
   [PASS] 4. RSI
-         RSI=61.66 rising=False, bullishDivergence=True
+         RSI=62.53 rising=True, bullishDivergence=True
   [----] 5. Volume / RVOL
-         day up=False, RVOL=0.48, up>downVol=True
+         day up=False, RVOL=0.66, up>downVol=True
   [PASS] 6. Volume Profile POC
-         close=72.37 vs POC=61.72 (above=True)
+         close=72.63 vs POC=61.72 (above=True)
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ATKR  (2026-08-17)  close=93.71  RSI=72.3  [today so far: open 93.55 -> 93.40 (-0.16%) | DELAYED]
+## ATKR  (2026-08-18)  close=93.44  RSI=71.5
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=60.0%, תשואה ממוצעת ל-20 יום=1.64%.
-  [PASS] 1. Price structure (HL+HH)
-         HigherLow=True, brokeSwingHigh=True (last swing high=77.46)
+  [----] 1. Price structure (HL+HH)
+         HigherLow=True, brokeSwingHigh=False (last swing high=94.14)
   [----] 2. Moving averages
-         close>93.74(MA10) & >84.81(MA20)=False, MA10 rising=True, MA10>MA50=True
+         close>93.69(MA10) & >84.79(MA20)=False, MA10 rising=True, MA10>MA50=True
   [----] 3. MACD
-         MACD=5.22 vs Signal=4.41 (above=True), hist=0.80 rising=False
+         MACD=5.19 vs Signal=4.40 (above=True), hist=0.78 rising=False
   [PASS] 4. RSI
-         RSI=72.27 rising=False, bullishDivergence=False
+         RSI=71.48 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=False, RVOL=0.40, up>downVol=True
-  [PASS] 6. Volume Profile POC
-         close=93.71 vs POC=93.48 (above=True)
-  >> 3/6 confirmed | mandatory(structure+volume)=False
+         day up=False, RVOL=0.38, up>downVol=True
+  [----] 6. Volume Profile POC
+         close=93.44 vs POC=93.44 (above=False)
+  >> 1/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## AMSC  (2026-08-17)  close=32.13  RSI=46.2  [today so far: open 30.80 -> 30.77 (-0.10%) | DELAYED]
+## AMSC  (2026-08-18)  close=31.02  RSI=42.7
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 16 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=11.61%.
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=34.24)
   [----] 2. Moving averages
-         close>32.30(MA10) & >31.51(MA20)=False, MA10 rising=True, MA10>MA50=False
+         close>32.06(MA10) & >31.33(MA20)=False, MA10 rising=False, MA10>MA50=False
   [----] 3. MACD
-         MACD=-1.10 vs Signal=-1.58 (above=True), hist=0.48 rising=False
+         MACD=-1.09 vs Signal=-1.48 (above=True), hist=0.39 rising=False
   [----] 4. RSI
-         RSI=46.21 rising=True, bullishDivergence=False
+         RSI=42.67 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.67, up>downVol=True
+         day up=True, RVOL=0.75, up>downVol=True
   [PASS] 6. Volume Profile POC
-         close=32.13 vs POC=30.81 (above=True)
+         close=31.02 vs POC=30.81 (above=True)
   >> 1/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## REGN  (2026-08-17)  close=805.93  RSI=78.0  [today so far: open 805.93 -> 817.54 (+1.44%) | DELAYED]
+## REGN  (2026-08-18)  close=810.24  RSI=78.5
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=70.0%, תשואה ממוצעת ל-20 יום=3.57%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=691.13)
   [PASS] 2. Moving averages
-         close>790.41(MA10) & >739.76(MA20)=True, MA10 rising=True, MA10>MA50=True
+         close>795.37(MA10) & >749.57(MA20)=True, MA10 rising=True, MA10>MA50=True
   [----] 3. MACD
-         MACD=39.79 vs Signal=34.97 (above=True), hist=4.82 rising=False
+         MACD=37.96 vs Signal=35.13 (above=True), hist=2.84 rising=False
   [PASS] 4. RSI
-         RSI=78.04 rising=True, bullishDivergence=False
+         RSI=78.54 rising=True, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.67, up>downVol=False
+         day up=False, RVOL=0.69, up>downVol=False
   [PASS] 6. Volume Profile POC
-         close=805.93 vs POC=611.03 (above=True)
+         close=810.24 vs POC=611.14 (above=True)
   >> 3/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## CBRS  (2026-08-17)  close=251.98  RSI=57.4  [today so far: open 240.00 -> 216.88 (-9.63%) | DELAYED]
+## CBRS  (2026-08-18)  close=220.01  RSI=49.6
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=265.63)
-  [PASS] 2. Moving averages
-         close>230.83(MA10) & >215.91(MA20)=True, MA10 rising=True, MA10>MA50=True
+  [----] 2. Moving averages
+         close>230.11(MA10) & >216.48(MA20)=False, MA10 rising=True, MA10>MA50=True
   [----] 3. MACD
-         MACD=9.24 vs Signal=5.09 (above=True), hist=4.15 rising=False
-  [PASS] 4. RSI
-         RSI=57.44 rising=True, bullishDivergence=False
-  [PASS] 5. Volume / RVOL
-         day up=True, RVOL=2.07, up>downVol=False
-  [PASS] 6. Volume Profile POC
-         close=251.98 vs POC=181.35 (above=True)
-  >> 4/6 confirmed | mandatory(structure+volume)=False
+         MACD=7.93 vs Signal=5.66 (above=True), hist=2.28 rising=False
+  [----] 4. RSI
+         RSI=49.60 rising=False, bullishDivergence=False
+  [----] 5. Volume / RVOL
+         day up=False, RVOL=1.76, up>downVol=False
+  [----] 6. Volume Profile POC
+         close=220.01 vs POC=221.26 (above=False)
+  >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ODD  (2026-08-17)  close=12.09  RSI=36.6  [today so far: open 12.04 -> 12.48 (+3.65%) | DELAYED]
+## ODD  (2026-08-18)  close=12.3  RSI=37.9
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=15.62)
   [----] 2. Moving averages
-         close>13.48(MA10) & >14.64(MA20)=False, MA10 rising=False, MA10>MA50=False
+         close>13.46(MA10) & >14.52(MA20)=False, MA10 rising=False, MA10>MA50=False
   [----] 3. MACD
-         MACD=-0.68 vs Signal=-0.34 (above=False), hist=-0.35 rising=False
+         MACD=-0.73 vs Signal=-0.39 (above=False), hist=-0.34 rising=False
   [----] 4. RSI
-         RSI=36.61 rising=False, bullishDivergence=False
+         RSI=37.90 rising=True, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=False, RVOL=1.66, up>downVol=False
+         day up=True, RVOL=1.11, up>downVol=False
   [----] 6. Volume Profile POC
-         close=12.09 vs POC=14.83 (above=False)
+         close=12.30 vs POC=14.74 (above=False)
   >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## RKLB  (2026-08-17)  close=82.08  RSI=55.4  [today so far: open 78.52 -> 79.74 (+1.55%) | DELAYED]
+## RKLB  (2026-08-18)  close=79.16  RSI=51.3
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=13.84%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=86.83)
-  [PASS] 2. Moving averages
-         close>79.15(MA10) & >72.69(MA20)=True, MA10 rising=True, MA10>MA50=False
+  [----] 2. Moving averages
+         close>79.61(MA10) & >73.19(MA20)=False, MA10 rising=True, MA10>MA50=False
   [----] 3. MACD
-         MACD=-0.17 vs Signal=-2.50 (above=True), hist=2.33 rising=False
-  [PASS] 4. RSI
-         RSI=55.36 rising=True, bullishDivergence=False
+         MACD=-0.05 vs Signal=-2.01 (above=True), hist=1.96 rising=False
+  [----] 4. RSI
+         RSI=51.26 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.93, up>downVol=False
+         day up=True, RVOL=0.80, up>downVol=False
   [PASS] 6. Volume Profile POC
-         close=82.08 vs POC=67.59 (above=True)
-  >> 3/6 confirmed | mandatory(structure+volume)=False
+         close=79.16 vs POC=67.59 (above=True)
+  >> 1/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## IBM  (2026-08-17)  close=228.85  RSI=43.7  [today so far: open 229.73 -> 233.73 (+1.74%) | DELAYED]
+## IBM  (2026-08-18)  close=232.67  RSI=47.0
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=1.15%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=241.80)
   [----] 2. Moving averages
-         close>235.28(MA10) & >226.59(MA20)=False, MA10 rising=True, MA10>MA50=False
+         close>235.03(MA10) & >227.70(MA20)=False, MA10 rising=True, MA10>MA50=False
   [----] 3. MACD
-         MACD=-3.24 vs Signal=-5.37 (above=True), hist=2.13 rising=False
+         MACD=-3.03 vs Signal=-4.90 (above=True), hist=1.88 rising=False
   [----] 4. RSI
-         RSI=43.73 rising=False, bullishDivergence=False
+         RSI=47.02 rising=True, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=False, RVOL=0.91, up>downVol=False
+         day up=True, RVOL=0.40, up>downVol=False
   [PASS] 6. Volume Profile POC
-         close=228.85 vs POC=216.88 (above=True)
+         close=232.67 vs POC=216.88 (above=True)
   >> 1/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## MRVL  (2026-08-17)  close=234.33  RSI=58.2  [today so far: open 220.65 -> 213.59 (-3.20%) | DELAYED]
+## MRVL  (2026-08-18)  close=216.0  RSI=50.3
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=8.38%.
   [----] 1. Price structure (HL+HH)
-         HigherLow=False, brokeSwingHigh=True (last swing high=222.67)
-  [PASS] 2. Moving averages
-         close>217.53(MA10) & >204.48(MA20)=True, MA10 rising=True, MA10>MA50=False
+         HigherLow=False, brokeSwingHigh=False (last swing high=222.67)
+  [----] 2. Moving averages
+         close>217.28(MA10) & >204.88(MA20)=False, MA10 rising=True, MA10>MA50=False
   [----] 3. MACD
-         MACD=0.35 vs Signal=-5.06 (above=True), hist=5.41 rising=False
-  [PASS] 4. RSI
-         RSI=58.17 rising=True, bullishDivergence=False
+         MACD=0.38 vs Signal=-3.97 (above=True), hist=4.35 rising=False
+  [----] 4. RSI
+         RSI=50.33 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.97, up>downVol=False
+         day up=False, RVOL=1.17, up>downVol=False
   [----] 6. Volume Profile POC
-         close=234.33 vs POC=309.21 (above=False)
-  >> 2/6 confirmed | mandatory(structure+volume)=False
+         close=216.00 vs POC=309.21 (above=False)
+  >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## QBTS  (2026-08-17)  close=20.87  RSI=53.4  [today so far: open 19.73 -> 19.84 (+0.59%) | DELAYED]
+## QBTS  (2026-08-18)  close=19.53  RSI=47.8
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 13 עסקאות בלתי-תלויות, win rate ל-20 יום=53.8%, תשואה ממוצעת ל-20 יום=31.38%.
   [----] 1. Price structure (HL+HH)
-         HigherLow=True, brokeSwingHigh=False (last swing high=22.00)
-  [PASS] 2. Moving averages
-         close>20.75(MA10) & >19.27(MA20)=True, MA10 rising=True, MA10>MA50=False
+         HigherLow=True, brokeSwingHigh=False (last swing high=21.75)
+  [----] 2. Moving averages
+         close>20.52(MA10) & >19.35(MA20)=False, MA10 rising=False, MA10>MA50=False
   [----] 3. MACD
-         MACD=0.20 vs Signal=-0.16 (above=True), hist=0.36 rising=False
+         MACD=0.13 vs Signal=-0.10 (above=True), hist=0.23 rising=False
   [----] 4. RSI
-         RSI=53.36 rising=False, bullishDivergence=False
+         RSI=47.76 rising=False, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.55, up>downVol=True
+         day up=False, RVOL=0.71, up>downVol=True
   [----] 6. Volume Profile POC
-         close=20.87 vs POC=29.28 (above=False)
-  >> 1/6 confirmed | mandatory(structure+volume)=False
+         close=19.53 vs POC=29.28 (above=False)
+  >> 0/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## CHWY  (2026-08-17)  close=22.13  RSI=49.9  [today so far: open 22.26 -> 23.37 (+4.99%) | DELAYED]
+## CHWY  (2026-08-18)  close=23.04  RSI=56.7
   [אמינות היסטורית: אמינות נמוכה] בבקטסט (5 שנים אחורה): 7 עסקאות בלתי-תלויות, win rate ל-20 יום=28.6%, תשואה ממוצעת ל-20 יום=1.62%.
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=24.33)
   [----] 2. Moving averages
-         close>22.95(MA10) & >22.54(MA20)=False, MA10 rising=False, MA10>MA50=True
+         close>23.01(MA10) & >22.54(MA20)=True, MA10 rising=False, MA10>MA50=True
   [----] 3. MACD
-         MACD=0.39 vs Signal=0.56 (above=False), hist=-0.17 rising=False
-  [----] 4. RSI
-         RSI=49.89 rising=False, bullishDivergence=False
+         MACD=0.43 vs Signal=0.56 (above=False), hist=-0.13 rising=False
+  [PASS] 4. RSI
+         RSI=56.73 rising=True, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=True, RVOL=0.81, up>downVol=False
+         day up=True, RVOL=0.70, up>downVol=False
   [----] 6. Volume Profile POC
-         close=22.13 vs POC=26.93 (above=False)
-  >> 0/6 confirmed | mandatory(structure+volume)=False
+         close=23.04 vs POC=26.93 (above=False)
+  >> 1/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
