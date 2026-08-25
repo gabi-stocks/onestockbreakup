@@ -8,7 +8,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 143.30 -> 145.10 (+1.26%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -59,7 +59,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 50.95 -> 50.44 (-1.00%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -96,7 +96,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 160.34 -> 159.76 (-0.36%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -147,7 +147,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "",
+    "context": "  [today so far: open 66.44 -> 69.75 (+4.97%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -218,7 +218,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 73.87 -> 73.69 (-0.24%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -269,7 +269,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 93.74 -> 93.72 (-0.02%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -320,7 +320,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 29.71 -> 29.66 (-0.17%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -371,7 +371,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 829.22 -> 839.78 (+1.27%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -422,7 +422,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 187.96 -> 181.38 (-3.50%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -436,7 +436,7 @@
       "2_moving_averages": "close>222.59(MA10) & >215.96(MA20)=False, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=-0.48 vs Signal=3.87 (above=False), hist=-4.35 rising=False",
       "4_rsi": "RSI=41.91 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.75, up>downVol=True",
+      "5_volume": "day up=False, RVOL=0.76, up>downVol=True",
       "6_volume_profile": "close=185.43 vs POC=221.26 (above=False)"
     },
     "progress": {
@@ -459,7 +459,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 13.72 -> 14.18 (+3.39%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -510,7 +510,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 69.89 -> 67.21 (-3.83%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -561,7 +561,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 230.00 -> 232.89 (+1.26%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -575,7 +575,7 @@
       "2_moving_averages": "close>234.49(MA10) & >232.44(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-2.03 vs Signal=-3.27 (above=True), hist=1.24 rising=False",
       "4_rsi": "RSI=45.88 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.61, up>downVol=False",
+      "5_volume": "day up=False, RVOL=0.63, up>downVol=False",
       "6_volume_profile": "close=231.04 vs POC=216.88 (above=True)"
     },
     "progress": {
@@ -612,7 +612,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 237.35 -> 243.67 (+2.66%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -663,7 +663,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 19.03 -> 19.15 (+0.63%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -714,7 +714,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "",
+    "context": "  [today so far: open 24.41 -> 24.50 (+0.37%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -757,6 +757,12 @@
     },
     "headlines": [
       {
+        "title": "1 of Wall Street\u2019s Favorite Stocks with Exciting Potential and 2 We Ignore",
+        "publisher": "StockStory",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/1-wall-street-favorite-stocks-081444102.html",
+        "date": "2026-08-25 08:14 UTC"
+      },
+      {
         "title": "Chewy (CHWY) Increases Despite Market Slip: Here's What You Need to Know",
         "publisher": "Zacks",
         "link": "https://finance.yahoo.com/markets/stocks/articles/chewy-chwy-increases-despite-market-214502321.html",
@@ -767,12 +773,6 @@
         "publisher": "Zacks",
         "link": "https://finance.yahoo.com/markets/stocks/articles/pdd-holdings-inc-sponsored-adr-165502029.html",
         "date": "2026-08-24 16:55 UTC"
-      },
-      {
-        "title": "Chewy Is Down 80% From Its All-Time High. Is This a No-Brainer Buy for Growth Stock Investors?",
-        "publisher": "Motley Fool",
-        "link": "https://www.fool.com/investing/2026/08/24/chewy-is-down-80-from-its-all-time-high-is-this-a/",
-        "date": "2026-08-24 13:20 UTC"
       }
     ]
   }
