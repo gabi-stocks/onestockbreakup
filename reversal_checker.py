@@ -17,6 +17,11 @@ AND (if REQUIRE_MARKET_REGIME) SPY is above its 200d MA.
 All thresholds are env-configurable -- see the Config section below for current
 defaults and reports/backtest_results.md for why they're set where they are.
 
+The emailed report only lists tickers that either fully triggered (green,
+BUY_TRIGGER) or came close (>= EMAIL_MIN_CONFIRMED out of 6) -- everything
+else is computed and kept in reports/latest.json for the record, but left
+out of the email itself to keep it focused on what's actually worth a look.
+
 Optional email (Gmail SMTP) + optional MORNING_MODE.
 Analysis tooling, not investment advice.
 """
@@ -39,6 +44,7 @@ PERIOD = "1y"
 MIN_SIGNALS = int(os.environ.get("MIN_SIGNALS", "4"))
 MORNING_MODE = os.environ.get("MORNING_MODE", "false").lower() == "true"
 EMAIL_ONLY_ON_TRIGGER = os.environ.get("EMAIL_ONLY_ON_TRIGGER", "false").lower() == "true"
+EMAIL_MIN_CONFIRMED = int(os.environ.get("EMAIL_MIN_CONFIRMED", "5"))
 PIVOT_L, PIVOT_R = 3, 3
 REPORT_DIR = "reports"
 TICKERS_FILE = "tickers.txt"
@@ -583,6 +589,7 @@ def build_html(results, mode_he):
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
         <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
         <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
+        <li><b>סינון תצוגה:</b> המייל מציג רק מניות עם טריגר קנייה מלא (ירוק) או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים שעברו — מניות חלשות יותר מחושבות אך לא מוצגות כאן.</li>
       </ul>
     </div>
     """
@@ -603,6 +610,17 @@ def build_html(results, mode_he):
 </body></html>"""
 
 
+def qualifies_for_email(r):
+    """Only these are worth surfacing in the email: a full green BUY_TRIGGER,
+    or at least EMAIL_MIN_CONFIRMED/6 parameters passed even without the full
+    trigger (e.g. structure or volume, the two mandatory ones, didn't line up
+    yet but everything else did). Everything else still gets computed and
+    saved in reports/latest.json, just not shown in the email itself."""
+    if "error" in r:
+        return False
+    return bool(r.get("BUY_TRIGGER")) or r.get("confirmed", 0) >= EMAIL_MIN_CONFIRMED
+
+
 def main():
     tickers = load_tickers()
     market_ok = fetch_market_regime()
@@ -613,16 +631,23 @@ def main():
     for r in results:
         if "error" not in r:
             r["reliability"] = reliability.get(r["ticker"])
+
+    shown = [r for r in results if qualifies_for_email(r)]
+
     news_calls = 0
-    for r in results:
+    for r in shown:
         if r.get("BUY_TRIGGER") and news_calls < 10:
             r["headlines"] = fetch_recent_headlines(r["ticker"])
             news_calls += 1
+
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     text = (f"# Reversal Checker — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} [{mode}]\n"
-            f"(needs >= {MIN_SIGNALS}/6 + mandatory structure & volume)\n\n"
-            + "\n".join(render(r) for r in results))
+            f"(needs >= {MIN_SIGNALS}/6 + mandatory structure & volume; showing only "
+            f"BUY_TRIGGER or >= {EMAIL_MIN_CONFIRMED}/6 confirmed, {len(shown)}/{len(results)} tickers)\n\n"
+            + ("\n".join(render(r) for r in shown) if shown
+               else "אף מניה לא עמדה היום בתנאי הסינון (טריגר מלא או "
+                    f"{EMAIL_MIN_CONFIRMED}/6 לפחות).\n"))
     print(text)
 
     os.makedirs(REPORT_DIR, exist_ok=True)
@@ -631,16 +656,16 @@ def main():
     with open(os.path.join(REPORT_DIR, "latest.md"), "w") as f:
         f.write(text)
     with open(os.path.join(REPORT_DIR, "latest.json"), "w") as f:
-        json.dump(results, f, indent=2, default=str)
+        json.dump(results, f, indent=2, default=str)  # full, unfiltered, for the record
 
     mode_he = "בוקר (עד סגירה מלאה אחרונה)" if MORNING_MODE else "סוף יום"
-    html = build_html(results, mode_he)
+    html = build_html(shown, mode_he)
     with open(os.path.join(REPORT_DIR, "latest.html"), "w") as f:
         f.write(html)
 
-    trigger = any(r.get("BUY_TRIGGER") for r in results)
+    trigger = len(shown) > 0
     if not EMAIL_ONLY_ON_TRIGGER or trigger:
-        tag = "TRIGGER" if trigger else "report"
+        tag = "TRIGGER" if any(r.get("BUY_TRIGGER") for r in shown) else ("close" if shown else "no matches")
         send_email(f"[Reversal] {tag} {stamp} - {','.join(tickers)}", text, html_body=html)
 
 
