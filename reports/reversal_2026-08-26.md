@@ -1,12 +1,12 @@
-# Reversal Checker — 2026-08-26 16:04 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-08-26 18:54 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 2/15 tickers)
 
-## TEM  (2026-08-25)  close=68.73  RSI=66.1  [today so far: open 67.33 -> 68.36 (+1.52%) | DELAYED]
+## TEM  (2026-08-25)  close=68.73  RSI=66.1  [today so far: open 67.33 -> 69.19 (+2.76%) | DELAYED]
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [חדשות אחרונות, מהחדש לישן]
+         - 2026-08-26 18:03 UTC Down 36%, can this Nancy Pelosi stock rebound in late 2026? (TheStreet)
          - 2026-08-26 03:01 UTC Tongcheng Travel Holdings Ltd (STU:TEM) (Q2 2026) Earnings Call Highlights: Resilient Growth ... (GuruFocus.com)
          - 2026-08-24 18:23 UTC What Is Really Moving Tempus AI Stock Right Now? (Trefis)
-         - 2026-08-23 11:35 UTC Why Tempus AI Skyrocketed This Week (Motley Fool)
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=57.03)
   [PASS] 2. Moving averages
@@ -22,7 +22,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## CHWY  (2026-08-25)  close=24.69  RSI=66.7  [today so far: open 24.50 -> 23.47 (-4.22%) | DELAYED]
+## CHWY  (2026-08-25)  close=24.69  RSI=66.7  [today so far: open 24.50 -> 23.18 (-5.39%) | DELAYED]
   [אמינות היסטורית: אמינות נמוכה] בבקטסט (5 שנים אחורה): 7 עסקאות בלתי-תלויות, win rate ל-20 יום=28.6%, תשואה ממוצעת ל-20 יום=1.62%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=24.33)
