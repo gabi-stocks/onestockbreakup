@@ -8,7 +8,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 147.00 -> 147.78 (+0.53%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -59,7 +59,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 50.12 -> 49.44 (-1.36%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -96,7 +96,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 160.19 -> 161.88 (+1.05%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -147,7 +147,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "",
+    "context": "  [today so far: open 67.33 -> 68.36 (+1.52%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -190,6 +190,12 @@
     },
     "headlines": [
       {
+        "title": "Tongcheng Travel Holdings Ltd (STU:TEM) (Q2 2026) Earnings Call Highlights: Resilient Growth ...",
+        "publisher": "GuruFocus.com",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/tongcheng-travel-holdings-ltd-stu-030139468.html",
+        "date": "2026-08-26 03:01 UTC"
+      },
+      {
         "title": "What Is Really Moving Tempus AI Stock Right Now?",
         "publisher": "Trefis",
         "link": "https://www.trefis.com/articles/612597/what-is-really-moving-tempus-ai-stock-right-now/2026-08-24",
@@ -200,12 +206,6 @@
         "publisher": "Motley Fool",
         "link": "https://www.fool.com/investing/2026/08/23/why-tempus-ai-skyrocketed-this-week/",
         "date": "2026-08-23 11:35 UTC"
-      },
-      {
-        "title": "A Tempus AI Director Sold Stock Four Days Before a 24% Rally. Here's What to Know",
-        "publisher": "Motley Fool",
-        "link": "https://www.fool.com/coverage/filings/2026/08/22/a-tempus-ai-director-sold-stock-four-days-before-a-24-rally-here-s-what-to-know/",
-        "date": "2026-08-22 12:39 UTC"
       }
     ]
   },
@@ -218,7 +218,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 73.74 -> 73.71 (-0.04%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -269,7 +269,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 93.69 -> 93.75 (+0.06%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -320,7 +320,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 29.76 -> 29.10 (-2.22%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -371,7 +371,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 827.78 -> 821.72 (-0.73%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -416,13 +416,13 @@
   {
     "ticker": "CBRS",
     "date": "2026-08-25",
-    "close": 183.91,
+    "close": 183.92,
     "rsi": 41.6,
     "confirmed": 0,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 180.15 -> 178.51 (-0.91%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -434,10 +434,10 @@
     "detail": {
       "1_price_structure": "HigherLow=True, brokeSwingHigh=False (last swing high=265.63)",
       "2_moving_averages": "close>217.51(MA10) & >215.52(MA20)=False, MA10 rising=False, MA10>MA50=True",
-      "3_macd": "MACD=-2.80 vs Signal=2.54 (above=False), hist=-5.34 rising=False",
+      "3_macd": "MACD=-2.80 vs Signal=2.54 (above=False), hist=-5.33 rising=False",
       "4_rsi": "RSI=41.58 rising=False, bullishDivergence=False",
       "5_volume": "day up=False, RVOL=0.91, up>downVol=True",
-      "6_volume_profile": "close=183.91 vs POC=221.26 (above=False)"
+      "6_volume_profile": "close=183.92 vs POC=221.26 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.5,
@@ -459,7 +459,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 14.25 -> 14.86 (+4.28%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -510,7 +510,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 66.37 -> 66.43 (+0.09%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -561,7 +561,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 230.70 -> 229.53 (-0.51%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -612,7 +612,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 240.10 -> 240.10 (+0.00%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -626,7 +626,7 @@
       "2_moving_averages": "close>230.66(MA10) & >215.72(MA20)=True, MA10 rising=True, MA10>MA50=False",
       "3_macd": "MACD=5.89 vs Signal=2.01 (above=True), hist=3.88 rising=False",
       "4_rsi": "RSI=56.38 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.85, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.90, up>downVol=False",
       "6_volume_profile": "close=240.38 vs POC=309.21 (above=False)"
     },
     "progress": {
@@ -663,7 +663,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 18.70 -> 17.75 (-5.11%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -677,7 +677,7 @@
       "2_moving_averages": "close>19.98(MA10) & >19.79(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-0.13 vs Signal=-0.08 (above=False), hist=-0.05 rising=False",
       "4_rsi": "RSI=48.03 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.92, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.93, up>downVol=False",
       "6_volume_profile": "close=19.35 vs POC=29.28 (above=False)"
     },
     "progress": {
@@ -714,7 +714,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 24.50 -> 23.47 (-4.22%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
