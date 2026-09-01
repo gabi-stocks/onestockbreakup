@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-01 17:56 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-01 19:43 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## QCOM  (2026-08-31)  close=170.48  RSI=55.5  [today so far: open 165.67 -> 166.06 (+0.24%) | DELAYED]
+## QCOM  (2026-08-31)  close=170.48  RSI=55.5  [today so far: open 165.67 -> 166.43 (+0.46%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=3.81%.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=166.97)
