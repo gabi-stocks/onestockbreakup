@@ -1,12 +1,12 @@
-# Reversal Checker — 2026-09-03 18:03 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-03 19:36 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## CEG  (2026-09-02)  close=290.04  RSI=63.8  [today so far: open 292.46 -> 284.65 (-2.67%) | DELAYED]
+## CEG  (2026-09-02)  close=290.04  RSI=63.8  [today so far: open 292.46 -> 284.61 (-2.68%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [חדשות אחרונות, מהחדש לישן]
+         - 2026-09-03 18:50 UTC Peter Thiel’s Fund Disclosed $59 Million in This Beaten-Down Power Stock (Insider Monkey)
          - 2026-09-03 16:35 UTC Better Energy Play: NextEra vs. Constellation Energy (Motley Fool)
          - 2026-09-03 15:45 UTC Trump Warned Towns They’d End Up Poor Without Data Centers but Berkshire’s CEO Sees a Revolt Growing (24/7 Wall St.)
-         - 2026-09-03 13:00 UTC Microsoft and Meta Signed Multi-Decade Nuclear Power Deals. These 3 Stocks Supply That Power (24/7 Wall St.)
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=285.26)
   [PASS] 2. Moving averages
