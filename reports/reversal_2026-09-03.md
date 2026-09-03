@@ -1,23 +1,19 @@
-# Reversal Checker — 2026-09-03 19:36 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-03 23:50 UTC [END-OF-DAY]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## CEG  (2026-09-02)  close=290.04  RSI=63.8  [today so far: open 292.46 -> 284.61 (-2.68%) | DELAYED]
+## CEG  (2026-09-03)  close=285.05  RSI=58.7
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
-  [חדשות אחרונות, מהחדש לישן]
-         - 2026-09-03 18:50 UTC Peter Thiel’s Fund Disclosed $59 Million in This Beaten-Down Power Stock (Insider Monkey)
-         - 2026-09-03 16:35 UTC Better Energy Play: NextEra vs. Constellation Energy (Motley Fool)
-         - 2026-09-03 15:45 UTC Trump Warned Towns They’d End Up Poor Without Data Centers but Berkshire’s CEO Sees a Revolt Growing (24/7 Wall St.)
-  [PASS] 1. Price structure (HL+HH)
-         HigherLow=True, brokeSwingHigh=True (last swing high=285.26)
+  [----] 1. Price structure (HL+HH)
+         HigherLow=True, brokeSwingHigh=False (last swing high=285.26)
   [PASS] 2. Moving averages
-         close>278.15(MA10) & >276.01(MA20)=True, MA10 rising=True, MA10>MA50=True
+         close>279.36(MA10) & >277.21(MA20)=True, MA10 rising=True, MA10>MA50=True
   [PASS] 3. MACD
-         MACD=4.20 vs Signal=3.57 (above=True), hist=0.63 rising=True
+         MACD=4.40 vs Signal=3.73 (above=True), hist=0.67 rising=True
   [PASS] 4. RSI
-         RSI=63.83 rising=True, bullishDivergence=False
+         RSI=58.73 rising=False, bullishDivergence=False
   [PASS] 5. Volume / RVOL
-         day up=True, RVOL=1.16, up>downVol=True
+         day up=False, RVOL=1.29, up>downVol=True
   [PASS] 6. Volume Profile POC
-         close=290.04 vs POC=273.60 (above=True)
-  >> 6/6 confirmed | mandatory(structure+volume)=True
-  >> BUY TRIGGER - reversal confirmed
+         close=285.05 vs POC=273.60 (above=True)
+  >> 5/6 confirmed | mandatory(structure+volume)=False
+  >> NO ENTRY - wait for confirmation
