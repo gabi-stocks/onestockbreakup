@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-04 17:47 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-04 19:16 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## CEG  (2026-09-03)  close=285.05  RSI=58.7  [today so far: open 284.04 -> 294.54 (+3.70%) | DELAYED]
+## CEG  (2026-09-03)  close=285.05  RSI=58.7  [today so far: open 284.04 -> 297.25 (+4.65%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=285.26)
