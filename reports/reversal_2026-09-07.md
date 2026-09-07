@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-09-07 18:51 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-07 20:20 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 2/21 tickers)
 
 ## ORCL  (2026-09-04)  close=158.78  RSI=60.9  [today so far: open 159.46 -> 158.76 (-0.43%) | DELAYED]
