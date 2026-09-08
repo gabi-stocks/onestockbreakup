@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-08 18:04 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-08 19:42 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 2/21 tickers)
 
-## ORCL  (2026-09-04)  close=158.78  RSI=60.9  [today so far: open 167.60 -> 162.57 (-3.00%) | DELAYED]
+## ORCL  (2026-09-04)  close=158.78  RSI=60.9  [today so far: open 167.60 -> 162.03 (-3.32%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=5.13%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=153.99)
@@ -18,7 +18,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## CEG  (2026-09-04)  close=298.96  RSI=66.7  [today so far: open 303.40 -> 301.14 (-0.74%) | DELAYED]
+## CEG  (2026-09-04)  close=298.96  RSI=66.7  [today so far: open 303.40 -> 299.30 (-1.35%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [חדשות אחרונות, מהחדש לישן]
          - 2026-09-08 15:25 UTC Google’s revived nuclear power plant gets $1.9B loan from US government (TechCrunch)
