@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-10 17:51 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-10 19:26 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## ORCL  (2026-09-09)  close=161.63  RSI=62.4  [today so far: open 158.38 -> 156.01 (-1.49%) | DELAYED]
+## ORCL  (2026-09-09)  close=161.63  RSI=62.4  [today so far: open 158.38 -> 154.70 (-2.32%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 11 עסקאות בלתי-תלויות, win rate ל-20 יום=54.5%, תשואה ממוצעת ל-20 יום=5.13%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=153.99)
