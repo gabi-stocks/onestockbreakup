@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-14 19:35 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-14 20:43 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## ODD  (2026-09-11)  close=18.28  RSI=67.4  [today so far: open 17.92 -> 18.88 (+5.36%) | DELAYED]
+## ODD  (2026-09-11)  close=18.28  RSI=67.4  [today so far: open 17.92 -> 18.82 (+5.02%) | DELAYED]
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=15.37)
