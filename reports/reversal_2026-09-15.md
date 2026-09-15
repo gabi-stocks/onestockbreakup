@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-15 18:28 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-15 19:58 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## IBM  (2026-09-14)  close=249.09  RSI=60.8  [today so far: open 246.19 -> 251.02 (+1.96%) | DELAYED]
+## IBM  (2026-09-14)  close=249.09  RSI=60.8  [today so far: open 246.19 -> 247.84 (+0.67%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=1.15%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=240.81)
