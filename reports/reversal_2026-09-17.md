@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-09-17 18:32 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-17 19:58 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/21 tickers)
 
-## ATKR  (2026-09-16)  close=94.52  RSI=73.0  [today so far: open 94.63 -> 94.46 (-0.17%) | DELAYED]
+## ATKR  (2026-09-16)  close=94.52  RSI=73.0  [today so far: open 94.63 -> 94.47 (-0.16%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=60.0%, תשואה ממוצעת ל-20 יום=1.64%.
   [חדשות אחרונות, מהחדש לישן]
          - 2026-09-14 13:40 UTC Is Applied Industrial Technologies (AIT) Outperforming Other Industrial Products Stocks This Year? (Zacks)
