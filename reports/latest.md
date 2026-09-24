@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-09-24 18:39 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-24 20:15 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/22 tickers)
 
 ## QCOM  (2026-09-23)  close=197.24  RSI=66.4  [today so far: open 196.58 -> 194.25 (-1.19%) | DELAYED]
