@@ -1,39 +1,39 @@
 [
   {
     "ticker": "ORCL",
-    "date": "2026-09-23",
-    "close": 144.56,
-    "rsi": 46.7,
+    "date": "2026-09-24",
+    "close": 139.54,
+    "rsi": 42.5,
     "confirmed": 1,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 138.57 -> 138.21 (-0.26%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
       "3_macd": false,
       "4_rsi": false,
-      "5_volume": false,
-      "6_volume_profile": true
+      "5_volume": true,
+      "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=170.70)",
-      "2_moving_averages": "close>147.20(MA10) & >149.84(MA20)=False, MA10 rising=False, MA10>MA50=True",
-      "3_macd": "MACD=0.21 vs Signal=1.02 (above=False), hist=-0.81 rising=False",
-      "4_rsi": "RSI=46.72 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.71, up>downVol=False",
-      "6_volume_profile": "close=144.56 vs POC=142.95 (above=True)"
+      "2_moving_averages": "close>145.86(MA10) & >149.38(MA20)=False, MA10 rising=False, MA10>MA50=True",
+      "3_macd": "MACD=-0.49 vs Signal=0.71 (above=False), hist=-1.21 rising=False",
+      "4_rsi": "RSI=42.52 rising=False, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=1.68, up>downVol=True",
+      "6_volume_profile": "close=139.54 vs POC=142.95 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.0,
       "3_macd": 0.0,
       "4_rsi": 0.0,
-      "5_volume": 0.0,
-      "6_volume_profile": 1.0
+      "5_volume": 1.0,
+      "6_volume_profile": 0.488
     },
-    "closest": "1_price_structure",
+    "closest": "6_volume_profile",
     "reliability": {
       "ticker": "ORCL",
       "variant": "IMPROVED",
@@ -52,35 +52,35 @@
   },
   {
     "ticker": "HTFL",
-    "date": "2026-09-23",
-    "close": 47.39,
-    "rsi": 54.8,
-    "confirmed": 1,
+    "date": "2026-09-24",
+    "close": 48.66,
+    "rsi": 57.6,
+    "confirmed": 2,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 48.93 -> 49.13 (+0.42%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
       "3_macd": false,
-      "4_rsi": false,
+      "4_rsi": true,
       "5_volume": false,
       "6_volume_profile": true
     },
     "detail": {
-      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=50.82)",
-      "2_moving_averages": "close>48.63(MA10) & >48.91(MA20)=False, MA10 rising=True, MA10>MA50=True",
-      "3_macd": "MACD=2.63 vs Signal=3.34 (above=False), hist=-0.72 rising=False",
-      "4_rsi": "RSI=54.80 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.00, up>downVol=True",
-      "6_volume_profile": "close=47.39 vs POC=29.18 (above=True)"
+      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=52.22)",
+      "2_moving_averages": "close>49.29(MA10) & >48.91(MA20)=False, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=2.30 vs Signal=3.03 (above=False), hist=-0.73 rising=False",
+      "4_rsi": "RSI=57.63 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.74, up>downVol=True",
+      "6_volume_profile": "close=48.66 vs POC=29.18 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.333,
       "3_macd": 0.0,
-      "4_rsi": 0.0,
+      "4_rsi": 0.667,
       "5_volume": 0.333,
       "6_volume_profile": 1.0
     },
@@ -89,39 +89,39 @@
   },
   {
     "ticker": "QCOM",
-    "date": "2026-09-23",
-    "close": 197.24,
-    "rsi": 66.4,
-    "confirmed": 5,
+    "date": "2026-09-24",
+    "close": 194.26,
+    "rsi": 63.2,
+    "confirmed": 4,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 195.40 -> 203.49 (+4.14%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
-      "3_macd": true,
+      "3_macd": false,
       "4_rsi": true,
       "5_volume": false,
       "6_volume_profile": true
     },
     "detail": {
       "1_price_structure": "HigherLow=True, brokeSwingHigh=True (last swing high=171.38)",
-      "2_moving_averages": "close>186.78(MA10) & >177.77(MA20)=True, MA10 rising=True, MA10>MA50=True",
-      "3_macd": "MACD=7.11 vs Signal=4.73 (above=True), hist=2.38 rising=True",
-      "4_rsi": "RSI=66.45 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.67, up>downVol=False",
-      "6_volume_profile": "close=197.24 vs POC=178.66 (above=True)"
+      "2_moving_averages": "close>188.52(MA10) & >179.29(MA20)=True, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=7.27 vs Signal=5.24 (above=True), hist=2.03 rising=False",
+      "4_rsi": "RSI=63.17 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=0.63, up>downVol=False",
+      "6_volume_profile": "close=194.26 vs POC=178.66 (above=True)"
     },
     "progress": {
       "1_price_structure": 1.0,
       "2_moving_averages": 1.0,
-      "3_macd": 1.0,
+      "3_macd": 0.5,
       "4_rsi": 0.333,
       "5_volume": 0.0,
       "6_volume_profile": 1.0
     },
-    "closest": "5_volume",
+    "closest": "3_macd",
     "reliability": {
       "ticker": "QCOM",
       "variant": "IMPROVED",
@@ -140,39 +140,39 @@
   },
   {
     "ticker": "TEM",
-    "date": "2026-09-23",
-    "close": 76.59,
-    "rsi": 65.3,
-    "confirmed": 3,
+    "date": "2026-09-24",
+    "close": 82.24,
+    "rsi": 70.4,
+    "confirmed": 4,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 83.69 -> 83.83 (+0.16%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
       "3_macd": false,
       "4_rsi": true,
-      "5_volume": false,
+      "5_volume": true,
       "6_volume_profile": true
     },
     "detail": {
-      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=81.83)",
-      "2_moving_averages": "close>70.88(MA10) & >67.71(MA20)=True, MA10 rising=True, MA10>MA50=True",
-      "3_macd": "MACD=5.03 vs Signal=3.97 (above=True), hist=1.06 rising=False",
-      "4_rsi": "RSI=65.33 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.80, up>downVol=True",
-      "6_volume_profile": "close=76.59 vs POC=49.70 (above=True)"
+      "1_price_structure": "HigherLow=False, brokeSwingHigh=True (last swing high=81.83)",
+      "2_moving_averages": "close>73.23(MA10) & >68.39(MA20)=True, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=5.49 vs Signal=4.27 (above=True), hist=1.22 rising=False",
+      "4_rsi": "RSI=70.41 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=1.55, up>downVol=True",
+      "6_volume_profile": "close=82.24 vs POC=49.28 (above=True)"
     },
     "progress": {
-      "1_price_structure": 0.0,
+      "1_price_structure": 0.5,
       "2_moving_averages": 1.0,
       "3_macd": 0.5,
-      "4_rsi": 0.333,
-      "5_volume": 0.333,
+      "4_rsi": 0.667,
+      "5_volume": 1.0,
       "6_volume_profile": 1.0
     },
-    "closest": "3_macd",
+    "closest": "1_price_structure",
     "reliability": {
       "ticker": "TEM",
       "variant": "IMPROVED",
@@ -191,39 +191,39 @@
   },
   {
     "ticker": "GEHC",
-    "date": "2026-09-23",
-    "close": 66.09,
-    "rsi": 44.1,
-    "confirmed": 2,
+    "date": "2026-09-24",
+    "close": 66.38,
+    "rsi": 45.8,
+    "confirmed": 3,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 66.20 -> 66.56 (+0.54%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
-      "3_macd": false,
+      "3_macd": true,
       "4_rsi": true,
       "5_volume": false,
       "6_volume_profile": true
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=75.65)",
-      "2_moving_averages": "close>64.46(MA10) & >67.68(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-1.56 vs Signal=-1.29 (above=False), hist=-0.27 rising=True",
-      "4_rsi": "RSI=44.12 rising=True, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=0.97, up>downVol=True",
-      "6_volume_profile": "close=66.09 vs POC=64.24 (above=True)"
+      "2_moving_averages": "close>64.79(MA10) & >66.95(MA20)=False, MA10 rising=True, MA10>MA50=False",
+      "3_macd": "MACD=-1.26 vs Signal=-1.30 (above=True), hist=0.04 rising=True",
+      "4_rsi": "RSI=45.77 rising=True, bullishDivergence=True",
+      "5_volume": "day up=True, RVOL=1.15, up>downVol=False",
+      "6_volume_profile": "close=66.38 vs POC=64.24 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.0,
-      "2_moving_averages": 0.333,
-      "3_macd": 0.5,
+      "2_moving_averages": 0.667,
+      "3_macd": 1.0,
       "4_rsi": 0.667,
       "5_volume": 0.333,
       "6_volume_profile": 1.0
     },
-    "closest": "3_macd",
+    "closest": "2_moving_averages",
     "reliability": {
       "ticker": "GEHC",
       "variant": "IMPROVED",
@@ -242,16 +242,16 @@
   },
   {
     "ticker": "ATKR",
-    "date": "2026-09-23",
-    "close": 94.51,
-    "rsi": 71.3,
-    "confirmed": 3,
+    "date": "2026-09-24",
+    "close": 94.54,
+    "rsi": 71.5,
+    "confirmed": 4,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 94.65 -> 94.58 (-0.07%) | DELAYED]",
     "checks": {
-      "1_price_structure": false,
+      "1_price_structure": true,
       "2_moving_averages": true,
       "3_macd": false,
       "4_rsi": true,
@@ -259,22 +259,22 @@
       "6_volume_profile": true
     },
     "detail": {
-      "1_price_structure": "HigherLow=True, brokeSwingHigh=False (last swing high=94.63)",
-      "2_moving_averages": "close>94.34(MA10) & >94.00(MA20)=True, MA10 rising=True, MA10>MA50=True",
-      "3_macd": "MACD=1.40 vs Signal=1.80 (above=False), hist=-0.40 rising=True",
-      "4_rsi": "RSI=71.33 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.47, up>downVol=True",
-      "6_volume_profile": "close=94.51 vs POC=93.52 (above=True)"
+      "1_price_structure": "HigherLow=True, brokeSwingHigh=True (last swing high=93.96)",
+      "2_moving_averages": "close>94.41(MA10) & >94.09(MA20)=True, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=1.24 vs Signal=1.61 (above=False), hist=-0.37 rising=True",
+      "4_rsi": "RSI=71.55 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.79, up>downVol=True",
+      "6_volume_profile": "close=94.54 vs POC=93.60 (above=True)"
     },
     "progress": {
-      "1_price_structure": 0.5,
+      "1_price_structure": 1.0,
       "2_moving_averages": 1.0,
       "3_macd": 0.5,
       "4_rsi": 0.667,
       "5_volume": 0.333,
       "6_volume_profile": 1.0
     },
-    "closest": "1_price_structure",
+    "closest": "3_macd",
     "reliability": {
       "ticker": "ATKR",
       "variant": "IMPROVED",
@@ -293,39 +293,39 @@
   },
   {
     "ticker": "AMSC",
-    "date": "2026-09-23",
-    "close": 31.05,
-    "rsi": 55.4,
-    "confirmed": 3,
+    "date": "2026-09-24",
+    "close": 30.42,
+    "rsi": 52.0,
+    "confirmed": 1,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 30.89 -> 30.08 (-2.62%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
-      "3_macd": true,
-      "4_rsi": true,
+      "3_macd": false,
+      "4_rsi": false,
       "5_volume": false,
       "6_volume_profile": false
     },
     "detail": {
-      "1_price_structure": "HigherLow=False, brokeSwingHigh=True (last swing high=31.00)",
-      "2_moving_averages": "close>29.29(MA10) & >29.24(MA20)=True, MA10 rising=True, MA10>MA50=False",
-      "3_macd": "MACD=-0.22 vs Signal=-0.66 (above=True), hist=0.44 rising=True",
-      "4_rsi": "RSI=55.38 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.26, up>downVol=False",
-      "6_volume_profile": "close=31.05 vs POC=39.79 (above=False)"
+      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=31.00)",
+      "2_moving_averages": "close>29.46(MA10) & >29.28(MA20)=True, MA10 rising=True, MA10>MA50=False",
+      "3_macd": "MACD=-0.15 vs Signal=-0.56 (above=True), hist=0.41 rising=False",
+      "4_rsi": "RSI=51.99 rising=False, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=1.00, up>downVol=False",
+      "6_volume_profile": "close=30.42 vs POC=39.79 (above=False)"
     },
     "progress": {
-      "1_price_structure": 0.5,
+      "1_price_structure": 0.0,
       "2_moving_averages": 1.0,
-      "3_macd": 1.0,
-      "4_rsi": 0.333,
-      "5_volume": 0.333,
-      "6_volume_profile": 0.39
+      "3_macd": 0.5,
+      "4_rsi": 0.0,
+      "5_volume": 0.0,
+      "6_volume_profile": 0.382
     },
-    "closest": "1_price_structure",
+    "closest": "3_macd",
     "reliability": {
       "ticker": "AMSC",
       "variant": "IMPROVED",
@@ -344,14 +344,14 @@
   },
   {
     "ticker": "REGN",
-    "date": "2026-09-23",
-    "close": 801.82,
-    "rsi": 53.2,
+    "date": "2026-09-24",
+    "close": 796.02,
+    "rsi": 50.9,
     "confirmed": 1,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 803.87 -> 789.46 (-1.79%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -362,17 +362,17 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=859.34)",
-      "2_moving_averages": "close>789.91(MA10) & >805.29(MA20)=False, MA10 rising=False, MA10>MA50=True",
-      "3_macd": "MACD=2.77 vs Signal=7.55 (above=False), hist=-4.78 rising=True",
-      "4_rsi": "RSI=53.21 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.03, up>downVol=False",
-      "6_volume_profile": "close=801.82 vs POC=613.23 (above=True)"
+      "2_moving_averages": "close>789.82(MA10) & >802.87(MA20)=False, MA10 rising=False, MA10>MA50=True",
+      "3_macd": "MACD=2.81 vs Signal=5.92 (above=False), hist=-3.11 rising=True",
+      "4_rsi": "RSI=50.92 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=0.85, up>downVol=False",
+      "6_volume_profile": "close=796.02 vs POC=613.23 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.333,
       "3_macd": 0.5,
-      "4_rsi": 0.333,
+      "4_rsi": 0.0,
       "5_volume": 0.0,
       "6_volume_profile": 1.0
     },
@@ -395,14 +395,14 @@
   },
   {
     "ticker": "CBRS",
-    "date": "2026-09-23",
-    "close": 205.24,
-    "rsi": 52.7,
+    "date": "2026-09-24",
+    "close": 206.41,
+    "rsi": 53.2,
     "confirmed": 2,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 211.38 -> 209.56 (-0.86%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -413,17 +413,17 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=True, brokeSwingHigh=False (last swing high=222.50)",
-      "2_moving_averages": "close>195.76(MA10) & >192.17(MA20)=True, MA10 rising=True, MA10>MA50=False",
-      "3_macd": "MACD=0.04 vs Signal=-2.90 (above=True), hist=2.94 rising=False",
-      "4_rsi": "RSI=52.74 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.64, up>downVol=True",
-      "6_volume_profile": "close=205.24 vs POC=181.35 (above=True)"
+      "2_moving_averages": "close>197.27(MA10) & >193.38(MA20)=True, MA10 rising=True, MA10>MA50=False",
+      "3_macd": "MACD=0.64 vs Signal=-2.19 (above=True), hist=2.83 rising=False",
+      "4_rsi": "RSI=53.25 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.54, up>downVol=True",
+      "6_volume_profile": "close=206.41 vs POC=181.35 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.5,
       "2_moving_averages": 1.0,
       "3_macd": 0.5,
-      "4_rsi": 0.0,
+      "4_rsi": 0.333,
       "5_volume": 0.333,
       "6_volume_profile": 1.0
     },
@@ -432,14 +432,14 @@
   },
   {
     "ticker": "ODD",
-    "date": "2026-09-23",
-    "close": 17.83,
-    "rsi": 58.9,
+    "date": "2026-09-24",
+    "close": 18.07,
+    "rsi": 58.8,
     "confirmed": 2,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 18.27 -> 18.58 (+1.67%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -449,18 +449,18 @@
       "6_volume_profile": true
     },
     "detail": {
-      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=20.16)",
-      "2_moving_averages": "close>17.92(MA10) & >16.06(MA20)=False, MA10 rising=True, MA10>MA50=True",
-      "3_macd": "MACD=1.14 vs Signal=0.88 (above=True), hist=0.27 rising=False",
-      "4_rsi": "RSI=58.92 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.47, up>downVol=False",
-      "6_volume_profile": "close=17.83 vs POC=16.53 (above=True)"
+      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=19.57)",
+      "2_moving_averages": "close>18.35(MA10) & >16.47(MA20)=False, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=1.12 vs Signal=0.98 (above=True), hist=0.14 rising=False",
+      "4_rsi": "RSI=58.78 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.35, up>downVol=False",
+      "6_volume_profile": "close=18.07 vs POC=16.53 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.667,
       "3_macd": 0.5,
-      "4_rsi": 0.333,
+      "4_rsi": 0.667,
       "5_volume": 0.0,
       "6_volume_profile": 1.0
     },
@@ -483,37 +483,37 @@
   },
   {
     "ticker": "RKLB",
-    "date": "2026-09-23",
-    "close": 70.31,
-    "rsi": 53.9,
+    "date": "2026-09-24",
+    "close": 73.61,
+    "rsi": 58.9,
     "confirmed": 3,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 74.10 -> 74.10 (+0.00%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
       "3_macd": true,
-      "4_rsi": false,
+      "4_rsi": true,
       "5_volume": false,
-      "6_volume_profile": true
+      "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=True (last swing high=67.70)",
-      "2_moving_averages": "close>65.93(MA10) & >65.20(MA20)=True, MA10 rising=True, MA10>MA50=False",
-      "3_macd": "MACD=-0.86 vs Signal=-2.20 (above=True), hist=1.34 rising=True",
-      "4_rsi": "RSI=53.94 rising=False, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=1.01, up>downVol=False",
-      "6_volume_profile": "close=70.31 vs POC=66.85 (above=True)"
+      "2_moving_averages": "close>67.09(MA10) & >65.57(MA20)=True, MA10 rising=True, MA10>MA50=False",
+      "3_macd": "MACD=-0.28 vs Signal=-1.82 (above=True), hist=1.53 rising=True",
+      "4_rsi": "RSI=58.93 rising=True, bullishDivergence=True",
+      "5_volume": "day up=True, RVOL=1.27, up>downVol=False",
+      "6_volume_profile": "close=73.61 vs POC=79.67 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.5,
       "2_moving_averages": 1.0,
       "3_macd": 1.0,
-      "4_rsi": 0.333,
-      "5_volume": 0.0,
-      "6_volume_profile": 1.0
+      "4_rsi": 1.0,
+      "5_volume": 0.333,
+      "6_volume_profile": 0.462
     },
     "closest": "1_price_structure",
     "reliability": {
@@ -534,37 +534,37 @@
   },
   {
     "ticker": "IBM",
-    "date": "2026-09-23",
-    "close": 232.76,
-    "rsi": 46.8,
-    "confirmed": 1,
+    "date": "2026-09-24",
+    "close": 227.06,
+    "rsi": 42.4,
+    "confirmed": 0,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 226.15 -> 226.93 (+0.34%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
       "3_macd": false,
       "4_rsi": false,
       "5_volume": false,
-      "6_volume_profile": true
+      "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=True, brokeSwingHigh=False (last swing high=251.82)",
-      "2_moving_averages": "close>238.42(MA10) & >236.06(MA20)=False, MA10 rising=False, MA10>MA50=True",
-      "3_macd": "MACD=-0.13 vs Signal=0.45 (above=False), hist=-0.58 rising=False",
-      "4_rsi": "RSI=46.84 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.82, up>downVol=False",
-      "6_volume_profile": "close=232.76 vs POC=231.70 (above=True)"
+      "2_moving_averages": "close>236.87(MA10) & >235.78(MA20)=False, MA10 rising=False, MA10>MA50=True",
+      "3_macd": "MACD=-1.10 vs Signal=-0.02 (above=False), hist=-1.08 rising=False",
+      "4_rsi": "RSI=42.35 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=0.74, up>downVol=False",
+      "6_volume_profile": "close=227.06 vs POC=231.70 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.5,
       "2_moving_averages": 0.0,
       "3_macd": 0.0,
-      "4_rsi": 0.333,
+      "4_rsi": 0.0,
       "5_volume": 0.0,
-      "6_volume_profile": 1.0
+      "6_volume_profile": 0.49
     },
     "closest": "1_price_structure",
     "reliability": {
@@ -585,39 +585,39 @@
   },
   {
     "ticker": "MRVL",
-    "date": "2026-09-23",
-    "close": 260.9,
-    "rsi": 63.1,
-    "confirmed": 4,
+    "date": "2026-09-24",
+    "close": 258.95,
+    "rsi": 62.0,
+    "confirmed": 3,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 263.67 -> 263.75 (+0.03%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
-      "3_macd": true,
+      "3_macd": false,
       "4_rsi": true,
       "5_volume": false,
       "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=True, brokeSwingHigh=True (last swing high=241.88)",
-      "2_moving_averages": "close>239.89(MA10) & >231.17(MA20)=True, MA10 rising=True, MA10>MA50=True",
-      "3_macd": "MACD=8.69 vs Signal=4.70 (above=True), hist=3.99 rising=True",
-      "4_rsi": "RSI=63.14 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.63, up>downVol=True",
-      "6_volume_profile": "close=260.90 vs POC=310.15 (above=False)"
+      "2_moving_averages": "close>243.09(MA10) & >231.86(MA20)=True, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=9.39 vs Signal=5.64 (above=True), hist=3.75 rising=False",
+      "4_rsi": "RSI=62.00 rising=False, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.62, up>downVol=True",
+      "6_volume_profile": "close=258.95 vs POC=310.22 (above=False)"
     },
     "progress": {
       "1_price_structure": 1.0,
       "2_moving_averages": 1.0,
-      "3_macd": 1.0,
+      "3_macd": 0.5,
       "4_rsi": 0.333,
       "5_volume": 0.333,
-      "6_volume_profile": 0.421
+      "6_volume_profile": 0.417
     },
-    "closest": "6_volume_profile",
+    "closest": "3_macd",
     "reliability": {
       "ticker": "MRVL",
       "variant": "IMPROVED",
@@ -636,37 +636,37 @@
   },
   {
     "ticker": "QBTS",
-    "date": "2026-09-23",
-    "close": 16.81,
-    "rsi": 44.6,
-    "confirmed": 0,
+    "date": "2026-09-24",
+    "close": 17.48,
+    "rsi": 48.9,
+    "confirmed": 2,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 17.45 -> 17.50 (+0.32%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
-      "2_moving_averages": false,
+      "2_moving_averages": true,
       "3_macd": false,
-      "4_rsi": false,
+      "4_rsi": true,
       "5_volume": false,
       "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=18.48)",
-      "2_moving_averages": "close>16.98(MA10) & >17.03(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-0.46 vs Signal=-0.60 (above=True), hist=0.14 rising=False",
-      "4_rsi": "RSI=44.61 rising=False, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=1.71, up>downVol=False",
-      "6_volume_profile": "close=16.81 vs POC=20.79 (above=False)"
+      "2_moving_averages": "close>17.07(MA10) & >17.03(MA20)=True, MA10 rising=True, MA10>MA50=False",
+      "3_macd": "MACD=-0.40 vs Signal=-0.56 (above=True), hist=0.16 rising=False",
+      "4_rsi": "RSI=48.88 rising=True, bullishDivergence=True",
+      "5_volume": "day up=True, RVOL=1.14, up>downVol=False",
+      "6_volume_profile": "close=17.48 vs POC=20.79 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.0,
-      "2_moving_averages": 0.0,
+      "2_moving_averages": 1.0,
       "3_macd": 0.5,
-      "4_rsi": 0.333,
+      "4_rsi": 0.667,
       "5_volume": 0.333,
-      "6_volume_profile": 0.404
+      "6_volume_profile": 0.42
     },
     "closest": "3_macd",
     "reliability": {
@@ -687,14 +687,14 @@
   },
   {
     "ticker": "CHWY",
-    "date": "2026-09-23",
-    "close": 18.55,
-    "rsi": 27.7,
+    "date": "2026-09-24",
+    "close": 18.32,
+    "rsi": 26.8,
     "confirmed": 1,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 18.30 -> 18.55 (+1.34%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -705,11 +705,11 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=25.38)",
-      "2_moving_averages": "close>20.52(MA10) & >21.88(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-0.85 vs Signal=-0.49 (above=False), hist=-0.36 rising=False",
-      "4_rsi": "RSI=27.68 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.63, up>downVol=True",
-      "6_volume_profile": "close=18.55 vs POC=20.80 (above=False)"
+      "2_moving_averages": "close>20.25(MA10) & >21.65(MA20)=False, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-0.99 vs Signal=-0.59 (above=False), hist=-0.40 rising=False",
+      "4_rsi": "RSI=26.79 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=1.27, up>downVol=True",
+      "6_volume_profile": "close=18.32 vs POC=20.80 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.0,
@@ -717,7 +717,7 @@
       "3_macd": 0.0,
       "4_rsi": 0.0,
       "5_volume": 0.667,
-      "6_volume_profile": 0.446
+      "6_volume_profile": 0.44
     },
     "closest": "6_volume_profile",
     "reliability": {
@@ -738,51 +738,51 @@
   },
   {
     "ticker": "NKE",
-    "date": "2026-09-23",
-    "close": 36.05,
-    "rsi": 36.6,
-    "confirmed": 0,
+    "date": "2026-09-24",
+    "close": 35.99,
+    "rsi": 36.3,
+    "confirmed": 1,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 35.25 -> 35.77 (+1.48%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
-      "3_macd": false,
+      "3_macd": true,
       "4_rsi": false,
       "5_volume": false,
       "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=39.88)",
-      "2_moving_averages": "close>36.26(MA10) & >37.36(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-1.22 vs Signal=-1.21 (above=False), hist=-0.00 rising=True",
-      "4_rsi": "RSI=36.57 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.26, up>downVol=False",
-      "6_volume_profile": "close=36.05 vs POC=42.98 (above=False)"
+      "2_moving_averages": "close>36.20(MA10) & >37.23(MA20)=False, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-1.18 vs Signal=-1.20 (above=True), hist=0.03 rising=True",
+      "4_rsi": "RSI=36.26 rising=False, bullishDivergence=True",
+      "5_volume": "day up=False, RVOL=1.21, up>downVol=False",
+      "6_volume_profile": "close=35.99 vs POC=42.98 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.0,
-      "3_macd": 0.5,
-      "4_rsi": 0.0,
+      "3_macd": 1.0,
+      "4_rsi": 0.333,
       "5_volume": 0.333,
       "6_volume_profile": 0.419
     },
-    "closest": "3_macd",
+    "closest": "6_volume_profile",
     "reliability": null
   },
   {
     "ticker": "BNTX",
-    "date": "2026-09-23",
-    "close": 98.46,
-    "rsi": 48.6,
+    "date": "2026-09-24",
+    "close": 99.26,
+    "rsi": 49.9,
     "confirmed": 1,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 99.31 -> 98.70 (-0.61%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -793,33 +793,33 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=103.00)",
-      "2_moving_averages": "close>97.38(MA10) & >101.33(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-0.65 vs Signal=0.02 (above=False), hist=-0.67 rising=True",
-      "4_rsi": "RSI=48.56 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.00, up>downVol=False",
-      "6_volume_profile": "close=98.46 vs POC=92.02 (above=True)"
+      "2_moving_averages": "close>97.94(MA10) & >100.00(MA20)=False, MA10 rising=True, MA10>MA50=True",
+      "3_macd": "MACD=-0.40 vs Signal=-0.12 (above=False), hist=-0.28 rising=True",
+      "4_rsi": "RSI=49.89 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.77, up>downVol=False",
+      "6_volume_profile": "close=99.26 vs POC=92.02 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.0,
-      "2_moving_averages": 0.333,
+      "2_moving_averages": 0.667,
       "3_macd": 0.5,
       "4_rsi": 0.333,
       "5_volume": 0.0,
       "6_volume_profile": 1.0
     },
-    "closest": "3_macd",
+    "closest": "2_moving_averages",
     "reliability": null
   },
   {
     "ticker": "CEG",
-    "date": "2026-09-23",
-    "close": 263.88,
-    "rsi": 43.8,
+    "date": "2026-09-24",
+    "close": 261.62,
+    "rsi": 42.3,
     "confirmed": 0,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 262.00 -> 262.86 (+0.33%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -829,34 +829,34 @@
       "6_volume_profile": false
     },
     "detail": {
-      "1_price_structure": "HigherLow=True, brokeSwingHigh=False (last swing high=305.80)",
-      "2_moving_averages": "close>269.21(MA10) & >276.87(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-3.53 vs Signal=-0.36 (above=False), hist=-3.17 rising=True",
-      "4_rsi": "RSI=43.79 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=1.03, up>downVol=False",
-      "6_volume_profile": "close=263.88 vs POC=273.60 (above=False)"
+      "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=305.80)",
+      "2_moving_averages": "close>263.73(MA10) & >275.23(MA20)=False, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-3.93 vs Signal=-1.61 (above=False), hist=-2.32 rising=True",
+      "4_rsi": "RSI=42.32 rising=False, bullishDivergence=False",
+      "5_volume": "day up=False, RVOL=0.59, up>downVol=True",
+      "6_volume_profile": "close=261.62 vs POC=275.33 (above=False)"
     },
     "progress": {
-      "1_price_structure": 0.5,
+      "1_price_structure": 0.0,
       "2_moving_averages": 0.0,
       "3_macd": 0.5,
-      "4_rsi": 0.333,
-      "5_volume": 0.0,
-      "6_volume_profile": 0.482
+      "4_rsi": 0.0,
+      "5_volume": 0.333,
+      "6_volume_profile": 0.475
     },
-    "closest": "1_price_structure",
+    "closest": "3_macd",
     "reliability": null
   },
   {
     "ticker": "ASTS",
-    "date": "2026-09-23",
-    "close": 59.98,
-    "rsi": 46.4,
+    "date": "2026-09-24",
+    "close": 61.06,
+    "rsi": 48.1,
     "confirmed": 0,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 62.11 -> 61.48 (-1.01%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -867,36 +867,36 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=True, brokeSwingHigh=False (last swing high=67.20)",
-      "2_moving_averages": "close>60.46(MA10) & >60.71(MA20)=False, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-1.10 vs Signal=-1.43 (above=True), hist=0.33 rising=False",
-      "4_rsi": "RSI=46.40 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.87, up>downVol=False",
-      "6_volume_profile": "close=59.98 vs POC=82.65 (above=False)"
+      "2_moving_averages": "close>60.58(MA10) & >60.77(MA20)=True, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-1.03 vs Signal=-1.35 (above=True), hist=0.32 rising=False",
+      "4_rsi": "RSI=48.11 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.89, up>downVol=False",
+      "6_volume_profile": "close=61.06 vs POC=82.65 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.5,
-      "2_moving_averages": 0.0,
+      "2_moving_averages": 0.667,
       "3_macd": 0.5,
-      "4_rsi": 0.0,
+      "4_rsi": 0.333,
       "5_volume": 0.0,
-      "6_volume_profile": 0.363
+      "6_volume_profile": 0.369
     },
-    "closest": "1_price_structure",
+    "closest": "2_moving_averages",
     "reliability": null
   },
   {
     "ticker": "ROK",
-    "date": "2026-09-23",
-    "close": 432.89,
-    "rsi": 52.6,
-    "confirmed": 1,
+    "date": "2026-09-24",
+    "close": 432.93,
+    "rsi": 52.9,
+    "confirmed": 2,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 433.97 -> 433.82 (-0.04%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
-      "2_moving_averages": false,
+      "2_moving_averages": true,
       "3_macd": true,
       "4_rsi": false,
       "5_volume": false,
@@ -904,54 +904,54 @@
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=436.00)",
-      "2_moving_averages": "close>421.01(MA10) & >424.68(MA20)=True, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-5.51 vs Signal=-6.97 (above=True), hist=1.46 rising=True",
-      "4_rsi": "RSI=52.56 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.82, up>downVol=True",
-      "6_volume_profile": "close=432.89 vs POC=459.96 (above=False)"
+      "2_moving_averages": "close>422.27(MA10) & >424.63(MA20)=True, MA10 rising=True, MA10>MA50=False",
+      "3_macd": "MACD=-3.62 vs Signal=-5.99 (above=True), hist=2.37 rising=True",
+      "4_rsi": "RSI=52.85 rising=True, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.55, up>downVol=False",
+      "6_volume_profile": "close=432.93 vs POC=460.55 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.0,
-      "2_moving_averages": 0.667,
+      "2_moving_averages": 1.0,
       "3_macd": 1.0,
       "4_rsi": 0.333,
-      "5_volume": 0.333,
-      "6_volume_profile": 0.471
+      "5_volume": 0.0,
+      "6_volume_profile": 0.47
     },
-    "closest": "2_moving_averages",
+    "closest": "6_volume_profile",
     "reliability": null
   },
   {
     "ticker": "DKS",
-    "date": "2026-09-23",
-    "close": 132.36,
-    "rsi": 37.9,
-    "confirmed": 2,
+    "date": "2026-09-24",
+    "close": 133.25,
+    "rsi": 39.5,
+    "confirmed": 3,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 136.60 -> 135.26 (-0.98%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
       "3_macd": true,
-      "4_rsi": false,
+      "4_rsi": true,
       "5_volume": false,
       "6_volume_profile": true
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=141.27)",
-      "2_moving_averages": "close>128.07(MA10) & >130.91(MA20)=True, MA10 rising=False, MA10>MA50=False",
-      "3_macd": "MACD=-14.18 vs Signal=-16.12 (above=True), hist=1.93 rising=True",
-      "4_rsi": "RSI=37.94 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.35, up>downVol=False",
-      "6_volume_profile": "close=132.36 vs POC=124.69 (above=True)"
+      "2_moving_averages": "close>128.14(MA10) & >131.57(MA20)=True, MA10 rising=False, MA10>MA50=False",
+      "3_macd": "MACD=-11.76 vs Signal=-14.71 (above=True), hist=2.95 rising=True",
+      "4_rsi": "RSI=39.46 rising=True, bullishDivergence=True",
+      "5_volume": "day up=False, RVOL=0.68, up>downVol=False",
+      "6_volume_profile": "close=133.25 vs POC=124.69 (above=True)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.667,
       "3_macd": 1.0,
-      "4_rsi": 0.333,
+      "4_rsi": 0.667,
       "5_volume": 0.0,
       "6_volume_profile": 1.0
     },
@@ -960,39 +960,39 @@
   },
   {
     "ticker": "COPJ",
-    "date": "2026-09-23",
-    "close": 45.35,
-    "rsi": 51.7,
-    "confirmed": 1,
+    "date": "2026-09-24",
+    "close": 44.92,
+    "rsi": 49.4,
+    "confirmed": 0,
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "",
+    "context": "  [today so far: open 45.53 -> 45.40 (-0.29%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
       "3_macd": false,
       "4_rsi": false,
       "5_volume": false,
-      "6_volume_profile": true
+      "6_volume_profile": false
     },
     "detail": {
       "1_price_structure": "HigherLow=False, brokeSwingHigh=False (last swing high=48.87)",
-      "2_moving_averages": "close>44.79(MA10) & >45.95(MA20)=False, MA10 rising=False, MA10>MA50=True",
-      "3_macd": "MACD=0.05 vs Signal=0.33 (above=False), hist=-0.28 rising=True",
-      "4_rsi": "RSI=51.72 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.93, up>downVol=False",
-      "6_volume_profile": "close=45.35 vs POC=44.99 (above=True)"
+      "2_moving_averages": "close>44.66(MA10) & >45.69(MA20)=False, MA10 rising=False, MA10>MA50=True",
+      "3_macd": "MACD=0.14 vs Signal=0.29 (above=False), hist=-0.15 rising=False",
+      "4_rsi": "RSI=49.42 rising=False, bullishDivergence=False",
+      "5_volume": "day up=True, RVOL=0.39, up>downVol=False",
+      "6_volume_profile": "close=44.92 vs POC=44.99 (above=False)"
     },
     "progress": {
       "1_price_structure": 0.0,
       "2_moving_averages": 0.333,
-      "3_macd": 0.5,
-      "4_rsi": 0.333,
+      "3_macd": 0.0,
+      "4_rsi": 0.0,
       "5_volume": 0.0,
-      "6_volume_profile": 1.0
+      "6_volume_profile": 0.499
     },
-    "closest": "3_macd",
+    "closest": "6_volume_profile",
     "reliability": null
   }
 ]
