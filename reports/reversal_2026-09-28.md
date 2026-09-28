@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-09-28 20:47 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-09-28 22:23 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/22 tickers)
 
 ## TEM  (2026-09-25)  close=85.01  RSI=72.5  [today so far: open 83.52 -> 85.08 (+1.87%) | DELAYED]
