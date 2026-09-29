@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-09-29 01:32 UTC [END-OF-DAY]
+# Reversal Checker — 2026-09-29 19:37 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 0/22 tickers)
 
 אף מניה לא עמדה היום בתנאי הסינון (טריגר מלא או 5/6 לפחות).
