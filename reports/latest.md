@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-10-02 19:30 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-02 21:08 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/22 tickers)
 
-## ROK  (2026-10-01)  close=442.45  RSI=59.9  [today so far: open 447.74 -> 453.83 (+1.36%) | DELAYED]
+## ROK  (2026-10-01)  close=442.45  RSI=59.9  [today so far: open 447.74 -> 454.46 (+1.50%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=436.00)
