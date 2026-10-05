@@ -967,7 +967,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 44.22 -> 44.27 (+0.12%) | DELAYED]",
+    "context": "  [today so far: open 44.08 -> 44.27 (+0.43%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
