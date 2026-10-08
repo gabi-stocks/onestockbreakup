@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-10-08 20:07 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-08 21:47 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 7/72 tickers)
 
-## MRVL  (2026-10-07)  close=284.68  RSI=68.2  [today so far: open 277.60 -> 274.66 (-1.06%) | DELAYED]
+## MRVL  (2026-10-07)  close=284.68  RSI=68.2  [today so far: open 277.60 -> 274.61 (-1.08%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=8.38%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=267.48)
@@ -52,7 +52,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## VST  (2026-10-07)  close=166.72  RSI=75.6  [today so far: open 165.81 -> 156.16 (-5.82%) | DELAYED]
+## VST  (2026-10-07)  close=166.72  RSI=75.6  [today so far: open 165.81 -> 156.17 (-5.81%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=143.51)
@@ -86,7 +86,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ZBRA  (2026-10-07)  close=386.05  RSI=69.1  [today so far: open 380.29 -> 382.14 (+0.49%) | DELAYED]
+## ZBRA  (2026-10-07)  close=386.05  RSI=69.1  [today so far: open 380.29 -> 382.21 (+0.50%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=374.94)
