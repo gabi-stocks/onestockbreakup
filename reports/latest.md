@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-10-09 19:44 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-09 21:26 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 3/72 tickers)
 
-## MRVL  (2026-10-08)  close=274.66  RSI=61.2  [today so far: open 279.26 -> 273.45 (-2.08%) | DELAYED]
+## MRVL  (2026-10-08)  close=274.66  RSI=61.2  [today so far: open 279.26 -> 275.33 (-1.41%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 14 עסקאות בלתי-תלויות, win rate ל-20 יום=64.3%, תשואה ממוצעת ל-20 יום=8.38%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=267.48)
@@ -18,7 +18,7 @@
   >> 4/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## IGV  (2026-10-08)  close=109.59  RSI=59.4  [today so far: open 110.79 -> 112.40 (+1.45%) | DELAYED]
+## IGV  (2026-10-08)  close=109.59  RSI=59.4  [today so far: open 110.79 -> 112.60 (+1.63%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=108.44)
@@ -35,7 +35,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## XLE  (2026-10-08)  close=65.24  RSI=62.7  [today so far: open 64.96 -> 65.06 (+0.15%) | DELAYED]
+## XLE  (2026-10-08)  close=65.24  RSI=62.7  [today so far: open 64.96 -> 65.08 (+0.18%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=66.17)
