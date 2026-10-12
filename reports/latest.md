@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-10-12 22:14 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-12 23:26 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 2/72 tickers)
 
 ## ODD  (2026-10-09)  close=21.11  RSI=69.0  [today so far: open 20.90 -> 21.57 (+3.18%) | DELAYED]
@@ -18,7 +18,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## TEVA  (2026-10-09)  close=41.1  RSI=65.3  [today so far: open 41.35 -> 41.14 (-0.51%) | DELAYED]
+## TEVA  (2026-10-09)  close=41.1  RSI=65.3  [today so far: open 41.34 -> 41.14 (-0.48%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=40.28)
