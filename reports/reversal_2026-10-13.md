@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-10-13 20:21 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-13 21:42 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 5/72 tickers)
 
 ## ODD  (2026-10-12)  close=21.58  RSI=70.7  [today so far: open 21.50 -> 22.12 (+2.88%) | DELAYED]
