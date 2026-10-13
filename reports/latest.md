@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-10-13 02:52 UTC [END-OF-DAY]
+# Reversal Checker — 2026-10-13 20:21 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 5/72 tickers)
 
-## ODD  (2026-10-12)  close=21.58  RSI=70.7
+## ODD  (2026-10-12)  close=21.58  RSI=70.7  [today so far: open 21.50 -> 22.12 (+2.88%) | DELAYED]
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=20.67)
@@ -18,7 +18,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ZIM  (2026-10-12)  close=30.9  RSI=62.4
+## ZIM  (2026-10-12)  close=30.9  RSI=62.4  [today so far: open 30.94 -> 30.43 (-1.65%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=False (last swing high=30.96)
@@ -35,7 +35,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## TEVA  (2026-10-12)  close=41.17  RSI=65.6
+## TEVA  (2026-10-12)  close=41.17  RSI=65.6  [today so far: open 41.23 -> 41.24 (+0.02%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=40.28)
@@ -52,7 +52,7 @@
   >> 6/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## MSFT  (2026-10-12)  close=541.15  RSI=69.9
+## MSFT  (2026-10-12)  close=541.15  RSI=69.9  [today so far: open 544.62 -> 543.66 (-0.18%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=509.95)
@@ -69,7 +69,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## AMZN  (2026-10-12)  close=259.53  RSI=55.6
+## AMZN  (2026-10-12)  close=259.53  RSI=55.6  [today so far: open 260.39 -> 258.62 (-0.68%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=259.49)
