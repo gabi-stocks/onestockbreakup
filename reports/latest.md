@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-10-14 18:53 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-14 20:25 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 4/72 tickers)
 
-## GEHC  (2026-10-13)  close=68.79  RSI=60.6  [today so far: open 68.92 -> 68.26 (-0.96%) | DELAYED]
+## GEHC  (2026-10-13)  close=68.79  RSI=60.6  [today so far: open 68.92 -> 68.49 (-0.62%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 8 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=0.16%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=66.55)
@@ -18,7 +18,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## ODD  (2026-10-13)  close=22.12  RSI=72.5  [today so far: open 22.22 -> 21.49 (-3.29%) | DELAYED]
+## ODD  (2026-10-13)  close=22.12  RSI=72.5  [today so far: open 22.22 -> 21.62 (-2.70%) | DELAYED]
   [אמינות היסטורית: מדגם קטן מדי (3 עסקאות)] רק 3 טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=20.67)
@@ -35,7 +35,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## TEVA  (2026-10-13)  close=41.25  RSI=66.0  [today so far: open 41.11 -> 41.24 (+0.32%) | DELAYED]
+## TEVA  (2026-10-13)  close=41.25  RSI=66.0  [today so far: open 41.11 -> 40.73 (-0.92%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=True (last swing high=40.28)
@@ -52,7 +52,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## MSFT  (2026-10-13)  close=543.45  RSI=70.7  [today so far: open 545.15 -> 534.10 (-2.03%) | DELAYED]
+## MSFT  (2026-10-13)  close=543.45  RSI=70.7  [today so far: open 545.15 -> 533.87 (-2.07%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=509.95)
