@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-10-15 18:38 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-15 20:10 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER or >= 5/6 confirmed, 1/72 tickers)
 
-## GEHC  (2026-10-14)  close=68.47  RSI=58.9  [today so far: open 69.79 -> 70.54 (+1.07%) | DELAYED]
+## GEHC  (2026-10-14)  close=68.47  RSI=58.9  [today so far: open 69.79 -> 70.37 (+0.83%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 8 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=0.16%.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=66.55)
