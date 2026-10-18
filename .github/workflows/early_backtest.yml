@@ -1,0 +1,41 @@
+name: Early-entry Backtest
+
+# Runs only on the experimental branch -- never touches main, sends no email.
+on:
+  push:
+    branches: [early-backtest]
+    paths:
+      - backtest_early.py
+      - .github/workflows/early_backtest.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: early-backtest
+  cancel-in-progress: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy
+
+      - name: Run early-entry backtest
+        run: python backtest_early.py
+
+      - name: Commit results to this branch
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/early_backtest_results.md reports/early_backtest_results.json || true
+          git commit -m "early backtest results $(date -u +%F)" || echo "no changes"
+          git push origin HEAD:early-backtest || echo "nothing to push"
