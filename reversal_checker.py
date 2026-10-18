@@ -17,8 +17,13 @@ AND (if REQUIRE_MARKET_REGIME) SPY is above its 200d MA.
 All thresholds are env-configurable -- see the Config section below for current
 defaults and reports/backtest_results.md for why they're set where they are.
 
+Each signal is also tagged on-time / late (distance from the 20-day low), and
+a separate EARLY ALERT flags the start of a reversal before the checklist
+confirms it (see the Early alert config block for its definition and results).
+
 The emailed report only lists tickers that either fully triggered (green,
-BUY_TRIGGER) or came close (>= EMAIL_MIN_CONFIRMED out of 6) -- everything
+BUY_TRIGGER), raised an EARLY ALERT (blue), or came close
+(>= EMAIL_MIN_CONFIRMED out of 6) -- everything
 else is computed and kept in reports/latest.json for the record, but left
 out of the email itself to keep it focused on what's actually worth a look.
 
@@ -73,6 +78,19 @@ REQUIRE_MARKET_REGIME = os.environ.get("REQUIRE_MARKET_REGIME", "true").lower() 
 # isn't chased.
 LATE_THRESHOLD_PCT = float(os.environ.get("LATE_THRESHOLD_PCT", "10"))
 LOW_LOOKBACK = 20
+
+# --- Early alert (added 2026-10-18) ---
+# Fires at the START of a reversal, before the full checklist confirms.
+# Definition is identical to EARLY_D + squeeze + pullback in backtest_early.py /
+# backtest_params.py (branch early-backtest, 5y, 68 tickers): 313 independent
+# trades, 20d win rate 62.3%, 20d median +3.29%, entry median 6.5% above the
+# 20-day low, consistent in 2022-24 (61.6%) and 2025-26 (63.3%). Stops under
+# the 10-day low got hit in roughly half the trades, so size accordingly.
+EARLY_ALERT = os.environ.get("EARLY_ALERT", "true").lower() == "true"
+EARLY_SQUEEZE_PCTL = 0.25          # band width in bottom 25% of its last 120 days...
+EARLY_SQUEEZE_WITHIN = 10          # ...at some point in the last 10 days
+EARLY_PULLBACK_MIN, EARLY_PULLBACK_MAX = -35.0, -10.0   # 20d low vs 120d high, %
+STOP_LOOKBACK, STOP_BUFFER = 10, 0.01
 
 
 def load_tickers():
@@ -276,6 +294,35 @@ def intraday_context(ticker):
     return ""
 
 
+def early_alert_state(close, high, low, ma10, ma20, rsi_s, hist):
+    """Early-reversal alert, evaluated on the last bar. All five parts must hold:
+      washout      : RSI < 40 or close >5% under MA20, at some point in the last 10 days
+      first_above10: today is the FIRST close back above MA10
+      hist_up2     : MACD histogram rose two days in a row
+      squeeze      : Bollinger band width (20,2) in the bottom 25% of its last
+                     120 days, at some point in the last 10 days
+      pullback     : 20-day low is 10%..35% below the 120-day high
+    Returns the parts, the alert flag and a suggested stop (1% under the 10-day low)."""
+    washout = bool((rsi_s.rolling(10).min().iloc[-1] < 40)
+                   or ((close / ma20 - 1).rolling(10).min().iloc[-1] < -0.05))
+    above10 = close > ma10
+    first_above10 = bool(above10.iloc[-1] and not above10.iloc[-2])
+    hist_up2 = bool(hist.iloc[-1] > hist.iloc[-2] > hist.iloc[-3])
+    bw = (4 * close.rolling(20).std()) / close.rolling(20).mean()
+    bw_rank = bw.rolling(120).apply(lambda a: (a[:-1] < a[-1]).mean() if len(a) > 1 else np.nan, raw=True)
+    squeeze = bool(bw_rank.rolling(EARLY_SQUEEZE_WITHIN).min().iloc[-1] <= EARLY_SQUEEZE_PCTL)
+    pullback_pct = float(100 * (low.rolling(20).min().iloc[-1] / high.rolling(120).max().iloc[-1] - 1))
+    pullback = bool(EARLY_PULLBACK_MIN <= pullback_pct <= EARLY_PULLBACK_MAX)
+    stop = float(low.tail(STOP_LOOKBACK).min()) * (1 - STOP_BUFFER)
+    last = float(close.iloc[-1])
+    return {
+        "alert": washout and first_above10 and hist_up2 and squeeze and pullback,
+        "washout": washout, "first_above10": first_above10, "hist_up2": hist_up2,
+        "squeeze": squeeze, "pullback": pullback, "pullback_pct": round(pullback_pct, 1),
+        "stop": round(stop, 2), "risk_pct": round(100 * (last / stop - 1), 1),
+    }
+
+
 # ---------------- Core analysis ----------------
 def analyze(ticker, morning=False, market_ok=True):
     try:
@@ -374,6 +421,9 @@ def analyze(ticker, morning=False, market_ok=True):
     timing = "on_time" if from_low_pct <= LATE_THRESHOLD_PCT else "late"
     max_entry = low20 * (1 + LATE_THRESHOLD_PCT / 100)
 
+    # Early alert: the start of a reversal, before the checklist confirms
+    early = early_alert_state(close, high, low, ma10, ma20, rsi_s, hist)
+
     # --- Proximity score per parameter (0..1, higher = closer to passing) ---
     # Based on how many sub-conditions are met + light momentum credit.
     def c01(x):
@@ -412,6 +462,8 @@ def analyze(ticker, morning=False, market_ok=True):
         "from_low20_pct": round(from_low_pct, 1),
         "timing": timing,
         "max_entry": round(max_entry, 2),
+        "early_alert": bool(EARLY_ALERT and early["alert"]),
+        "early": early,
     }
 
 
@@ -457,6 +509,19 @@ def timing_text(r):
             f"לחכות לתיקון אל {max_entry} ומטה (עד {LATE_THRESHOLD_PCT:g}% מעל השפל), או לוותר.")
 
 
+def early_text(r):
+    """Plain-Hebrew explanation of an early alert, with the concrete stop level."""
+    if not r.get("early_alert"):
+        return None
+    e = r["early"]
+    return (f"תחילת היפוך, לפני שהטבלה מאשרת. המניה ירדה בתיקון בריא ({e['pullback_pct']}% מהשיא של חצי השנה), "
+            f"נרגעה (התנודתיות התכווצה), והיום סגרה לראשונה מעל ממוצע 10 עם מומנטום מקד שמתחיל לעלות. "
+            f"בגלל שזה מוקדם, רוב הפרמטרים בטבלה עדיין ייכשלו, וזה צפוי. "
+            f"עצירה מוצעת: {e['stop']} (1% מתחת לשפל של 10 הימים, סיכון של {e['risk_pct']}%). "
+            f"בבדיקה על 5 שנים: 62% הצלחה אחרי 20 יום, תשואה חציונית של ‎+3.3%, "
+            f"אבל העצירה נפגעה בכמחצית מהעסקאות, ולכן מתאים לפוזיציה קטנה מהרגיל.")
+
+
 def render(r):
     if "error" in r:
         return f"## {r['ticker']}\n  ERROR: {r['error']}\n"
@@ -471,6 +536,9 @@ def render(r):
     lines = [f"## {r['ticker']}  ({r['date']})  close={r['close']}  RSI={r['rsi']}{r['context']}"]
     tier, rel_detail = reliability_label(r.get("reliability"))
     lines.append(f"  [אמינות היסטורית: {tier}] {rel_detail}")
+    et = early_text(r)
+    if et:
+        lines.append(f"  [התראה מוקדמת 🔵] {et}")
     tt = timing_text(r)
     if tt:
         lines.append(f"  [תזמון כניסה: {tt[0]}] {tt[1]}")
@@ -482,7 +550,12 @@ def render(r):
     for k, label in names.items():
         mark = "PASS" if r["checks"][k] else "----"
         lines.append(f"  [{mark}] {label}\n         {r['detail'][k]}")
-    verdict = "BUY TRIGGER - reversal confirmed" if r["BUY_TRIGGER"] else "NO ENTRY - wait for confirmation"
+    if r["BUY_TRIGGER"]:
+        verdict = "BUY TRIGGER - reversal confirmed"
+    elif r.get("early_alert"):
+        verdict = "EARLY ALERT - reversal starting, not yet confirmed"
+    else:
+        verdict = "NO ENTRY - wait for confirmation"
     lines.append(f"  >> {r['confirmed']}/6 confirmed | mandatory(structure+volume)={r['mandatory_met']}")
     if not r.get("market_regime_ok", True) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS:
         lines.append("  >> (would have triggered, but blocked: SPY below its 200d MA)")
@@ -554,6 +627,10 @@ def render_html(r):
     elif buy:
         banner_bg = "#0a7d33"
         banner_txt = f"טריגר כניסה בזמן — ההיפוך אושר ({r['confirmed']}/6)"
+    elif r.get("early_alert"):
+        banner_bg = "#1f4fb8"
+        banner_txt = (f"התראה מוקדמת — ההיפוך מתחיל, עוד לא מאושר. "
+                      f"עצירה מוצעת {r['early']['stop']} (סיכון {r['early']['risk_pct']}%)")
     else:
         banner_bg = "#b02a2a"
         banner_txt = f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)"
@@ -567,6 +644,12 @@ def render_html(r):
       <div style="background:{t_bg};border-bottom:1px solid {t_border};padding:10px 16px;font-size:13px;color:{t_color}">
         ⏱️ <b>תזמון כניסה: {tt[0]}</b> — {tt[1]}
       </div>"""
+    et = early_text(r)
+    if et:
+        timing_html = f"""
+      <div style="background:#e8efff;border-bottom:1px solid #c5d4f7;padding:10px 16px;font-size:13px;color:#16357a">
+        🔵 <b>התראה מוקדמת:</b> {et}
+      </div>""" + timing_html
 
     # "closest to passing" strip
     blocked_by_regime = (not r.get("market_regime_ok", True)) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS
@@ -651,9 +734,16 @@ def build_html(results, mode_he):
           למה: בבדיקה על 5 שנים ו-70 מניות, הטריגר בדרך כלל מגיע כ-16% מעל השפל. טריגרים "בזמן" הצליחו
           ב-61% מהמקרים אחרי 20 יום (לעומת 56% לכל הטריגרים), ופקודת העצירה הייתה רחוקה פי שניים פחות
           (כ-6.5% במקום כ-12%). המחיר: פחות אותות, ומפספסים חלק מהמניות שממשיכות לטפס.</li>
+        <li><b>🔵 התראה מוקדמת:</b> מזהה את <b>תחילת</b> ההיפוך, עוד לפני שטבלת ששת הפרמטרים מאשרת אותו.
+          היא קופצת רק כשחמישה תנאים מתקיימים יחד: ירידה חדה בעשרת הימים האחרונים; תיקון בריא של 10% עד 35%
+          מהשיא של חצי השנה (לא קריסה); התכווצות תנודתיות (המניה "נרגעה"); סגירה ראשונה מעל ממוצע 10;
+          והיסטוגרמת מקד שעולה יומיים. בבדיקה על 5 שנים ו-68 מניות: 313 עסקאות, 62% הצלחה אחרי 20 יום,
+          תשואה חציונית של ‎+3.3%, כניסה בממוצע כ-6.5% מעל השפל, ותוצאה דומה גם ב-2022 עד 2024 וגם ב-2025 עד 2026.
+          המחיר: העצירה נפגעה בכמחצית מהעסקאות. לכן: פוזיציה קטנה מהרגיל, עצירה במחיר שמצוין בכרטיס,
+          והגדלה רק אם הטריגר המלא מגיע אחר כך. בכרטיס כזה רוב הפרמטרים בטבלה ייכשלו, וזה צפוי.</li>
         <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
-        <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
-        <li><b>סינון תצוגה:</b> המייל מציג רק מניות עם טריגר קנייה מלא (ירוק) או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים שעברו — מניות חלשות יותר מחושבות אך לא מוצגות כאן.</li>
+        <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר או התראה מוקדמת היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
+        <li><b>סינון תצוגה:</b> המייל מציג רק מניות עם טריגר קנייה מלא (ירוק), התראה מוקדמת (כחול) או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים שעברו — מניות חלשות יותר מחושבות אך לא מוצגות כאן.</li>
       </ul>
     </div>
     """
@@ -682,7 +772,8 @@ def qualifies_for_email(r):
     saved in reports/latest.json, just not shown in the email itself."""
     if "error" in r:
         return False
-    return bool(r.get("BUY_TRIGGER")) or r.get("confirmed", 0) >= EMAIL_MIN_CONFIRMED
+    return (bool(r.get("BUY_TRIGGER")) or bool(r.get("early_alert"))
+            or r.get("confirmed", 0) >= EMAIL_MIN_CONFIRMED)
 
 
 def main():
@@ -697,12 +788,20 @@ def main():
             r["reliability"] = reliability.get(r["ticker"])
 
     shown = [r for r in results if qualifies_for_email(r)]
-    # on-time triggers first, then late triggers, then near-misses
-    shown.sort(key=lambda r: (not r.get("BUY_TRIGGER"), r.get("timing") == "late", -r.get("confirmed", 0)))
+    # order: on-time triggers, early alerts, late triggers, near-misses
+    def _rank(r):
+        if r.get("BUY_TRIGGER") and r.get("timing") != "late":
+            return 0
+        if r.get("early_alert") and not r.get("BUY_TRIGGER"):
+            return 1
+        if r.get("BUY_TRIGGER"):
+            return 2
+        return 3
+    shown.sort(key=lambda r: (_rank(r), -r.get("confirmed", 0)))
 
     news_calls = 0
     for r in shown:
-        if r.get("BUY_TRIGGER") and news_calls < 10:
+        if (r.get("BUY_TRIGGER") or r.get("early_alert")) and news_calls < 10:
             r["headlines"] = fetch_recent_headlines(r["ticker"])
             news_calls += 1
 
@@ -710,9 +809,9 @@ def main():
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     text = (f"# Reversal Checker — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} [{mode}]\n"
             f"(needs >= {MIN_SIGNALS}/6 + mandatory structure & volume; showing only "
-            f"BUY_TRIGGER or >= {EMAIL_MIN_CONFIRMED}/6 confirmed, {len(shown)}/{len(results)} tickers)\n\n"
+            f"BUY_TRIGGER, EARLY ALERT or >= {EMAIL_MIN_CONFIRMED}/6 confirmed, {len(shown)}/{len(results)} tickers)\n\n"
             + ("\n".join(render(r) for r in shown) if shown
-               else "אף מניה לא עמדה היום בתנאי הסינון (טריגר מלא או "
+               else "אף מניה לא עמדה היום בתנאי הסינון (טריגר מלא, התראה מוקדמת או "
                     f"{EMAIL_MIN_CONFIRMED}/6 לפחות).\n"))
     print(text)
 
@@ -733,12 +832,15 @@ def main():
     if not EMAIL_ONLY_ON_TRIGGER or trigger:
         on_time = [r["ticker"] for r in shown if r.get("BUY_TRIGGER") and r.get("timing") == "on_time"]
         late = [r["ticker"] for r in shown if r.get("BUY_TRIGGER") and r.get("timing") == "late"]
+        early = [r["ticker"] for r in shown if r.get("early_alert") and not r.get("BUY_TRIGGER")]
+        parts = []
         if on_time:
-            tag = f"TRIGGER בזמן: {','.join(on_time)}" + (f" | מאוחר: {','.join(late)}" if late else "")
-        elif late:
-            tag = f"TRIGGER מאוחר (לא לרדוף): {','.join(late)}"
-        else:
-            tag = "close" if shown else "no matches"
+            parts.append(f"TRIGGER בזמן: {','.join(on_time)}")
+        if early:
+            parts.append(f"התראה מוקדמת: {','.join(early)}")
+        if late:
+            parts.append(f"מאוחר (לא לרדוף): {','.join(late)}")
+        tag = " | ".join(parts) if parts else ("close" if shown else "no matches")
         send_email(f"[Reversal] {tag} {stamp} - {','.join(tickers)}", text, html_body=html)
 
 
