@@ -63,6 +63,17 @@ _poc_window_env = os.environ.get("POC_WINDOW", "120")
 POC_WINDOW = int(_poc_window_env) if _poc_window_env.strip() else None
 REQUIRE_MARKET_REGIME = os.environ.get("REQUIRE_MARKET_REGIME", "true").lower() == "true"
 
+# --- Entry timing tag: "on time" vs "late" (added 2026-10-18) ---
+# backtest_early.py (branch early-backtest, 5y, 70 tickers) showed the trigger
+# usually fires after the stock already bounced ~16% off its 20-day low. Triggers
+# that fired while price was still <= LATE_THRESHOLD_PCT above that low did
+# better: 20d win rate 60.7% vs 55.8% for all triggers, and the stop (under the
+# 10-day low) was about half as far away (6.5% vs 11.8% median). This tag does
+# NOT change BUY_TRIGGER itself -- it only labels each signal so a late one
+# isn't chased.
+LATE_THRESHOLD_PCT = float(os.environ.get("LATE_THRESHOLD_PCT", "10"))
+LOW_LOOKBACK = 20
+
 
 def load_tickers():
     """Priority: tickers.txt (one symbol per line, '#'=comment) -> TICKERS env -> ORCL."""
@@ -357,6 +368,12 @@ def analyze(ticker, morning=False, market_ok=True):
     mandatory = checks["1_price_structure"] and checks["5_volume"]
     buy = n_conf >= MIN_SIGNALS and mandatory and market_ok
 
+    # Entry timing: how far price already ran from its recent low
+    low20 = float(low.tail(LOW_LOOKBACK).min())
+    from_low_pct = (last_close / low20 - 1) * 100 if low20 > 0 else 0.0
+    timing = "on_time" if from_low_pct <= LATE_THRESHOLD_PCT else "late"
+    max_entry = low20 * (1 + LATE_THRESHOLD_PCT / 100)
+
     # --- Proximity score per parameter (0..1, higher = closer to passing) ---
     # Based on how many sub-conditions are met + light momentum credit.
     def c01(x):
@@ -391,6 +408,10 @@ def analyze(ticker, morning=False, market_ok=True):
         "detail": detail,
         "progress": progress,
         "closest": closest,
+        "low20": round(low20, 2),
+        "from_low20_pct": round(from_low_pct, 1),
+        "timing": timing,
+        "max_entry": round(max_entry, 2),
     }
 
 
@@ -419,6 +440,23 @@ def send_email(subject, text_body, html_body=None):
 
 
 # ---------------- Reporting ----------------
+def timing_text(r):
+    """(label, explanation) for the on-time / late tag, in plain Hebrew,
+    so the email itself reminds what the tag means and what to do with it."""
+    if "timing" not in r:
+        return None
+    pct, low20, max_entry = r["from_low20_pct"], r["low20"], r["max_entry"]
+    if r["timing"] == "on_time":
+        return ("בזמן ✅",
+                f"המחיר רק {pct}% מעל השפל של {LOW_LOOKBACK} הימים האחרונים ({low20}). "
+                f"ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. "
+                f"בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.")
+    return ("מאוחרת ⚠️",
+            f"המחיר כבר {pct}% מעל השפל של {LOW_LOOKBACK} הימים האחרונים ({low20}), "
+            f"כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: "
+            f"לחכות לתיקון אל {max_entry} ומטה (עד {LATE_THRESHOLD_PCT:g}% מעל השפל), או לוותר.")
+
+
 def render(r):
     if "error" in r:
         return f"## {r['ticker']}\n  ERROR: {r['error']}\n"
@@ -433,6 +471,9 @@ def render(r):
     lines = [f"## {r['ticker']}  ({r['date']})  close={r['close']}  RSI={r['rsi']}{r['context']}"]
     tier, rel_detail = reliability_label(r.get("reliability"))
     lines.append(f"  [אמינות היסטורית: {tier}] {rel_detail}")
+    tt = timing_text(r)
+    if tt:
+        lines.append(f"  [תזמון כניסה: {tt[0]}] {tt[1]}")
     if r.get("headlines"):
         lines.append("  [חדשות אחרונות, מהחדש לישן]")
         for h in r["headlines"]:
@@ -505,10 +546,27 @@ def render_html(r):
         )
 
     buy = r["BUY_TRIGGER"]
-    banner_bg = "#0a7d33" if buy else "#b02a2a"
-    banner_txt = (f"טריגר כניסה — ההיפוך אושר ({r['confirmed']}/6)"
-                  if buy else
-                  f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)")
+    late = r.get("timing") == "late"
+    if buy and late:
+        banner_bg = "#c76a00"
+        banner_txt = (f"טריגר כניסה, אבל מאוחר ({r['confirmed']}/6) — לא לרדוף, "
+                      f"לחכות לתיקון אל {r['max_entry']} ומטה")
+    elif buy:
+        banner_bg = "#0a7d33"
+        banner_txt = f"טריגר כניסה בזמן — ההיפוך אושר ({r['confirmed']}/6)"
+    else:
+        banner_bg = "#b02a2a"
+        banner_txt = f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)"
+
+    timing_html = ""
+    tt = timing_text(r)
+    if tt:
+        t_bg, t_border, t_color = (("#fff1e0", "#f3d3a8", "#7a3e00") if late
+                                   else ("#e8f6ec", "#c6e8d0", "#0a5a26"))
+        timing_html = f"""
+      <div style="background:{t_bg};border-bottom:1px solid {t_border};padding:10px 16px;font-size:13px;color:{t_color}">
+        ⏱️ <b>תזמון כניסה: {tt[0]}</b> — {tt[1]}
+      </div>"""
 
     # "closest to passing" strip
     blocked_by_regime = (not r.get("market_regime_ok", True)) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS
@@ -550,7 +608,7 @@ def render_html(r):
       </div>
       <div style="background:#eef2ff;border-bottom:1px solid #dde3fb;padding:8px 16px;font-size:12px;color:#333">
         📊 <b>אמינות היסטורית של האות במניה זו:</b> {tier}. {rel_detail}
-      </div>{news_html}
+      </div>{timing_html}{news_html}
       <div style="background:#fff7e6;border-bottom:1px solid #eee;padding:10px 16px;font-size:13px;color:#7a5900">
         {strip}
       </div>
@@ -587,6 +645,12 @@ def build_html(results, mode_he):
         <li><b>סף RVOL:</b> {RVOL_THRESHOLD:g} ליום היפוך בנפח גבוה; רצפת פעילות {RVOL_SOFT_FLOOR:g} לענף החלופי.</li>
         <li><b>חלון פרופיל נפח (POC):</b> {poc_desc}.</li>
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
+        <li><b>תזמון כניסה (בזמן / מאוחרת):</b> כמה המחיר כבר עלה מהשפל של {LOW_LOOKBACK} הימים האחרונים.
+          <b>בזמן</b> = עד {LATE_THRESHOLD_PCT:g}% מעל השפל: ההיפוך אושר והמניה עוד לא ברחה.
+          <b>מאוחרת</b> = יותר מזה: רוב העלייה כבר קרתה, לא לרדוף אלא לחכות לתיקון אל המחיר שמצוין בכרטיס.
+          למה: בבדיקה על 5 שנים ו-70 מניות, הטריגר בדרך כלל מגיע כ-16% מעל השפל. טריגרים "בזמן" הצליחו
+          ב-61% מהמקרים אחרי 20 יום (לעומת 56% לכל הטריגרים), ופקודת העצירה הייתה רחוקה פי שניים פחות
+          (כ-6.5% במקום כ-12%). המחיר: פחות אותות, ומפספסים חלק מהמניות שממשיכות לטפס.</li>
         <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
         <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
         <li><b>סינון תצוגה:</b> המייל מציג רק מניות עם טריגר קנייה מלא (ירוק) או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים שעברו — מניות חלשות יותר מחושבות אך לא מוצגות כאן.</li>
@@ -633,6 +697,8 @@ def main():
             r["reliability"] = reliability.get(r["ticker"])
 
     shown = [r for r in results if qualifies_for_email(r)]
+    # on-time triggers first, then late triggers, then near-misses
+    shown.sort(key=lambda r: (not r.get("BUY_TRIGGER"), r.get("timing") == "late", -r.get("confirmed", 0)))
 
     news_calls = 0
     for r in shown:
@@ -665,7 +731,14 @@ def main():
 
     trigger = len(shown) > 0
     if not EMAIL_ONLY_ON_TRIGGER or trigger:
-        tag = "TRIGGER" if any(r.get("BUY_TRIGGER") for r in shown) else ("close" if shown else "no matches")
+        on_time = [r["ticker"] for r in shown if r.get("BUY_TRIGGER") and r.get("timing") == "on_time"]
+        late = [r["ticker"] for r in shown if r.get("BUY_TRIGGER") and r.get("timing") == "late"]
+        if on_time:
+            tag = f"TRIGGER בזמן: {','.join(on_time)}" + (f" | מאוחר: {','.join(late)}" if late else "")
+        elif late:
+            tag = f"TRIGGER מאוחר (לא לרדוף): {','.join(late)}"
+        else:
+            tag = "close" if shown else "no matches"
         send_email(f"[Reversal] {tag} {stamp} - {','.join(tickers)}", text, html_body=html)
 
 
