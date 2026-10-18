@@ -92,6 +92,13 @@ EARLY_SQUEEZE_WITHIN = 10          # ...at some point in the last 10 days
 EARLY_PULLBACK_MIN, EARLY_PULLBACK_MAX = -35.0, -10.0   # 20d low vs 120d high, %
 STOP_LOOKBACK, STOP_BUFFER = 10, 0.01
 
+# --- Next earnings date (added 2026-10-18) ---
+# The backtests did not separate trades with an earnings report inside the
+# 20-trading-day window, and a report can move a stock more than any technical
+# signal. So every card shows the next report date, with a warning when it
+# falls within EARNINGS_WARN_DAYS calendar days (~20 trading days).
+EARNINGS_WARN_DAYS = int(os.environ.get("EARNINGS_WARN_DAYS", "30"))
+
 
 def load_tickers():
     """Priority: tickers.txt (one symbol per line, '#'=comment) -> TICKERS env -> ORCL."""
@@ -213,6 +220,54 @@ def fetch_recent_headlines(ticker, max_items=MAX_NEWS_ITEMS, lookback_days=NEWS_
     for it in items:
         del it["_epoch"]
     return items[:max_items]
+
+
+def _as_date(x):
+    """Best-effort conversion of a date / datetime / Timestamp / string to a date."""
+    try:
+        if hasattr(x, "date") and callable(x.date):
+            return x.date()
+        return pd.Timestamp(x).date()
+    except Exception:
+        return None
+
+
+def fetch_next_earnings(ticker):
+    """Next earnings report date from Yahoo Finance via yfinance (free).
+    Returns {date, end, days, estimated} or None if nothing is known (e.g. an
+    ETF, or the date isn't published yet). Two different dates from Yahoo mean
+    only an estimated window is known. Never raises -- a failure just means no
+    date is shown."""
+    today = datetime.now(ZoneInfo("America/New_York")).date()
+    dates = []
+    try:
+        cal = yf.Ticker(ticker).calendar
+        raw = None
+        if isinstance(cal, dict):
+            raw = cal.get("Earnings Date")
+        elif isinstance(cal, pd.DataFrame) and "Earnings Date" in cal.index:
+            raw = list(cal.loc["Earnings Date"].values)
+        if raw is not None and not isinstance(raw, (list, tuple)):
+            raw = [raw]
+        dates = [d for d in (_as_date(x) for x in (raw or [])) if d is not None and d >= today]
+    except Exception as e:
+        print(f"WARNING: earnings calendar failed for {ticker} ({e})")
+    if not dates:
+        try:
+            ed = yf.Ticker(ticker).get_earnings_dates(limit=8)
+            if ed is not None and len(ed):
+                dates = [d for d in (_as_date(x) for x in ed.index) if d is not None and d >= today]
+                dates = sorted(dates)[:1]
+        except Exception as e:
+            print(f"WARNING: earnings dates failed for {ticker} ({e})")
+    if not dates:
+        return None
+    dates = sorted(set(dates))
+    first = dates[0]
+    return {"date": first.isoformat(),
+            "end": dates[-1].isoformat() if len(dates) > 1 else None,
+            "days": (first - today).days,
+            "estimated": len(dates) > 1}
 
 
 def fetch_market_regime():
@@ -522,6 +577,25 @@ def early_text(r):
             f"אבל העצירה נפגעה בכמחצית מהעסקאות, ולכן מתאים לפוזיציה קטנה מהרגיל.")
 
 
+def earnings_text(r):
+    """(is_warning, plain-Hebrew line) about the next earnings report, or None
+    if the lookup wasn't run for this ticker."""
+    if "earnings" not in r:
+        return None
+    e = r["earnings"]
+    if not e:
+        return (False, "דוח כספי הבא: לא נמצא תאריך (למשל בקרן סל, או שהתאריך עוד לא פורסם). כדאי לבדוק ידנית לפני קנייה.")
+    when = (f"{e['date']} (משוער, בין {e['date']} ל-{e['end']})" if e.get("estimated")
+            else e["date"])
+    days = e["days"]
+    days_txt = "היום" if days == 0 else f"בעוד {days} ימים"
+    if days <= EARNINGS_WARN_DAYS:
+        return (True, f"דוח כספי {days_txt}: {when}. זה בתוך חלון העסקה של כ-20 ימי מסחר. "
+                      f"דוח יכול להזיז את המניה יותר מכל אות טכני, לשני הכיוונים, והבדיקה ההיסטורית "
+                      f"לא הפרידה מקרים כאלה. שקול לחכות לאחרי הדוח, או להקטין את המנה.")
+    return (False, f"דוח כספי הבא: {when}, {days_txt}. מחוץ לחלון העסקה של כ-20 ימי מסחר.")
+
+
 def render(r):
     if "error" in r:
         return f"## {r['ticker']}\n  ERROR: {r['error']}\n"
@@ -542,6 +616,9 @@ def render(r):
     tt = timing_text(r)
     if tt:
         lines.append(f"  [תזמון כניסה: {tt[0]}] {tt[1]}")
+    ert = earnings_text(r)
+    if ert:
+        lines.append(f"  [{'⚠️ ' if ert[0] else ''}דוח כספי] {ert[1]}")
     if r.get("headlines"):
         lines.append("  [חדשות אחרונות, מהחדש לישן]")
         for h in r["headlines"]:
@@ -650,6 +727,15 @@ def render_html(r):
       <div style="background:#e8efff;border-bottom:1px solid #c5d4f7;padding:10px 16px;font-size:13px;color:#16357a">
         🔵 <b>התראה מוקדמת:</b> {et}
       </div>""" + timing_html
+    ert = earnings_text(r)
+    if ert:
+        warn, line = ert
+        e_bg, e_border, e_color, icon = (("#fdecea", "#f5c2bd", "#8a1c12", "⚠️") if warn
+                                         else ("#f4f4f4", "#e2e2e2", "#444", "📅"))
+        timing_html += f"""
+      <div style="background:{e_bg};border-bottom:1px solid {e_border};padding:10px 16px;font-size:13px;color:{e_color}">
+        {icon} {line}
+      </div>"""
 
     # "closest to passing" strip
     blocked_by_regime = (not r.get("market_regime_ok", True)) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS
@@ -741,6 +827,9 @@ def build_html(results, mode_he):
           תשואה חציונית של ‎+3.3%, כניסה בממוצע כ-6.5% מעל השפל, ותוצאה דומה גם ב-2022 עד 2024 וגם ב-2025 עד 2026.
           המחיר: העצירה נפגעה בכמחצית מהעסקאות. לכן: פוזיציה קטנה מהרגיל, עצירה במחיר שמצוין בכרטיס,
           והגדלה רק אם הטריגר המלא מגיע אחר כך. בכרטיס כזה רוב הפרמטרים בטבלה ייכשלו, וזה צפוי.</li>
+        <li><b>📅 דוח כספי הבא:</b> מופיע בכל כרטיס, לפי יאהו פייננס. אם הדוח צפוי בתוך {EARNINGS_WARN_DAYS} ימים
+          (בערך 20 ימי מסחר, אורך העסקה שנבדקה) הפס אדום: הבדיקות ההיסטוריות לא הפרידו בין עסקאות עם דוח לעסקאות בלעדיו,
+          ודוח יכול להזיז את המניה יותר מכל אות טכני. "משוער" = יאהו מכירה רק טווח תאריכים ולא תאריך מאושר.</li>
         <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
         <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר או התראה מוקדמת היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
         <li><b>סינון תצוגה:</b> המייל מציג רק מניות עם טריגר קנייה מלא (ירוק), התראה מוקדמת (כחול) או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים שעברו — מניות חלשות יותר מחושבות אך לא מוצגות כאן.</li>
@@ -798,6 +887,9 @@ def main():
             return 2
         return 3
     shown.sort(key=lambda r: (_rank(r), -r.get("confirmed", 0)))
+
+    for r in shown:
+        r["earnings"] = fetch_next_earnings(r["ticker"])
 
     news_calls = 0
     for r in shown:
