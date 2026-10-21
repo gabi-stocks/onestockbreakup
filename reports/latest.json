@@ -8,7 +8,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 133.12 -> 128.90 (-3.17%) | DELAYED]",
+    "context": "  [today so far: open 133.12 -> 129.10 (-3.02%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -75,7 +75,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "  [today so far: open 55.60 -> 56.23 (+1.13%) | DELAYED]",
+    "context": "  [today so far: open 55.60 -> 55.82 (+0.40%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -135,7 +135,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 177.15 -> 177.23 (+0.05%) | DELAYED]",
+    "context": "  [today so far: open 177.15 -> 177.83 (+0.38%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -149,7 +149,7 @@
       "2_moving_averages": "close>175.23(MA10) & >181.51(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-1.54 vs Signal=-0.31 (above=False), hist=-1.23 rising=True",
       "4_rsi": "RSI=47.12 rising=True, bullishDivergence=True",
-      "5_volume": "day up=True, RVOL=0.65, up>downVol=True",
+      "5_volume": "day up=True, RVOL=0.66, up>downVol=True",
       "6_volume_profile": "close=175.71 vs POC=177.60 (above=False)"
     },
     "progress": {
@@ -202,7 +202,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 66.88 -> 67.82 (+1.41%) | DELAYED]",
+    "context": "  [today so far: open 66.88 -> 67.74 (+1.29%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -269,7 +269,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 69.30 -> 69.34 (+0.06%) | DELAYED]",
+    "context": "  [today so far: open 69.30 -> 69.00 (-0.44%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -410,7 +410,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 26.34 -> 26.68 (+1.31%) | DELAYED]",
+    "context": "  [today so far: open 26.34 -> 26.65 (+1.18%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -477,7 +477,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 806.74 -> 807.93 (+0.15%) | DELAYED]",
+    "context": "  [today so far: open 806.74 -> 805.60 (-0.14%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -544,7 +544,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 120.05 -> 116.30 (-3.12%) | DELAYED]",
+    "context": "  [today so far: open 120.05 -> 118.03 (-1.68%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -558,7 +558,7 @@
       "2_moving_averages": "close>145.26(MA10) & >166.75(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-18.42 vs Signal=-13.15 (above=False), hist=-5.26 rising=False",
       "4_rsi": "RSI=24.35 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=1.03, up>downVol=False",
+      "5_volume": "day up=True, RVOL=1.04, up>downVol=False",
       "6_volume_profile": "close=118.24 vs POC=181.87 (above=False)"
     },
     "progress": {
@@ -597,7 +597,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 23.70 -> 22.53 (-4.94%) | DELAYED]",
+    "context": "  [today so far: open 23.70 -> 22.41 (-5.44%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -664,7 +664,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 52.21 -> 53.38 (+2.23%) | DELAYED]",
+    "context": "  [today so far: open 52.21 -> 53.65 (+2.76%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -731,7 +731,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 241.91 -> 246.38 (+1.85%) | DELAYED]",
+    "context": "  [today so far: open 241.91 -> 251.48 (+3.95%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -798,7 +798,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 246.98 -> 245.20 (-0.72%) | DELAYED]",
+    "context": "  [today so far: open 248.96 -> 244.67 (-1.72%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -865,7 +865,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 12.04 -> 12.15 (+0.96%) | DELAYED]",
+    "context": "  [today so far: open 12.04 -> 12.11 (+0.58%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -879,7 +879,7 @@
       "2_moving_averages": "close>13.17(MA10) & >14.85(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-1.45 vs Signal=-1.13 (above=False), hist=-0.31 rising=True",
       "4_rsi": "RSI=26.68 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.66, up>downVol=True",
+      "5_volume": "day up=True, RVOL=0.67, up>downVol=True",
       "6_volume_profile": "close=11.78 vs POC=29.22 (above=False)"
     },
     "progress": {
@@ -932,7 +932,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 21.45 -> 21.26 (-0.86%) | DELAYED]",
+    "context": "  [today so far: open 21.34 -> 21.33 (-0.09%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -999,7 +999,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 37.79 -> 37.67 (-0.32%) | DELAYED]",
+    "context": "  [today so far: open 37.79 -> 37.53 (-0.70%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -1013,7 +1013,7 @@
       "2_moving_averages": "close>35.92(MA10) & >35.61(MA20)=True, MA10 rising=True, MA10>MA50=False",
       "3_macd": "MACD=-0.07 vs Signal=-0.56 (above=True), hist=0.50 rising=True",
       "4_rsi": "RSI=62.84 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.54, up>downVol=True",
+      "5_volume": "day up=True, RVOL=0.55, up>downVol=True",
       "6_volume_profile": "close=37.88 vs POC=43.18 (above=False)"
     },
     "progress": {
@@ -1052,7 +1052,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 91.25 -> 91.87 (+0.68%) | DELAYED]",
+    "context": "  [today so far: open 91.25 -> 91.21 (-0.04%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1105,7 +1105,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 266.47 -> 272.13 (+2.12%) | DELAYED]",
+    "context": "  [today so far: open 266.47 -> 270.65 (+1.57%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1158,7 +1158,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 41.75 -> 40.98 (-1.85%) | DELAYED]",
+    "context": "  [today so far: open 41.75 -> 40.90 (-2.04%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1172,7 +1172,7 @@
       "2_moving_averages": "close>47.73(MA10) & >53.82(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-5.29 vs Signal=-3.70 (above=False), hist=-1.59 rising=True",
       "4_rsi": "RSI=30.76 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.83, up>downVol=True",
+      "5_volume": "day up=False, RVOL=0.84, up>downVol=True",
       "6_volume_profile": "close=41.13 vs POC=58.22 (above=False)"
     },
     "progress": {
@@ -1211,7 +1211,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 431.44 -> 439.60 (+1.89%) | DELAYED]",
+    "context": "  [today so far: open 431.44 -> 438.51 (+1.64%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1264,7 +1264,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 141.93 -> 141.93 (+0.00%) | DELAYED]",
+    "context": "  [today so far: open 141.93 -> 141.91 (-0.01%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -1317,7 +1317,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 39.85 -> 39.88 (+0.06%) | DELAYED]",
+    "context": "  [today so far: open 39.85 -> 39.94 (+0.23%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1370,7 +1370,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 29.10 -> 29.29 (+0.65%) | DELAYED]",
+    "context": "  [today so far: open 29.10 -> 29.15 (+0.17%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1423,7 +1423,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 40.18 -> 40.59 (+1.02%) | DELAYED]",
+    "context": "  [today so far: open 40.18 -> 40.62 (+1.10%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -1476,7 +1476,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "  [today so far: open 313.83 -> 343.59 (+9.48%) | DELAYED]",
+    "context": "  [today so far: open 313.83 -> 344.81 (+9.87%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": false,
@@ -1536,7 +1536,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 529.44 -> 531.82 (+0.45%) | DELAYED]",
+    "context": "  [today so far: open 529.44 -> 532.81 (+0.64%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1589,7 +1589,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 336.91 -> 333.96 (-0.88%) | DELAYED]",
+    "context": "  [today so far: open 336.91 -> 334.67 (-0.66%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1642,7 +1642,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 391.00 -> 393.41 (+0.62%) | DELAYED]",
+    "context": "  [today so far: open 392.06 -> 393.84 (+0.45%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1695,7 +1695,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 153.35 -> 157.80 (+2.90%) | DELAYED]",
+    "context": "  [today so far: open 153.35 -> 156.18 (+1.85%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1709,7 +1709,7 @@
       "2_moving_averages": "close>156.28(MA10) & >148.98(MA20)=False, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=2.60 vs Signal=2.94 (above=False), hist=-0.34 rising=False",
       "4_rsi": "RSI=50.82 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.45, up>downVol=True",
+      "5_volume": "day up=True, RVOL=0.46, up>downVol=True",
       "6_volume_profile": "close=150.32 vs POC=140.54 (above=True)"
     },
     "progress": {
@@ -1748,7 +1748,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 25.88 -> 25.70 (-0.70%) | DELAYED]",
+    "context": "  [today so far: open 25.88 -> 25.62 (-0.99%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1801,7 +1801,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 184.01 -> 182.45 (-0.85%) | DELAYED]",
+    "context": "  [today so far: open 184.01 -> 182.27 (-0.95%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1815,7 +1815,7 @@
       "2_moving_averages": "close>191.93(MA10) & >198.10(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-5.72 vs Signal=-1.63 (above=False), hist=-4.09 rising=False",
       "4_rsi": "RSI=38.46 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.82, up>downVol=True",
+      "5_volume": "day up=True, RVOL=0.84, up>downVol=True",
       "6_volume_profile": "close=171.51 vs POC=236.98 (above=False)"
     },
     "progress": {
@@ -1854,7 +1854,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 112.23 -> 108.97 (-2.90%) | DELAYED]",
+    "context": "  [today so far: open 112.23 -> 108.91 (-2.96%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1907,7 +1907,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 0.26 -> 0.24 (-9.90%) | DELAYED]",
+    "context": "  [today so far: open 0.26 -> 0.23 (-11.34%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1960,7 +1960,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 220.96 -> 221.29 (+0.15%) | DELAYED]",
+    "context": "  [today so far: open 220.96 -> 221.87 (+0.41%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1974,7 +1974,7 @@
       "2_moving_averages": "close>223.83(MA10) & >227.04(MA20)=False, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=-1.31 vs Signal=1.01 (above=False), hist=-2.32 rising=False",
       "4_rsi": "RSI=40.90 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.76, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.77, up>downVol=False",
       "6_volume_profile": "close=216.47 vs POC=211.18 (above=True)"
     },
     "progress": {
@@ -2013,7 +2013,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 225.82 -> 226.54 (+0.32%) | DELAYED]",
+    "context": "  [today so far: open 225.82 -> 226.57 (+0.33%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2066,7 +2066,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 149.64 -> 152.57 (+1.96%) | DELAYED]",
+    "context": "  [today so far: open 149.64 -> 153.12 (+2.33%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -2080,7 +2080,7 @@
       "2_moving_averages": "close>142.28(MA10) & >138.93(MA20)=True, MA10 rising=True, MA10>MA50=True",
       "3_macd": "MACD=3.17 vs Signal=2.35 (above=True), hist=0.83 rising=True",
       "4_rsi": "RSI=62.74 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=1.01, up>downVol=True",
+      "5_volume": "day up=True, RVOL=1.02, up>downVol=True",
       "6_volume_profile": "close=149.54 vs POC=91.42 (above=True)"
     },
     "progress": {
@@ -2119,7 +2119,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 160.56 -> 158.71 (-1.15%) | DELAYED]",
+    "context": "  [today so far: open 160.56 -> 159.27 (-0.80%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2133,7 +2133,7 @@
       "2_moving_averages": "close>155.33(MA10) & >154.70(MA20)=False, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=0.45 vs Signal=2.62 (above=False), hist=-2.17 rising=False",
       "4_rsi": "RSI=45.69 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=1.29, up>downVol=True",
+      "5_volume": "day up=True, RVOL=1.39, up>downVol=True",
       "6_volume_profile": "close=147.79 vs POC=148.49 (above=False)"
     },
     "progress": {
@@ -2172,7 +2172,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 10.99 -> 10.97 (-0.22%) | DELAYED]",
+    "context": "  [today so far: open 10.99 -> 10.92 (-0.64%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2225,7 +2225,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 159.41 -> 160.00 (+0.37%) | DELAYED]",
+    "context": "  [today so far: open 159.41 -> 159.76 (+0.22%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -2239,7 +2239,7 @@
       "2_moving_averages": "close>153.79(MA10) & >150.67(MA20)=True, MA10 rising=True, MA10>MA50=True",
       "3_macd": "MACD=4.03 vs Signal=2.97 (above=True), hist=1.06 rising=True",
       "4_rsi": "RSI=64.92 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.41, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.42, up>downVol=False",
       "6_volume_profile": "close=160.61 vs POC=143.70 (above=True)"
     },
     "progress": {
@@ -2278,7 +2278,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 921.79 -> 927.29 (+0.60%) | DELAYED]",
+    "context": "  [today so far: open 921.79 -> 925.91 (+0.45%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2331,7 +2331,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 27.64 -> 28.17 (+1.92%) | DELAYED]",
+    "context": "  [today so far: open 27.64 -> 27.84 (+0.72%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2345,7 +2345,7 @@
       "2_moving_averages": "close>32.15(MA10) & >37.35(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-3.93 vs Signal=-2.57 (above=False), hist=-1.36 rising=True",
       "4_rsi": "RSI=23.64 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.50, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.52, up>downVol=True",
       "6_volume_profile": "close=26.62 vs POC=38.57 (above=False)"
     },
     "progress": {
@@ -2384,7 +2384,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 140.99 -> 141.68 (+0.49%) | DELAYED]",
+    "context": "  [today so far: open 140.99 -> 141.84 (+0.60%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2437,7 +2437,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 139.31 -> 141.91 (+1.87%) | DELAYED]",
+    "context": "  [today so far: open 139.31 -> 143.50 (+3.01%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -2490,7 +2490,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 386.14 -> 391.74 (+1.45%) | DELAYED]",
+    "context": "  [today so far: open 386.14 -> 391.09 (+1.28%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2543,7 +2543,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 223.81 -> 222.18 (-0.73%) | DELAYED]",
+    "context": "  [today so far: open 223.81 -> 222.65 (-0.52%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2596,7 +2596,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 337.11 -> 334.67 (-0.72%) | DELAYED]",
+    "context": "  [today so far: open 337.11 -> 335.13 (-0.59%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -2649,7 +2649,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 47.35 -> 47.86 (+1.07%) | DELAYED]",
+    "context": "  [today so far: open 47.35 -> 47.82 (+0.99%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2702,7 +2702,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 175.00 -> 178.61 (+2.06%) | DELAYED]",
+    "context": "  [today so far: open 175.00 -> 177.02 (+1.15%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2716,7 +2716,7 @@
       "2_moving_averages": "close>176.12(MA10) & >183.41(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-2.38 vs Signal=-0.31 (above=False), hist=-2.07 rising=False",
       "4_rsi": "RSI=44.26 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.84, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.85, up>downVol=False",
       "6_volume_profile": "close=170.85 vs POC=159.56 (above=True)"
     },
     "progress": {
@@ -2755,7 +2755,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 101.37 -> 102.23 (+0.85%) | DELAYED]",
+    "context": "  [today so far: open 101.37 -> 101.94 (+0.56%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2808,7 +2808,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 345.55 -> 348.73 (+0.92%) | DELAYED]",
+    "context": "  [today so far: open 345.55 -> 345.51 (-0.01%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2861,7 +2861,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 28.08 -> 28.02 (-0.23%) | DELAYED]",
+    "context": "  [today so far: open 28.08 -> 27.74 (-1.21%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2875,7 +2875,7 @@
       "2_moving_averages": "close>31.18(MA10) & >34.24(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-3.03 vs Signal=-2.29 (above=False), hist=-0.74 rising=False",
       "4_rsi": "RSI=28.65 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.83, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.84, up>downVol=False",
       "6_volume_profile": "close=27.48 vs POC=41.38 (above=False)"
     },
     "progress": {
@@ -2914,7 +2914,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 13.48 -> 13.42 (-0.45%) | DELAYED]",
+    "context": "  [today so far: open 13.48 -> 13.32 (-1.19%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2967,7 +2967,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 70.82 -> 70.47 (-0.49%) | DELAYED]",
+    "context": "  [today so far: open 71.00 -> 70.60 (-0.56%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3022,7 +3022,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 343.32 -> 348.76 (+1.59%) | DELAYED]",
+    "context": "  [today so far: open 343.32 -> 347.17 (+1.12%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3075,7 +3075,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 339.20 -> 344.30 (+1.50%) | DELAYED]",
+    "context": "  [today so far: open 339.20 -> 344.05 (+1.43%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3089,7 +3089,7 @@
       "2_moving_averages": "close>340.68(MA10) & >337.61(MA20)=False, MA10 rising=True, MA10>MA50=True",
       "3_macd": "MACD=3.80 vs Signal=3.94 (above=False), hist=-0.14 rising=False",
       "4_rsi": "RSI=55.53 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.97, up>downVol=False",
+      "5_volume": "day up=False, RVOL=0.98, up>downVol=False",
       "6_volume_profile": "close=339.50 vs POC=309.57 (above=True)"
     },
     "progress": {
@@ -3128,7 +3128,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 188.01 -> 190.65 (+1.41%) | DELAYED]",
+    "context": "  [today so far: open 188.01 -> 189.23 (+0.65%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3142,7 +3142,7 @@
       "2_moving_averages": "close>214.30(MA10) & >224.97(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-7.13 vs Signal=-1.51 (above=False), hist=-5.62 rising=False",
       "4_rsi": "RSI=34.78 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=2.08, up>downVol=False",
+      "5_volume": "day up=False, RVOL=2.09, up>downVol=False",
       "6_volume_profile": "close=183.78 vs POC=222.37 (above=False)"
     },
     "progress": {
@@ -3181,7 +3181,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 80.31 -> 80.07 (-0.30%) | DELAYED]",
+    "context": "  [today so far: open 80.31 -> 80.25 (-0.08%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -3234,7 +3234,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 90.37 -> 90.18 (-0.22%) | DELAYED]",
+    "context": "  [today so far: open 90.37 -> 90.23 (-0.15%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -3287,7 +3287,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 69.89 -> 69.69 (-0.29%) | DELAYED]",
+    "context": "  [today so far: open 69.89 -> 69.83 (-0.09%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -3340,7 +3340,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 262.99 -> 262.66 (-0.13%) | DELAYED]",
+    "context": "  [today so far: open 262.99 -> 262.28 (-0.27%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -3354,7 +3354,7 @@
       "2_moving_averages": "close>257.84(MA10) & >253.81(MA20)=True, MA10 rising=True, MA10>MA50=True",
       "3_macd": "MACD=1.29 vs Signal=0.42 (above=True), hist=0.87 rising=True",
       "4_rsi": "RSI=57.41 rising=True, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=0.96, up>downVol=True",
+      "5_volume": "day up=False, RVOL=0.97, up>downVol=True",
       "6_volume_profile": "close=262.63 vs POC=232.96 (above=True)"
     },
     "progress": {
@@ -3393,7 +3393,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 743.27 -> 745.21 (+0.26%) | DELAYED]",
+    "context": "  [today so far: open 743.27 -> 743.18 (-0.01%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -3446,7 +3446,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 90.66 -> 89.76 (-0.99%) | DELAYED]",
+    "context": "  [today so far: open 90.66 -> 89.88 (-0.86%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3499,7 +3499,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 53.85 -> 53.33 (-0.96%) | DELAYED]",
+    "context": "  [today so far: open 53.85 -> 53.37 (-0.89%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3552,7 +3552,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 68.34 -> 68.43 (+0.14%) | DELAYED]",
+    "context": "  [today so far: open 68.34 -> 68.89 (+0.80%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3605,7 +3605,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 39.58 -> 39.45 (-0.33%) | DELAYED]",
+    "context": "  [today so far: open 39.58 -> 39.51 (-0.18%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3658,7 +3658,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 78.23 -> 77.85 (-0.49%) | DELAYED]",
+    "context": "  [today so far: open 78.23 -> 78.01 (-0.28%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3711,7 +3711,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 107.28 -> 108.89 (+1.50%) | DELAYED]",
+    "context": "  [today so far: open 107.28 -> 108.87 (+1.48%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3764,7 +3764,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 57.15 -> 57.08 (-0.12%) | DELAYED]",
+    "context": "  [today so far: open 57.15 -> 56.97 (-0.31%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3817,7 +3817,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 338.02 -> 337.26 (-0.23%) | DELAYED]",
+    "context": "  [today so far: open 338.02 -> 337.68 (-0.10%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3831,7 +3831,7 @@
       "2_moving_averages": "close>349.85(MA10) & >352.48(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-6.52 vs Signal=-4.07 (above=False), hist=-2.45 rising=False",
       "4_rsi": "RSI=38.63 rising=False, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.73, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.74, up>downVol=False",
       "6_volume_profile": "close=334.37 vs POC=418.91 (above=False)"
     },
     "progress": {
@@ -3870,7 +3870,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 57.89 -> 58.20 (+0.54%) | DELAYED]",
+    "context": "  [today so far: open 57.90 -> 58.04 (+0.24%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3923,7 +3923,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 67.86 -> 68.36 (+0.74%) | DELAYED]",
+    "context": "  [today so far: open 67.86 -> 68.15 (+0.43%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -3976,7 +3976,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 225.90 -> 227.52 (+0.72%) | DELAYED]",
+    "context": "  [today so far: open 225.90 -> 226.77 (+0.39%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
