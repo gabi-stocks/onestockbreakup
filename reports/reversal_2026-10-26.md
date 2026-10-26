@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-10-26 20:08 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-10-26 21:18 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 5/71 tickers)
 
 ## PANW  (2026-10-23)  close=380.55  RSI=52.3  [today so far: open 384.05 -> 390.54 (+1.69%) | DELAYED]
@@ -78,7 +78,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
 
-## USO  (2026-10-23)  close=169.53  RSI=72.2  [today so far: open 166.16 -> 166.27 (+0.07%) | DELAYED]
+## USO  (2026-10-23)  close=169.53  RSI=72.2  [today so far: open 166.16 -> 166.23 (+0.04%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 19.6% מעל השפל של 20 הימים האחרונים (141.76), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 155.94 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: לא נמצא תאריך (למשל בקרן סל, או שהתאריך עוד לא פורסם). כדאי לבדוק ידנית לפני קנייה.
