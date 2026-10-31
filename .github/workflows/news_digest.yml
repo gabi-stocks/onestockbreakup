@@ -1,0 +1,52 @@
+name: News Digest
+
+on:
+  schedule:
+    # GitHub cron is UTC only. Two slots cover Israel summer (UTC+3) and winter
+    # (UTC+2) time; news_digest.py runs only the one that lands at ~09:10 Israel
+    # time and exits immediately on the other, so you get one email a day.
+    - cron: '10 6 * * *'
+    - cron: '10 7 * * *'
+  workflow_dispatch:          # manual run from the Actions tab
+  push:                       # runs once right after the digest code changes
+    branches: [main]
+    paths:
+      - news_digest.py
+      - .github/workflows/news_digest.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: news-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy
+
+      - name: Build and email the news digest
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python news_digest.py
+
+      - name: Keep a copy of the email
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-digest
+          path: reports/news_latest.html
+          if-no-files-found: ignore
+          retention-days: 7
