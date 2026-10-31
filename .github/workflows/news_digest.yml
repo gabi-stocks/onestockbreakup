@@ -12,10 +12,11 @@ on:
     branches: [main]
     paths:
       - news_digest.py
+      - news_export.py
       - .github/workflows/news_digest.yml
 
 permissions:
-  contents: read
+  contents: write             # to publish reports/news_latest.json for the dashboard
 
 concurrency:
   group: news-digest
@@ -34,13 +35,13 @@ jobs:
       - name: Install dependencies
         run: pip install yfinance pandas numpy
 
-      - name: Build and email the news digest
+      - name: Build and email the news digest (+ JSON for the dashboard)
         env:
           SCHEDULE: ${{ github.event.schedule }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
-        run: python news_digest.py
+        run: python news_export.py   # runs news_digest.py and also saves reports/news_latest.json
 
       - name: Keep a copy of the email
         if: always()
@@ -50,3 +51,14 @@ jobs:
           path: reports/news_latest.html
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Publish the news for the stock dashboard
+        if: success()
+        run: |
+          [ -f reports/news_latest.json ] || { echo "no news file this run"; exit 0; }
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/news_latest.json
+          git commit -m "news digest $(date -u +%F)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          echo "::warning::could not push news_latest.json"
