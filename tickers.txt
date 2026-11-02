@@ -75,3 +75,6 @@ AVGO
 CGNX
 XLE
 CVX
+
+# נוספה 02/11/2026
+LEN
