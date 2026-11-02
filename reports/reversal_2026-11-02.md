@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-02 22:53 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-02 23:46 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 5/72 tickers)
 
 ## IEF  (2026-10-30)  close=91.76  RSI=66.7  [today so far: open 91.52 -> 91.50 (-0.03%) | DELAYED]
