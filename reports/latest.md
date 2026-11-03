@@ -1,97 +1,97 @@
-# Reversal Checker — 2026-11-02 23:46 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-03 03:20 UTC [END-OF-DAY]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 5/72 tickers)
 
-## IEF  (2026-10-30)  close=91.76  RSI=66.7  [today so far: open 91.52 -> 91.50 (-0.03%) | DELAYED]
+## KRE  (2026-11-02)  close=73.73  RSI=62.1
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
-  [תזמון כניסה: בזמן ✅] המחיר רק 3.5% מעל השפל של 20 הימים האחרונים (88.66). ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.
+  [תזמון כניסה: בזמן ✅] המחיר רק 8.8% מעל השפל של 20 הימים האחרונים (67.79). ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.
   [דוח כספי] דוח כספי הבא: לא נמצא תאריך (למשל בקרן סל, או שהתאריך עוד לא פורסם). כדאי לבדוק ידנית לפני קנייה.
   [PASS] 1. Price structure (HL+HH)
-         HigherLow=True, brokeSwingHigh=True (last swing high=91.40)
+         HigherLow=True, brokeSwingHigh=True (last swing high=71.36)
   [PASS] 2. Moving averages
-         close>90.89(MA10) & >90.22(MA20)=True, MA10 rising=True, MA10>MA50=True
+         close>72.21(MA10) & >70.78(MA20)=True, MA10 rising=True, MA10>MA50=True
   [----] 3. MACD
-         MACD=0.23 vs Signal=-0.00 (above=True), hist=0.23 rising=False
+         MACD=0.41 vs Signal=-0.03 (above=True), hist=0.44 rising=False
   [PASS] 4. RSI
-         RSI=66.72 rising=True, bullishDivergence=False
+         RSI=62.14 rising=True, bullishDivergence=False
   [PASS] 5. Volume / RVOL
-         day up=True, RVOL=1.85, up>downVol=True
-  [----] 6. Volume Profile POC
-         close=91.76 vs POC=93.16 (above=False)
-  >> 4/6 confirmed | mandatory(structure+volume)=True
-  >> BUY TRIGGER - reversal confirmed
-
-## HTFL  (2026-10-30)  close=59.05  RSI=67.3  [today so far: open 59.14 -> 54.45 (-7.93%) | DELAYED]
-  [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
-  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 27.0% מעל השפל של 20 הימים האחרונים (46.5), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 51.15 ומטה (עד 10% מעל השפל), או לוותר.
-  [⚠️ דוח כספי] דוח כספי בעוד 10 ימים: 2026-11-12. זה בתוך חלון העסקה של כ-20 ימי מסחר. דוח יכול להזיז את המניה יותר מכל אות טכני, לשני הכיוונים, והבדיקה ההיסטורית לא הפרידה מקרים כאלה. שקול לחכות לאחרי הדוח, או להקטין את המנה.
-  [PASS] 1. Price structure (HL+HH)
-         HigherLow=True, brokeSwingHigh=True (last swing high=54.32)
-  [PASS] 2. Moving averages
-         close>56.81(MA10) & >53.36(MA20)=True, MA10 rising=True, MA10>MA50=True
-  [----] 3. MACD
-         MACD=2.91 vs Signal=2.29 (above=True), hist=0.62 rising=False
-  [PASS] 4. RSI
-         RSI=67.31 rising=False, bullishDivergence=False
-  [PASS] 5. Volume / RVOL
-         day up=True, RVOL=1.33, up>downVol=True
+         day up=True, RVOL=1.29, up>downVol=True
   [PASS] 6. Volume Profile POC
-         close=59.05 vs POC=49.97 (above=True)
+         close=73.73 vs POC=69.49 (above=True)
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## REGN  (2026-10-30)  close=927.89  RSI=79.1  [today so far: open 927.22 -> 961.43 (+3.69%) | DELAYED]
+## REGN  (2026-11-02)  close=961.26  RSI=81.9
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=70.0%, תשואה ממוצעת ל-20 יום=3.57%.
-  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 28.5% מעל השפל של 20 הימים האחרונים (722.02), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 794.22 ומטה (עד 10% מעל השפל), או לוותר.
+  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 32.8% מעל השפל של 20 הימים האחרונים (723.65), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 796.02 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-01-28, בעוד 87 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=825.52)
   [PASS] 2. Moving averages
-         close>820.30(MA10) & >788.89(MA20)=True, MA10 rising=True, MA10>MA50=True
-  [----] 3. MACD
-         MACD=20.98 vs Signal=9.54 (above=True), hist=11.43 rising=False
+         close>838.22(MA10) & >800.63(MA20)=True, MA10 rising=True, MA10>MA50=True
+  [PASS] 3. MACD
+         MACD=30.62 vs Signal=13.76 (above=True), hist=16.86 rising=True
   [PASS] 4. RSI
-         RSI=79.11 rising=True, bullishDivergence=False
+         RSI=81.85 rising=True, bullishDivergence=False
   [PASS] 5. Volume / RVOL
-         day up=True, RVOL=3.85, up>downVol=True
+         day up=True, RVOL=2.09, up>downVol=True
   [PASS] 6. Volume Profile POC
-         close=927.89 vs POC=630.11 (above=True)
-  >> 5/6 confirmed | mandatory(structure+volume)=True
+         close=961.26 vs POC=611.48 (above=True)
+  >> 6/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## TEVA  (2026-10-30)  close=42.09  RSI=63.7  [today so far: open 41.12 -> 40.70 (-1.02%) | DELAYED]
-  [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
-  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 10.0% מעל השפל של 20 הימים האחרונים (38.25), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 42.08 ומטה (עד 10% מעל השפל), או לוותר.
-  [⚠️ דוח כספי] דוח כספי בעוד 1 ימים: 2026-11-03. זה בתוך חלון העסקה של כ-20 ימי מסחר. דוח יכול להזיז את המניה יותר מכל אות טכני, לשני הכיוונים, והבדיקה ההיסטורית לא הפרידה מקרים כאלה. שקול לחכות לאחרי הדוח, או להקטין את המנה.
-  [PASS] 1. Price structure (HL+HH)
-         HigherLow=True, brokeSwingHigh=True (last swing high=41.88)
-  [PASS] 2. Moving averages
-         close>40.63(MA10) & >40.52(MA20)=True, MA10 rising=True, MA10>MA50=True
-  [----] 3. MACD
-         MACD=0.55 vs Signal=0.56 (above=False), hist=-0.01 rising=True
-  [PASS] 4. RSI
-         RSI=63.68 rising=True, bullishDivergence=False
-  [PASS] 5. Volume / RVOL
-         day up=True, RVOL=1.17, up>downVol=True
-  [PASS] 6. Volume Profile POC
-         close=42.09 vs POC=34.57 (above=True)
-  >> 5/6 confirmed | mandatory(structure+volume)=True
-  >> BUY TRIGGER - reversal confirmed
-
-## GEHC  (2026-10-30)  close=76.57  RSI=74.1  [today so far: open 77.54 -> 79.56 (+2.61%) | DELAYED]
+## GEHC  (2026-11-02)  close=79.55  RSI=78.8
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 8 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=0.16%.
-  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 20.9% מעל השפל של 20 הימים האחרונים (63.31), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 69.65 ומטה (עד 10% מעל השפל), או לוותר.
+  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 25.6% מעל השפל של 20 הימים האחרונים (63.31), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 69.65 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-02-03, בעוד 93 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=71.32)
   [PASS] 2. Moving averages
-         close>72.38(MA10) & >69.69(MA20)=True, MA10 rising=True, MA10>MA50=True
+         close>73.36(MA10) & >70.38(MA20)=True, MA10 rising=True, MA10>MA50=True
   [PASS] 3. MACD
-         MACD=2.22 vs Signal=1.36 (above=True), hist=0.85 rising=True
+         MACD=2.62 vs Signal=1.62 (above=True), hist=1.01 rising=True
   [PASS] 4. RSI
-         RSI=74.10 rising=True, bullishDivergence=False
+         RSI=78.80 rising=True, bullishDivergence=False
   [----] 5. Volume / RVOL
-         day up=False, RVOL=1.02, up>downVol=False
+         day up=True, RVOL=1.22, up>downVol=False
   [PASS] 6. Volume Profile POC
-         close=76.57 vs POC=64.26 (above=True)
+         close=79.55 vs POC=64.18 (above=True)
+  >> 5/6 confirmed | mandatory(structure+volume)=False
+  >> NO ENTRY - wait for confirmation
+
+## NKE  (2026-11-02)  close=39.12  RSI=64.0
+  [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
+  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 16.8% מעל השפל של 20 הימים האחרונים (33.5), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 36.85 ומטה (עד 10% מעל השפל), או לוותר.
+  [דוח כספי] דוח כספי הבא: 2026-12-17, בעוד 45 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
+  [PASS] 1. Price structure (HL+HH)
+         HigherLow=True, brokeSwingHigh=True (last swing high=36.67)
+  [PASS] 2. Moving averages
+         close>37.99(MA10) & >36.79(MA20)=True, MA10 rising=True, MA10>MA50=True
+  [PASS] 3. MACD
+         MACD=0.56 vs Signal=0.26 (above=True), hist=0.30 rising=True
+  [PASS] 4. RSI
+         RSI=64.04 rising=True, bullishDivergence=False
+  [----] 5. Volume / RVOL
+         day up=True, RVOL=0.83, up>downVol=True
+  [PASS] 6. Volume Profile POC
+         close=39.12 vs POC=34.00 (above=True)
+  >> 5/6 confirmed | mandatory(structure+volume)=False
+  >> NO ENTRY - wait for confirmation
+
+## LEN  (2026-11-02)  close=91.02  RSI=68.6
+  [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
+  [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 26.8% מעל השפל של 20 הימים האחרונים (71.78), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 78.96 ומטה (עד 10% מעל השפל), או לוותר.
+  [דוח כספי] דוח כספי הבא: 2026-12-15, בעוד 43 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
+  [PASS] 1. Price structure (HL+HH)
+         HigherLow=True, brokeSwingHigh=True (last swing high=86.15)
+  [PASS] 2. Moving averages
+         close>84.11(MA10) & >80.14(MA20)=True, MA10 rising=True, MA10>MA50=True
+  [PASS] 3. MACD
+         MACD=2.02 vs Signal=0.67 (above=True), hist=1.35 rising=True
+  [PASS] 4. RSI
+         RSI=68.61 rising=True, bullishDivergence=False
+  [----] 5. Volume / RVOL
+         day up=True, RVOL=0.97, up>downVol=True
+  [PASS] 6. Volume Profile POC
+         close=91.02 vs POC=82.31 (above=True)
   >> 5/6 confirmed | mandatory(structure+volume)=False
   >> NO ENTRY - wait for confirmation
