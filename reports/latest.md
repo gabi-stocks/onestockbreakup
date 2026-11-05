@@ -1,14 +1,14 @@
-# Reversal Checker — 2026-11-04 22:23 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-05 02:01 UTC [END-OF-DAY]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 2/73 tickers)
 
-## REGN  (2026-11-03)  close=973.36  RSI=82.7  [today so far: open 989.90 -> 930.77 (-5.97%) | DELAYED]
+## REGN  (2026-11-03)  close=973.36  RSI=82.7
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=70.0%, תשואה ממוצעת ל-20 יום=3.57%.
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 34.5% מעל השפל של 20 הימים האחרונים (723.65), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 796.02 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-01-28, בעוד 85 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
   [חדשות אחרונות, מהחדש לישן]
+         - 2026-11-04 22:22 UTC Is Regeneron Stock Increasing Your Market Risk? (Trefis)
          - 2026-11-04 20:59 UTC Was There Any Sign Regeneron Stock Would Run? (Trefis)
          - 2026-11-04 16:41 UTC Moderna Soars 8% on Early Multiple Myeloma Data for Its Three-in-One mRNA Therapy (TIKR)
-         - 2026-11-04 16:20 UTC Why Regeneron (REGN) Might be Well Poised for a Surge (Zacks)
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=825.52)
   [PASS] 2. Moving averages
@@ -24,7 +24,7 @@
   >> 6/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## GEHC  (2026-11-03)  close=80.66  RSI=80.2  [today so far: open 82.97 -> 85.79 (+3.40%) | DELAYED]
+## GEHC  (2026-11-03)  close=80.66  RSI=80.2
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 8 עסקאות בלתי-תלויות, win rate ל-20 יום=62.5%, תשואה ממוצעת ל-20 יום=0.16%.
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 27.4% מעל השפל של 20 הימים האחרונים (63.31), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 69.65 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-02-03, בעוד 91 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
