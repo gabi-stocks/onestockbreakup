@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-05 21:13 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-05 22:29 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 8/73 tickers)
 
 ## JPM  (2026-11-04)  close=352.11  RSI=63.2  [today so far: open 358.64 -> 337.35 (-5.94%) | DELAYED]
@@ -6,9 +6,9 @@
   [תזמון כניסה: בזמן ✅] המחיר רק 8.1% מעל השפל של 20 הימים האחרונים (325.63). ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.
   [דוח כספי] דוח כספי הבא: 2027-01-14, בעוד 70 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
   [חדשות אחרונות, מהחדש לישן]
+         - 2026-11-05 22:06 UTC OpenAI Could Go Public In 2027 As Greg Brockman Signals IPO Readiness (Benzinga Private Markets)
+         - 2026-11-05 21:55 UTC Financial Services Roundup: Market Talk (The Wall Street Journal)
          - 2026-11-05 20:09 UTC Bank Earnings Have Entered the Upside-Down (Motley Fool)
-         - 2026-11-05 20:08 UTC Morgan Stanley Sinks 6%, Goldman Down 6%, Citi Down 5% as Market Selloff Drags Wall Street Banks (TIKR)
-         - 2026-11-05 17:33 UTC The Stocks Making Noise-And the Ones That Actually Matter (24/7 Wall St.)
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=345.75)
   [PASS] 2. Moving averages
@@ -94,7 +94,7 @@
   >> 6/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## CHWY  (2026-11-04)  close=23.4  RSI=66.8  [today so far: open 23.48 -> 23.02 (-1.96%) | DELAYED]
+## CHWY  (2026-11-04)  close=23.4  RSI=66.8  [today so far: open 23.48 -> 23.02 (-1.94%) | DELAYED]
   [אמינות היסטורית: אמינות נמוכה] בבקטסט (5 שנים אחורה): 7 עסקאות בלתי-תלויות, win rate ל-20 יום=28.6%, תשואה ממוצעת ל-20 יום=1.62%.
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 30.2% מעל השפל של 20 הימים האחרונים (17.98), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 19.77 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2026-12-09, בעוד 34 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
@@ -140,14 +140,14 @@
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## NKE  (2026-11-04)  close=40.49  RSI=67.8  [today so far: open 40.38 -> 39.55 (-2.04%) | DELAYED]
+## NKE  (2026-11-04)  close=40.49  RSI=67.8  [today so far: open 40.38 -> 39.56 (-2.02%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 19.7% מעל השפל של 20 הימים האחרונים (33.83), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 37.21 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2026-12-17, בעוד 42 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
   [חדשות אחרונות, מהחדש לישן]
+         - 2026-11-05 21:31 UTC Nike recovery may lag valuation expectations, UBS warns (Proactive)
          - 2026-11-05 18:29 UTC Is Now a Good Time to Buy Nike Stock? (Motley Fool)
          - 2026-11-05 17:10 UTC Nike (NKE) Put Vietnam’s First Fully Electric Container Barge Into Service (Simply Wall St.)
-         - 2026-11-05 16:33 UTC Nike CEO admits blind spot as Jordan and Dunk sales shrink (TheStreet)
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=36.67)
   [PASS] 2. Moving averages

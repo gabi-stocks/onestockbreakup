@@ -702,7 +702,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 255.92 -> 247.14 (-3.43%) | DELAYED]",
+    "context": "  [today so far: open 255.92 -> 247.10 (-3.45%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -903,7 +903,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "  [today so far: open 23.48 -> 23.02 (-1.96%) | DELAYED]",
+    "context": "  [today so far: open 23.48 -> 23.02 (-1.94%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -996,7 +996,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": true,
-    "context": "  [today so far: open 40.38 -> 39.55 (-2.04%) | DELAYED]",
+    "context": "  [today so far: open 40.38 -> 39.56 (-2.02%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -1047,6 +1047,12 @@
     },
     "headlines": [
       {
+        "title": "Nike recovery may lag valuation expectations, UBS warns",
+        "publisher": "Proactive",
+        "link": "https://www.proactiveinvestors.com/companies/news/1101331/nike-recovery-may-lag-valuation-expectations-ubs-warns-1101331.html",
+        "date": "2026-11-05 21:31 UTC"
+      },
+      {
         "title": "Is Now a Good Time to Buy Nike Stock?",
         "publisher": "Motley Fool",
         "link": "https://www.fool.com/investing/2026/11/05/is-now-a-good-time-to-buy-nike-stock/",
@@ -1057,12 +1063,6 @@
         "publisher": "Simply Wall St.",
         "link": "https://finance.yahoo.com/markets/stocks/articles/nike-nke-put-vietnam-first-171010785.html",
         "date": "2026-11-05 17:10 UTC"
-      },
-      {
-        "title": "Nike CEO admits blind spot as Jordan and Dunk sales shrink",
-        "publisher": "TheStreet",
-        "link": "https://www.thestreet.com/retail/nike-jordan-dunk-reset-morgan-stanley-underweight",
-        "date": "2026-11-05 16:33 UTC"
       }
     ]
   },
@@ -1234,7 +1234,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 402.96 -> 381.52 (-5.32%) | DELAYED]",
+    "context": "  [today so far: open 402.96 -> 381.53 (-5.32%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -1287,7 +1287,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 148.93 -> 141.09 (-5.26%) | DELAYED]",
+    "context": "  [today so far: open 148.93 -> 141.11 (-5.25%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1393,7 +1393,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 28.30 -> 27.43 (-3.06%) | DELAYED]",
+    "context": "  [today so far: open 28.30 -> 27.43 (-3.07%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1446,7 +1446,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 41.49 -> 41.75 (+0.63%) | DELAYED]",
+    "context": "  [today so far: open 41.49 -> 41.76 (+0.65%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -1499,7 +1499,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 330.14 -> 313.13 (-5.15%) | DELAYED]",
+    "context": "  [today so far: open 330.14 -> 312.83 (-5.24%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1658,7 +1658,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 340.04 -> 326.63 (-3.94%) | DELAYED]",
+    "context": "  [today so far: open 340.04 -> 326.53 (-3.97%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1711,7 +1711,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 116.86 -> 112.94 (-3.35%) | DELAYED]",
+    "context": "  [today so far: open 116.86 -> 112.90 (-3.39%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1870,7 +1870,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 95.49 -> 89.11 (-6.69%) | DELAYED]",
+    "context": "  [today so far: open 95.49 -> 89.00 (-6.80%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2082,7 +2082,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 108.56 -> 102.35 (-5.72%) | DELAYED]",
+    "context": "  [today so far: open 108.56 -> 102.33 (-5.74%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2241,7 +2241,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 147.14 -> 148.21 (+0.72%) | DELAYED]",
+    "context": "  [today so far: open 147.14 -> 148.19 (+0.71%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2559,7 +2559,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 223.77 -> 214.09 (-4.33%) | DELAYED]",
+    "context": "  [today so far: open 223.77 -> 214.05 (-4.35%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2663,22 +2663,22 @@
     },
     "headlines": [
       {
+        "title": "OpenAI Could Go Public In 2027 As Greg Brockman Signals IPO Readiness",
+        "publisher": "Benzinga Private Markets",
+        "link": "https://www.benzinga.com/markets/private-markets/26/11/62957030/openai-could-go-public-in-2027-as-greg-brockman-signals-ipo-readiness?utm_source=yahooFinance&utm_campaign=partner_feed&utm_medium=referral",
+        "date": "2026-11-05 22:06 UTC"
+      },
+      {
+        "title": "Financial Services Roundup: Market Talk",
+        "publisher": "The Wall Street Journal",
+        "link": "https://www.wsj.com/business/financial-services-roundup-market-talk-30f0ffc4?siteid=yhoof2&yptr=yahoo",
+        "date": "2026-11-05 21:55 UTC"
+      },
+      {
         "title": "Bank Earnings Have Entered the Upside-Down",
         "publisher": "Motley Fool",
         "link": "https://www.fool.com/investing/2026/11/05/bank-earnings-have-entered-the-upside-down/",
         "date": "2026-11-05 20:09 UTC"
-      },
-      {
-        "title": "Morgan Stanley Sinks 6%, Goldman Down 6%, Citi Down 5% as Market Selloff Drags Wall Street Banks",
-        "publisher": "TIKR",
-        "link": "https://www.tikr.com/blog/morgan-stanley-sinks-6-goldman-down-6-citi-down-5-as-market-selloff-drags-wall-street-banks?ref=yahoofinance&tlnk=yf-261105-jwpc6pp2",
-        "date": "2026-11-05 20:08 UTC"
-      },
-      {
-        "title": "The Stocks Making Noise-And the Ones That Actually Matter",
-        "publisher": "24/7 Wall St.",
-        "link": "https://247wallst.com/investing/2026/11/05/the-stocks-making-noise-and-the-ones-that-actually-matter/",
-        "date": "2026-11-05 17:33 UTC"
       }
     ]
   },
@@ -3528,7 +3528,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 103.00 -> 98.34 (-4.52%) | DELAYED]",
+    "context": "  [today so far: open 103.00 -> 98.32 (-4.54%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -3581,7 +3581,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 53.40 -> 50.55 (-5.34%) | DELAYED]",
+    "context": "  [today so far: open 53.40 -> 50.53 (-5.37%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3740,7 +3740,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 74.83 -> 70.40 (-5.92%) | DELAYED]",
+    "context": "  [today so far: open 74.83 -> 70.29 (-6.07%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3793,7 +3793,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 103.11 -> 98.99 (-4.00%) | DELAYED]",
+    "context": "  [today so far: open 103.11 -> 98.97 (-4.02%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3846,7 +3846,7 @@
     "mandatory_met": true,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 57.90 -> 55.96 (-3.35%) | DELAYED]",
+    "context": "  [today so far: open 57.90 -> 55.95 (-3.37%) | DELAYED]",
     "checks": {
       "1_price_structure": true,
       "2_moving_averages": true,
@@ -4005,7 +4005,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 64.13 -> 61.70 (-3.79%) | DELAYED]",
+    "context": "  [today so far: open 64.13 -> 61.68 (-3.82%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -4058,7 +4058,7 @@
     "mandatory_met": false,
     "market_regime_ok": true,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 220.01 -> 212.99 (-3.19%) | DELAYED]",
+    "context": "  [today so far: open 220.01 -> 212.93 (-3.22%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
