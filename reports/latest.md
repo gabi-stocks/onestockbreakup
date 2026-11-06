@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-11-06 20:34 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-06 21:55 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 5/73 tickers)
 
-## TLT  (2026-11-05)  close=81.93  RSI=61.2  [today so far: open 81.87 -> 81.96 (+0.10%) | DELAYED]
+## TLT  (2026-11-05)  close=81.93  RSI=61.2  [today so far: open 81.87 -> 81.93 (+0.07%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [תזמון כניסה: בזמן ✅] המחיר רק 5.7% מעל השפל של 20 הימים האחרונים (77.49). ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.
   [דוח כספי] דוח כספי הבא: לא נמצא תאריך (למשל בקרן סל, או שהתאריך עוד לא פורסם). כדאי לבדוק ידנית לפני קנייה.
@@ -47,7 +47,7 @@
   >> 6/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## REGN  (2026-11-05)  close=902.9  RSI=62.9  [today so far: open 887.22 -> 909.50 (+2.51%) | DELAYED]
+## REGN  (2026-11-05)  close=902.9  RSI=62.9  [today so far: open 887.22 -> 904.12 (+1.91%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 10 עסקאות בלתי-תלויות, win rate ל-20 יום=70.0%, תשואה ממוצעת ל-20 יום=3.57%.
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 23.2% מעל השפל של 20 הימים האחרונים (732.83), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 806.11 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-01-28, בעוד 83 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
@@ -70,14 +70,14 @@
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## NKE  (2026-11-05)  close=39.56  RSI=61.1  [today so far: open 38.27 -> 38.63 (+0.95%) | DELAYED]
+## NKE  (2026-11-05)  close=39.56  RSI=61.1  [today so far: open 38.27 -> 38.59 (+0.84%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 16.0% מעל השפל של 20 הימים האחרונים (34.1), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 37.51 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2026-12-17, בעוד 41 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
   [חדשות אחרונות, מהחדש לישן]
+         - 2026-11-06 21:05 UTC Lululemon CEO Heidi O’Neill Fills Key Brand and Strategy Positions for Reset (WWD)
          - 2026-11-06 18:19 UTC Under Armour Issues Stark Warning on 2027 Profit Margins (GuruFocus.com)
          - 2026-11-06 16:31 UTC Nike's Five-Year Financial Targets Expected to Fall Within Consensus, RBC Says (MT Newswires)
-         - 2026-11-06 14:49 UTC NIKE's Fiscal 2027 Outlook Puts Pace Savings Against Revenue Risk (Zacks)
   [PASS] 1. Price structure (HL+HH)
          HigherLow=True, brokeSwingHigh=True (last swing high=36.67)
   [PASS] 2. Moving averages
@@ -93,7 +93,7 @@
   >> 5/6 confirmed | mandatory(structure+volume)=True
   >> BUY TRIGGER - reversal confirmed
 
-## TEVA  (2026-11-05)  close=41.78  RSI=58.6  [today so far: open 41.47 -> 42.39 (+2.22%) | DELAYED]
+## TEVA  (2026-11-05)  close=41.78  RSI=58.6  [today so far: open 41.47 -> 42.61 (+2.75%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [תזמון כניסה: בזמן ✅] המחיר רק 6.8% מעל השפל של 20 הימים האחרונים (39.11). ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.
   [דוח כספי] דוח כספי הבא: 2027-01-27, בעוד 82 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
