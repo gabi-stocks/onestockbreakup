@@ -1,0 +1,18 @@
+name: keep dashboard warm
+
+# The dashboard's server sleeps after a few idle minutes; waking it made the
+# first load slow. One light request every 10 minutes keeps it ready.
+# The request has no sign-in, so the server answers 401 and returns no data.
+on:
+  schedule:
+    - cron: "*/10 5-21 * * *"   # UTC: about 07:00-00:00 Israel time
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: curl -s -o /dev/null -w "%{http_code} %{time_total}s\n" --max-time 60 https://stock-dashboard-709ed.web.app/api/ping || true
