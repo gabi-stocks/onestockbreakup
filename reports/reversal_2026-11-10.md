@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-11-10 21:00 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-10 22:08 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 1/73 tickers)
 
-## CEG  (2026-11-09)  close=276.09  RSI=55.7  [today so far: open 270.25 -> 267.62 (-0.97%) | DELAYED]
+## CEG  (2026-11-09)  close=276.09  RSI=55.7  [today so far: open 270.25 -> 267.76 (-0.92%) | DELAYED]
   [אמינות היסטורית: אין נתוני בקטסט] לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 19.4% מעל השפל של 20 הימים האחרונים (231.3), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 254.43 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-02-24, בעוד 106 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
