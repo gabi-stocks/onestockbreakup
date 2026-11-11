@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-11 21:32 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-11 23:16 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 1/73 tickers)
 
 ## DKS  (2026-11-10)  close=150.0  RSI=58.1  [today so far: open 149.03 -> 149.46 (+0.29%) | DELAYED]
