@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-12 21:35 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-12 22:32 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 6/73 tickers)
 
 ## IFRA  (2026-11-11)  close=58.11  RSI=55.5  [today so far: open 57.97 -> 57.99 (+0.03%) | DELAYED]
