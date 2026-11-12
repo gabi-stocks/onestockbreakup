@@ -448,14 +448,20 @@ def analyze(ticker, morning=False, market_ok=True):
 
     # 5) Volume / RVOL
     rvol_today = float(rvol.iloc[-1]) if not np.isnan(rvol.iloc[-1]) else 0.0
-    latest_up = last_close > float(op.iloc[-1])
+    # "Up day" = closed above the previous close. A green candle (close > open)
+    # after a gap down is still a down day, so it must not count as one.
+    prev_close = float(close.iloc[-2]) if len(close) >= 2 else float(op.iloc[-1])
+    latest_up = last_close > prev_close
+    latest_up_or_flat = last_close >= prev_close
+    chg = df["Close"].diff()
     recent = df.tail(10)
-    up_vol = recent.loc[recent["Close"] >= recent["Open"], "Volume"].mean()
-    down_vol = recent.loc[recent["Close"] < recent["Open"], "Volume"].mean()
+    rchg = chg.tail(10)
+    up_vol = recent.loc[rchg >= 0, "Volume"].mean()
+    down_vol = recent.loc[rchg < 0, "Volume"].mean()
     up_gt_down = np.nan_to_num(up_vol) > np.nan_to_num(down_vol)
     checks["5_volume"] = bool(
         (latest_up and rvol_today > RVOL_THRESHOLD)
-        or (up_gt_down and rvol_today > RVOL_SOFT_FLOOR)
+        or (latest_up_or_flat and up_gt_down and rvol_today > RVOL_SOFT_FLOOR)
     )
     detail["5_volume"] = f"day up={latest_up}, RVOL={rvol_today:.2f}, up>downVol={up_gt_down}"
 

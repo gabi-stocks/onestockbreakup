@@ -147,14 +147,20 @@ def evaluate_day(sub, params):
 
     # 5) Volume / RVOL (mandatory), soft-floor is tunable per variant
     rvol_today = float(rvol.iloc[-1]) if not np.isnan(rvol.iloc[-1]) else 0.0
-    latest_up = last_close > float(op.iloc[-1])
+    # "Up day" = closed above the previous close. A green candle (close > open)
+    # after a gap down is still a down day, so it must not count as one.
+    prev_close = float(close.iloc[-2]) if len(close) >= 2 else float(op.iloc[-1])
+    latest_up = last_close > prev_close
+    latest_up_or_flat = last_close >= prev_close
+    chg = sub["Close"].diff()
     recent = sub.tail(10)
-    up_vol = recent.loc[recent["Close"] >= recent["Open"], "Volume"].mean()
-    down_vol = recent.loc[recent["Close"] < recent["Open"], "Volume"].mean()
+    rchg = chg.tail(10)
+    up_vol = recent.loc[rchg >= 0, "Volume"].mean()
+    down_vol = recent.loc[rchg < 0, "Volume"].mean()
     up_gt_down = np.nan_to_num(up_vol) > np.nan_to_num(down_vol)
     checks["5_volume"] = bool(
         (latest_up and rvol_today > params["rvol_threshold"])
-        or (up_gt_down and rvol_today > params["rvol_soft_floor"])
+        or (latest_up_or_flat and up_gt_down and rvol_today > params["rvol_soft_floor"])
     )
 
     # 6) Volume Profile POC, window is tunable per variant (None = full sub)
@@ -260,7 +266,7 @@ def main():
               f"IMPROVED variant will treat regime as always-on.")
         spy_regime_series = pd.Series(dtype=bool)
 
-    detail_lines = ["# Backtest results \u2014 reversal checklist (BASELINE vs IMPROVED)\n"]
+    detail_lines = ["# Backtest results — reversal checklist (BASELINE vs IMPROVED)\n"]
     detail_lines.append(
         f"Generated {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC. "
         f"History: {HISTORY_PERIOD}, warmup {WARMUP}d, horizons {HORIZONS}d.\n"
@@ -277,10 +283,10 @@ def main():
         try:
             df = yf.Ticker(ticker).history(period=HISTORY_PERIOD, auto_adjust=False).dropna()
         except Exception as e:
-            detail_lines.append(f"\n## {ticker}\nSKIPPED \u2014 data fetch failed: {e}\n")
+            detail_lines.append(f"\n## {ticker}\nSKIPPED — data fetch failed: {e}\n")
             continue
         if len(df) < WARMUP + 30:
-            detail_lines.append(f"\n## {ticker}\nSKIPPED \u2014 not enough history ({len(df)} rows)\n")
+            detail_lines.append(f"\n## {ticker}\nSKIPPED — not enough history ({len(df)} rows)\n")
             continue
 
         regime_by_date = spy_regime_series.reindex(df.index).ffill().fillna(False) \
@@ -321,7 +327,7 @@ def main():
         "Compare BASELINE vs IMPROVED n_triggers and winrate/avg return at each horizon. More "
         "trades with similar or better winrate/avg return = the change helped. Fewer trades with "
         "much better winrate can also be a legitimate improvement (higher-quality, rarer signals) "
-        "\u2014 that's a judgment call, not something the numbers alone decide."
+        "— that's a judgment call, not something the numbers alone decide."
     )
 
     os.makedirs("reports", exist_ok=True)
