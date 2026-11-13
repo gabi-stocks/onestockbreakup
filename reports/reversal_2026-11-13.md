@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-11-13 20:59 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-13 22:21 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 1/73 tickers)
 
-## TEVA  (2026-11-12)  close=43.65  RSI=65.7  [today so far: open 43.91 -> 44.51 (+1.38%) | DELAYED]
+## TEVA  (2026-11-12)  close=43.65  RSI=65.7  [today so far: open 43.91 -> 44.53 (+1.41%) | DELAYED]
   [אמינות היסטורית: אמינות גבוהה יחסית] בבקטסט (5 שנים אחורה): 16 עסקאות בלתי-תלויות, win rate ל-20 יום=56.2%, תשואה ממוצעת ל-20 יום=1.89%.
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 11.6% מעל השפל של 20 הימים האחרונים (39.11), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 43.02 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-01-27, בעוד 75 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
