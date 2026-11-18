@@ -276,7 +276,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 81.33 -> 83.65 (+2.85%) | DELAYED]",
+    "context": "  [today so far: open 81.33 -> 83.67 (+2.88%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -410,7 +410,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 957.25 -> 945.60 (-1.22%) | DELAYED]",
+    "context": "  [today so far: open 957.25 -> 945.58 (-1.22%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -1200,7 +1200,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 390.20 -> 395.75 (+1.42%) | DELAYED]",
+    "context": "  [today so far: open 394.05 -> 395.75 (+0.43%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2928,7 +2928,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 327.52 -> 324.11 (-1.04%) | DELAYED]",
+    "context": "  [today so far: open 327.61 -> 324.12 (-1.07%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3464,7 +3464,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 313.75 -> 342.07 (+9.03%) | DELAYED]",
+    "context": "  [today so far: open 313.75 -> 341.41 (+8.82%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -3866,7 +3866,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 262.24 -> 267.67 (+2.07%) | DELAYED]",
+    "context": "  [today so far: open 259.81 -> 267.67 (+3.03%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
