@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-19 22:26 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-19 23:23 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 2/73 tickers)
 
 ## ZIM  (2026-11-18)  close=29.92  RSI=57.4  [today so far: open 30.10 -> 29.63 (-1.56%) | DELAYED]
