@@ -1,7 +1,7 @@
-# Reversal Checker — 2026-11-20 21:57 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-20 22:57 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 1/73 tickers)
 
-## CHKP  (2026-11-19)  close=155.5  RSI=65.2  [today so far: open 155.26 -> 155.10 (-0.10%) | DELAYED]
+## CHKP  (2026-11-19)  close=155.5  RSI=65.2  [today so far: open 153.61 -> 155.10 (+0.97%) | DELAYED]
   [אמינות היסטורית: אמינות בינונית] בבקטסט (5 שנים אחורה): 16 עסקאות בלתי-תלויות, win rate ל-20 יום=53.3%, תשואה ממוצעת ל-20 יום=-1.13%.
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 12.3% מעל השפל של 20 הימים האחרונים (138.41), כלומר רוב העלייה כבר קרתה ופקודת העצירה תהיה רחוקה. לא לרדוף: לחכות לתיקון אל 152.25 ומטה (עד 10% מעל השפל), או לוותר.
   [דוח כספי] דוח כספי הבא: 2027-02-18, בעוד 90 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
