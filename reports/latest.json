@@ -22,7 +22,7 @@
       "2_moving_averages": "close>117.84(MA10) & >122.51(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-6.27 vs Signal=-4.82 (above=False), hist=-1.45 rising=False",
       "4_rsi": "RSI=31.83 rising=False, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=1.12, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.13, up>downVol=True",
       "6_volume_profile": "close=101.19 vs POC=143.09 (above=False)"
     },
     "progress": {
@@ -156,7 +156,7 @@
       "2_moving_averages": "close>167.81(MA10) & >169.85(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-4.31 vs Signal=-2.72 (above=False), hist=-1.59 rising=False",
       "4_rsi": "RSI=35.10 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.50, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.51, up>downVol=False",
       "6_volume_profile": "close=149.94 vs POC=177.31 (above=False)"
     },
     "progress": {
@@ -491,7 +491,7 @@
       "2_moving_averages": "close>96.69(MA10) & >99.44(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-12.92 vs Signal=-14.54 (above=True), hist=1.62 rising=False",
       "4_rsi": "RSI=33.79 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.64, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.65, up>downVol=True",
       "6_volume_profile": "close=82.67 vs POC=180.90 (above=False)"
     },
     "progress": {
@@ -611,7 +611,7 @@
       "2_moving_averages": "close>57.52(MA10) & >55.89(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-2.16 vs Signal=-1.49 (above=False), hist=-0.67 rising=False",
       "4_rsi": "RSI=35.63 rising=False, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=1.12, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.13, up>downVol=True",
       "6_volume_profile": "close=45.42 vs POC=64.05 (above=False)"
     },
     "progress": {
@@ -678,7 +678,7 @@
       "2_moving_averages": "close>238.11(MA10) & >245.15(MA20)=False, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=-2.99 vs Signal=0.57 (above=False), hist=-3.56 rising=False",
       "4_rsi": "RSI=33.53 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=1.84, up>downVol=True",
+      "5_volume": "day up=True, RVOL=1.85, up>downVol=True",
       "6_volume_profile": "close=224.44 vs POC=216.81 (above=True)"
     },
     "progress": {
@@ -946,7 +946,7 @@
       "2_moving_averages": "close>37.03(MA10) & >37.81(MA20)=False, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=-0.57 vs Signal=0.09 (above=False), hist=-0.66 rising=False",
       "4_rsi": "RSI=31.66 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.31, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.32, up>downVol=False",
       "6_volume_profile": "close=32.92 vs POC=33.83 (above=False)"
     },
     "progress": {
@@ -1147,7 +1147,7 @@
       "2_moving_averages": "close>30.48(MA10) & >34.21(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-5.73 vs Signal=-5.22 (above=False), hist=-0.51 rising=False",
       "4_rsi": "RSI=27.62 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.30, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.31, up>downVol=True",
       "6_volume_profile": "close=23.27 vs POC=62.97 (above=False)"
     },
     "progress": {
@@ -1683,7 +1683,7 @@
       "2_moving_averages": "close>284.78(MA10) & >289.45(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-13.59 vs Signal=-13.06 (above=False), hist=-0.53 rising=False",
       "4_rsi": "RSI=27.78 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.27, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.29, up>downVol=False",
       "6_volume_profile": "close=265.29 vs POC=338.32 (above=False)"
     },
     "progress": {
@@ -1951,7 +1951,7 @@
       "2_moving_averages": "close>126.06(MA10) & >136.47(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-16.22 vs Signal=-15.00 (above=False), hist=-1.22 rising=False",
       "4_rsi": "RSI=31.61 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.59, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.60, up>downVol=True",
       "6_volume_profile": "close=99.86 vs POC=239.70 (above=False)"
     },
     "progress": {
@@ -2085,7 +2085,7 @@
       "2_moving_averages": "close>0.16(MA10) & >0.19(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-0.04 vs Signal=-0.03 (above=False), hist=-0.01 rising=False",
       "4_rsi": "RSI=18.30 rising=False, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=1.43, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.44, up>downVol=False",
       "6_volume_profile": "close=0.10 vs POC=0.34 (above=False)"
     },
     "progress": {
@@ -2152,7 +2152,7 @@
       "2_moving_averages": "close>158.44(MA10) & >181.46(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-19.83 vs Signal=-15.20 (above=False), hist=-4.63 rising=False",
       "4_rsi": "RSI=15.05 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=2.18, up>downVol=False",
+      "5_volume": "day up=False, RVOL=2.20, up>downVol=False",
       "6_volume_profile": "close=125.53 vs POC=217.64 (above=False)"
     },
     "progress": {
@@ -2406,7 +2406,7 @@
       "2_moving_averages": "close>11.35(MA10) & >10.94(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-0.54 vs Signal=-0.44 (above=False), hist=-0.11 rising=False",
       "4_rsi": "RSI=35.94 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.13, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.14, up>downVol=True",
       "6_volume_profile": "close=8.77 vs POC=13.91 (above=False)"
     },
     "progress": {
@@ -2473,7 +2473,7 @@
       "2_moving_averages": "close>141.13(MA10) & >150.11(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-4.35 vs Signal=-2.84 (above=False), hist=-1.51 rising=True",
       "4_rsi": "RSI=39.45 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=0.93, up>downVol=False",
+      "5_volume": "day up=True, RVOL=0.94, up>downVol=False",
       "6_volume_profile": "close=139.63 vs POC=129.11 (above=True)"
     },
     "progress": {
@@ -2607,7 +2607,7 @@
       "2_moving_averages": "close>17.33(MA10) & >20.65(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-4.64 vs Signal=-4.33 (above=False), hist=-0.31 rising=False",
       "4_rsi": "RSI=24.48 rising=False, bullishDivergence=True",
-      "5_volume": "day up=False, RVOL=1.65, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.67, up>downVol=False",
       "6_volume_profile": "close=11.82 vs POC=41.33 (above=False)"
     },
     "progress": {
@@ -3015,7 +3015,7 @@
       "2_moving_averages": "close>38.19(MA10) & >41.34(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-2.86 vs Signal=-1.92 (above=False), hist=-0.94 rising=False",
       "4_rsi": "RSI=17.49 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=2.10, up>downVol=False",
+      "5_volume": "day up=False, RVOL=2.11, up>downVol=False",
       "6_volume_profile": "close=33.02 vs POC=36.06 (above=False)"
     },
     "progress": {
@@ -3082,7 +3082,7 @@
       "2_moving_averages": "close>121.90(MA10) & >135.63(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-15.89 vs Signal=-13.27 (above=False), hist=-2.62 rising=False",
       "4_rsi": "RSI=22.94 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.53, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.54, up>downVol=False",
       "6_volume_profile": "close=101.97 vs POC=160.44 (above=False)"
     },
     "progress": {
@@ -3149,7 +3149,7 @@
       "2_moving_averages": "close>74.97(MA10) & >81.07(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-8.72 vs Signal=-7.50 (above=False), hist=-1.23 rising=False",
       "4_rsi": "RSI=22.79 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.32, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.33, up>downVol=False",
       "6_volume_profile": "close=62.17 vs POC=112.84 (above=False)"
     },
     "progress": {
@@ -3283,7 +3283,7 @@
       "2_moving_averages": "close>23.41(MA10) & >23.92(MA20)=False, MA10 rising=False, MA10>MA50=False",
       "3_macd": "MACD=-2.46 vs Signal=-2.47 (above=True), hist=0.01 rising=False",
       "4_rsi": "RSI=32.31 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.27, up>downVol=True",
+      "5_volume": "day up=False, RVOL=1.28, up>downVol=True",
       "6_volume_profile": "close=19.85 vs POC=39.99 (above=False)"
     },
     "progress": {
@@ -3685,7 +3685,7 @@
       "2_moving_averages": "close>80.38(MA10) & >80.99(MA20)=True, MA10 rising=False, MA10>MA50=True",
       "3_macd": "MACD=-0.00 vs Signal=0.08 (above=False), hist=-0.08 rising=True",
       "4_rsi": "RSI=57.79 rising=True, bullishDivergence=False",
-      "5_volume": "day up=True, RVOL=1.79, up>downVol=False",
+      "5_volume": "day up=True, RVOL=1.81, up>downVol=False",
       "6_volume_profile": "close=81.45 vs POC=81.76 (above=False)"
     },
     "progress": {
@@ -4489,7 +4489,7 @@
       "2_moving_averages": "close>338.82(MA10) & >332.38(MA20)=False, MA10 rising=True, MA10>MA50=False",
       "3_macd": "MACD=-2.10 vs Signal=-2.76 (above=True), hist=0.66 rising=False",
       "4_rsi": "RSI=40.84 rising=False, bullishDivergence=False",
-      "5_volume": "day up=False, RVOL=1.96, up>downVol=False",
+      "5_volume": "day up=False, RVOL=1.98, up>downVol=False",
       "6_volume_profile": "close=304.41 vs POC=345.96 (above=False)"
     },
     "progress": {
