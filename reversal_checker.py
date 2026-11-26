@@ -32,6 +32,7 @@ Analysis tooling, not investment advice.
 """
 
 import os
+import re
 import json
 import smtplib
 from email.mime.text import MIMEText
@@ -233,9 +234,23 @@ def material_news(ticker, max_items=MAX_NEWS_ITEMS):
         print(f"WARNING: news_digest import failed ({e}); no news shown.")
         return []
     raw = fetch_recent_headlines(ticker, max_items=40)
+    try:
+        info = yf.Ticker(ticker).info or {}
+    except Exception:
+        info = {}
+    name = nd.clean_company_name(info.get("shortName") or info.get("longName") or "")
+    first = name.split()[0] if name else ""
     items = []
     for h in raw:
-        cat = nd.classify(h["title"])
+        title = h["title"]
+        # Must be about this company (ticker or company name in the headline) --
+        # Yahoo attaches general market wraps to every ticker they mention.
+        if not (re.search(rf"\b{re.escape(ticker)}\b", title)
+                or (len(first) >= 3 and re.search(rf"\b{re.escape(first)}", title, re.I))):
+            continue
+        if title.rstrip().endswith("?"):
+            continue  # opinion / speculation pieces ("Is X a buy?")
+        cat = nd.classify(title)
         if not cat:
             continue
         try:
