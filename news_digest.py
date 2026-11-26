@@ -409,13 +409,21 @@ def to_hebrew(text):
         return _TR_CACHE[text]
     url = "https://translate.googleapis.com/translate_a/single?" + urllib.parse.urlencode(
         {"client": "gtx", "sl": "en", "tl": "iw", "dt": "t", "q": text})
-    try:
-        data = json.loads(http_get(url, timeout=10).decode("utf-8"))
-        he = "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
-        time.sleep(0.2)
-    except Exception as e:
-        note_fail("תרגום אוטומטי", e)
-        he = None
+    he = None
+    # The free endpoint rate-limits bursts (HTTP 429): back off and retry
+    # instead of falling back to the English title.
+    for attempt, wait in enumerate((0, 2, 5, 10)):
+        if wait:
+            time.sleep(wait)
+        try:
+            data = json.loads(http_get(url, timeout=10).decode("utf-8"))
+            he = "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
+            time.sleep(0.5)
+            break
+        except Exception as e:
+            if attempt == 3 or "429" not in str(e):
+                note_fail("תרגום אוטומטי", e)
+                break
     _TR_CACHE[text] = he
     return he
 
