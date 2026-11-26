@@ -545,12 +545,18 @@ def analyze(ticker, morning=False, market_ok=True):
 
     # Plain-Hebrew values for the email (the English `detail` stays for the .md report)
     yn = lambda b: "כן" if b else "לא"
+    ok = lambda b: "✓" if b else "✗"
     poc_gap = (last_close / poc - 1) * 100 if poc else 0.0
     he_values = {
         "1_price_structure": (f"שפל אחרון גבוה מהקודם: {yn(higher_low)}<br>"
                               f"פריצת הפסגה האחרונה ({last_swing_high:.2f}): {yn(broke_high)}"),
-        "2_moving_averages": (f"סגירה {last_close:.2f}<br><bdi>MA10</bdi>: {ma10.iloc[-1]:.2f} · <bdi>MA20</bdi>: {ma20.iloc[-1]:.2f}<br>"
-                              f"MA10 עולה: {yn(ma10_rising)} · MA10 מעל MA50: {yn(golden_short)}"),
+        # Each required condition gets its own ✓/✗ so it's clear which one failed;
+        # MA50 is shown as context only (not part of the pass rule).
+        "2_moving_averages": (f"{ok(last_close > ma10.iloc[-1])} סגירה {last_close:.2f} מעל <bdi>MA10</bdi> ({ma10.iloc[-1]:.2f})<br>"
+                              f"{ok(last_close > ma20.iloc[-1])} סגירה מעל <bdi>MA20</bdi> ({ma20.iloc[-1]:.2f})<br>"
+                              f"{ok(ma10_rising)} <bdi>MA10</bdi> עולה (לפני יומיים {ma10.iloc[-3]:.2f}, היום {ma10.iloc[-1]:.2f})<br>"
+                              f"<span style='color:#888'>לעיון: <bdi>MA50</bdi> {ma50.iloc[-1]:.2f} · "
+                              f"<bdi>MA10</bdi> מעל <bdi>MA50</bdi>: {yn(golden_short)}</span>"),
         "3_macd": (f"MACD {macd_line.iloc[-1]:.2f} מול Signal {sig_line.iloc[-1]:.2f} (מעליו: {yn(macd_above)})<br>"
                    f"היסטוגרמה {hist.iloc[-1]:.2f}, עולה יומיים ברציפות: {yn(hist_rising)}"),
         "4_rsi": (f"ערך {rsi_now:.1f}, עולה: {yn(rsi_rising)}<br>"
