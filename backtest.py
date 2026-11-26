@@ -158,9 +158,19 @@ def evaluate_day(sub, params):
     up_vol = recent.loc[rchg >= 0, "Volume"].mean()
     down_vol = recent.loc[rchg < 0, "Volume"].mean()
     up_gt_down = np.nan_to_num(up_vol) > np.nan_to_num(down_vol)
+    # Alternative branch: in "trend5" mode the soft branch uses a 5-day RVOL
+    # (avg volume of the last 5 days vs the 50 days BEFORE them), so a single
+    # quiet day -- or the rally's own volume inflating the 20-day baseline --
+    # doesn't fail an otherwise healthy uptrend. The breakout-day spike branch
+    # (single-day RVOL > rvol_threshold) is unchanged in every mode.
+    if params.get("volume_mode", "classic") == "trend5":
+        base = vol.shift(5).rolling(50).mean().iloc[-1]
+        soft_rvol = float(vol.tail(5).mean() / base) if base and not np.isnan(base) else 0.0
+    else:
+        soft_rvol = rvol_today
     checks["5_volume"] = bool(
         (latest_up and rvol_today > params["rvol_threshold"])
-        or (latest_up_or_flat and up_gt_down and rvol_today > params["rvol_soft_floor"])
+        or (latest_up_or_flat and up_gt_down and soft_rvol > params["rvol_soft_floor"])
     )
 
     # 6) Volume Profile POC, window is tunable per variant (None = full sub)
@@ -240,6 +250,18 @@ IMPROVED_PARAMS = {
 }
 
 
+# Volume-check variants (Nov 2026): same as IMPROVED except for check 5.
+VOL_TREND5_PARAMS = {**IMPROVED_PARAMS, "volume_mode": "trend5", "rvol_soft_floor": 1.0}
+VOL_LOWFLOOR_PARAMS = {**IMPROVED_PARAMS, "rvol_soft_floor": 0.8}
+
+VARIANTS = {
+    "BASELINE": BASELINE_PARAMS,
+    "IMPROVED": IMPROVED_PARAMS,          # what reversal_checker.py runs today
+    "VOL_TREND5": VOL_TREND5_PARAMS,      # 5-day RVOL vs prior 50 days, floor 1.0
+    "VOL_LOWFLOOR": VOL_LOWFLOOR_PARAMS,  # classic 1-day RVOL, floor lowered 1.1 -> 0.8
+}
+
+
 def pooled_stats(triggers):
     if not triggers:
         return {"n_triggers": 0}
@@ -266,7 +288,7 @@ def main():
               f"IMPROVED variant will treat regime as always-on.")
         spy_regime_series = pd.Series(dtype=bool)
 
-    detail_lines = ["# Backtest results — reversal checklist (BASELINE vs IMPROVED)\n"]
+    detail_lines = ["# Backtest results — reversal checklist (all variants)\n"]
     detail_lines.append(
         f"Generated {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC. "
         f"History: {HISTORY_PERIOD}, warmup {WARMUP}d, horizons {HORIZONS}d.\n"
@@ -276,7 +298,7 @@ def main():
         "Small n_triggers = not statistically meaningful, read literally.\n"
     )
 
-    pooled_by_variant = {"BASELINE": [], "IMPROVED": []}
+    pooled_by_variant = {k: [] for k in VARIANTS}
     per_ticker_json = []
 
     for ticker in tickers:
@@ -293,7 +315,7 @@ def main():
             if len(spy_regime_series) else pd.Series(True, index=df.index)
 
         detail_lines.append(f"\n## {ticker}")
-        for label, params in (("BASELINE", BASELINE_PARAMS), ("IMPROVED", IMPROVED_PARAMS)):
+        for label, params in VARIANTS.items():
             triggers, raw_days = run_variant(df, regime_by_date, params)
             pooled_by_variant[label] += triggers
             stats = pooled_stats(triggers)
@@ -309,7 +331,7 @@ def main():
 
     detail_lines.append("\n## Aggregate (all tickers' trades pooled together)")
     aggregate_json = {}
-    for label in ("BASELINE", "IMPROVED"):
+    for label in VARIANTS:
         stats = pooled_stats(pooled_by_variant[label])
         aggregate_json[label] = stats
         if stats["n_triggers"] == 0:
@@ -336,7 +358,7 @@ def main():
         f.write(text)
     with open("reports/backtest_results.json", "w", encoding="utf-8") as f:
         json.dump({"per_ticker": per_ticker_json, "aggregate": aggregate_json,
-                    "baseline_params": BASELINE_PARAMS, "improved_params": IMPROVED_PARAMS},
+                    "variants": VARIANTS},
                    f, indent=2, default=str)
     print(text)
 
