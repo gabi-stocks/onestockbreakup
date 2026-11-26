@@ -39,6 +39,7 @@ jobs:
         env:
           SCHEDULE: ${{ github.event.schedule }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
         run: python news_export.py   # runs news_digest.py and also saves reports/news_latest.json

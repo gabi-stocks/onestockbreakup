@@ -43,7 +43,9 @@ IL = ZoneInfo("Asia/Jerusalem")
 NY = ZoneInfo("America/New_York")
 UA_BROWSER = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 # SEC asks automated clients to identify themselves with a contact address.
-SEC_UA = os.environ.get("SEC_USER_AGENT") or f"onestockbreakup news digest {os.environ.get('GMAIL_USER', '')}".strip()
+# Contact address comes ONLY from the SEC_CONTACT_EMAIL secret (a dedicated
+# address) -- never from GMAIL_USER, so the personal address is not sent out.
+SEC_UA = f"onestockbreakup news digest {os.environ.get('SEC_CONTACT_EMAIL', '')}".strip()
 TRANSLATE = os.environ.get("TRANSLATE", "true").lower() == "true"
 MAX_ITEMS_PER_TICKER = int(os.environ.get("MAX_ITEMS_PER_TICKER", "4"))
 EARNINGS_AHEAD_DAYS = 7

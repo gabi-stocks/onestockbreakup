@@ -549,18 +549,18 @@ def analyze(ticker, morning=False, market_ok=True):
     he_values = {
         "1_price_structure": (f"שפל אחרון גבוה מהקודם: {yn(higher_low)}<br>"
                               f"פריצת הפסגה האחרונה ({last_swing_high:.2f}): {yn(broke_high)}"),
-        "2_moving_averages": (f"סגירה {last_close:.2f}<br>ממוצע 10: {ma10.iloc[-1]:.2f} · ממוצע 20: {ma20.iloc[-1]:.2f}<br>"
-                              f"ממוצע 10 עולה: {yn(ma10_rising)} · ממוצע 10 מעל ממוצע 50: {yn(golden_short)}"),
-        "3_macd": (f"קו מקד {macd_line.iloc[-1]:.2f} מול קו האות {sig_line.iloc[-1]:.2f} (מעליו: {yn(macd_above)})<br>"
+        "2_moving_averages": (f"סגירה {last_close:.2f}<br><bdi>MA10</bdi>: {ma10.iloc[-1]:.2f} · <bdi>MA20</bdi>: {ma20.iloc[-1]:.2f}<br>"
+                              f"MA10 עולה: {yn(ma10_rising)} · MA10 מעל MA50: {yn(golden_short)}"),
+        "3_macd": (f"MACD {macd_line.iloc[-1]:.2f} מול Signal {sig_line.iloc[-1]:.2f} (מעליו: {yn(macd_above)})<br>"
                    f"היסטוגרמה {hist.iloc[-1]:.2f}, עולה יומיים ברציפות: {yn(hist_rising)}"),
         "4_rsi": (f"ערך {rsi_now:.1f}, עולה: {yn(rsi_rising)}<br>"
-                  f"התבדרות חיובית (שפל מחיר נמוך יותר עם מדד גבוה יותר): {yn(bull_div)}"),
+                  f"<bdi>Bullish Divergence</bdi>: {yn(bull_div)}"),
         "5_volume": (f"יום עלייה: {yn(latest_up)} · מחזור עליות גובר על ירידות: {yn(up_gt_down)}<br>"
-                     f"מחזור יחסי היום: <b>{rvol_today:.2f}</b> (סף {RVOL_THRESHOLD:g}, רצפה {RVOL_SOFT_FLOOR:g})<br>"
-                     f"ממוצע 5 ימים: {rvol5:.2f} (לעיון בלבד)"),
-        "6_volume_profile": (f"נקודת השליטה: <b>{poc:.2f}</b><br>"
+                     f"RVOL היום: <b>{rvol_today:.2f}</b> (סף {RVOL_THRESHOLD:g}, רצפה {RVOL_SOFT_FLOOR:g})<br>"
+                     f"RVOL 5 ימים: {rvol5:.2f} (לעיון בלבד)"),
+        "6_volume_profile": (f"<bdi>POC</bdi>: <b>{poc:.2f}</b><br>"
                              f"סגירה {last_close:.2f}, "
-                             f"{abs(poc_gap):.1f}% {'מעליה' if last_close > poc else 'מתחתיה'}"),
+                             f"{abs(poc_gap):.1f}% {'מעל ה-POC' if last_close > poc else 'מתחת ל-POC'}"),
     }
 
     n_conf = sum(checks.values())
@@ -671,7 +671,7 @@ def early_text(r):
         return None
     e = r["early"]
     return (f"תחילת היפוך, לפני שהטבלה מאשרת. המניה ירדה בתיקון בריא ({e['pullback_pct']}% מהשיא של חצי השנה), "
-            f"נרגעה (התנודתיות התכווצה), והיום סגרה לראשונה מעל ממוצע 10 עם מומנטום מקד שמתחיל לעלות. "
+            f"נרגעה (התנודתיות התכווצה), והיום סגרה לראשונה מעל MA10 עם מומנטום MACD שמתחיל לעלות. "
             f"בגלל שזה מוקדם, רוב הפרמטרים בטבלה עדיין ייכשלו, וזה צפוי. "
             f"עצירה מוצעת: {e['stop']} (1% מתחת לשפל של 10 הימים, סיכון של {e['risk_pct']}%). "
             f"בבדיקה על 5 שנים: 62% הצלחה אחרי 20 יום, תשואה חציונית של ‎+3.3%, "
@@ -750,16 +750,16 @@ def build_he():
         "1_price_structure": ("מבנה מחיר",
             "עובר כשנוצר שפל גבוה מהקודם והמחיר שובר את הפסגה האחרונה. הסימן העיקרי להיפוך אמיתי. חובה."),
         "2_moving_averages": ("ממוצעים נעים",
-            "עובר כשהמחיר סוגר מעל ממוצע 10 ומעל ממוצע 20, וממוצע 10 מתחיל לעלות."),
-        "3_macd": ("מקד",
-            "עובר כשקו המקד מעל קו האות וההיסטוגרמה עולה יומיים ברציפות. היסטוגרמה שעולה לבדה היא רק האטה של הירידה."),
-        "4_rsi": ("עוצמה יחסית",
-            f"עובר כשהמדד מעל {RSI_THRESHOLD:g}, או כשיש התבדרות חיובית והמדד עולה. מדד נמוך לבדו אינו אות קנייה."),
-        "5_volume": ("מחזור",
-            f"עובר ביום עלייה עם מחזור יחסי מעל {RVOL_THRESHOLD:g}, או כשמחזור העליות גובר על הירידות "
-            f"והמחזור היחסי מעל {RVOL_SOFT_FLOOR:g}. מחזור יחסי = מחזור היום חלקי ממוצע 20 הימים. חובה."),
-        "6_volume_profile": ("פרופיל מחזור",
-            f"נקודת השליטה = המחיר שבו נסחר הכי הרבה מחזור ב-{poc_desc}. "
+            "עובר כשהמחיר סוגר מעל MA10 ומעל MA20, וMA10 מתחיל לעלות."),
+        "3_macd": ("MACD",
+            "עובר כשMACD מעל Signal וההיסטוגרמה עולה יומיים ברציפות. היסטוגרמה שעולה לבדה היא רק האטה של הירידה."),
+        "4_rsi": ("RSI",
+            f"עובר כשהמדד מעל {RSI_THRESHOLD:g}, או כשיש Bullish Divergence והמדד עולה. מדד נמוך לבדו אינו אות קנייה."),
+        "5_volume": ("Volume / RVOL",
+            f"עובר ביום עלייה עם RVOL מעל {RVOL_THRESHOLD:g}, או כשמחזור העליות גובר על הירידות "
+            f"והמחזור היחסי מעל {RVOL_SOFT_FLOOR:g}. RVOL = מחזור היום חלקי MA20 הימים. חובה."),
+        "6_volume_profile": ("Volume Profile",
+            f"POC = המחיר שבו נסחר הכי הרבה מחזור ב-{poc_desc}. "
             f"עובר כשהמחיר מעליה: רוב מי שסחר במניה ברווח, והרמה משמשת תמיכה."),
     }
 
@@ -768,11 +768,11 @@ def build_he():
 def build_closest_hint():
     return {
         "1_price_structure": "המבנה היורד עדיין שולט. צריך שפל גבוה יותר ושבירת הפסגה האחרונה.",
-        "2_moving_averages": "המחיר מתחת לממוצעים. צריך סגירה מעל ממוצע 10 ואז מעל ממוצע 20.",
-        "3_macd": "ההיסטוגרמה מתחילה להשתפר. לעקוב אחרי חציית קו המקד מעל קו האות.",
-        "4_rsi": f"מדד העוצמה היחסית עוד לא התאושש. צריך עלייה מעל {RSI_THRESHOLD:g}.",
-        "5_volume": f"המחזור כמעט מספיק. צריך יום עלייה עם מחזור יחסי מעל {RVOL_THRESHOLD:g}.",
-        "6_volume_profile": "המחיר מתקרב לנקודת השליטה. צריך סגירה מעליה.",
+        "2_moving_averages": "המחיר מתחת לממוצעים. צריך סגירה מעל MA10 ואז מעל MA20.",
+        "3_macd": "ההיסטוגרמה מתחילה להשתפר. לעקוב אחרי חציית MACD מעל Signal.",
+        "4_rsi": f"RSI עוד לא התאושש. צריך עלייה מעל {RSI_THRESHOLD:g}.",
+        "5_volume": f"המחזור כמעט מספיק. צריך יום עלייה עם RVOL מעל {RVOL_THRESHOLD:g}.",
+        "6_volume_profile": "המחיר מתקרב לPOC. צריך סגירה מעליה.",
     }
 
 
@@ -843,7 +843,7 @@ def render_html(r):
     if buy:
         hint = "<b>כל הפרמטרים תומכים בהיפוך.</b>"
     elif blocked_by_regime:
-        hint = "⚠️ <b>כל הפרמטרים עברו, אבל השוק הכללי חלש</b> (מדד ס&amp;פ 500 מתחת לממוצע 200 יום), ולכן הטריגר נחסם."
+        hint = "⚠️ <b>כל הפרמטרים עברו, אבל השוק הכללי חלש</b> (מדד SPY מתחת לMA200 יום), ולכן הטריגר נחסם."
     elif r.get("closest"):
         ck = r["closest"]
         pct = int(round(r["progress"][ck] * 100))
@@ -867,7 +867,7 @@ def render_html(r):
     <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:16px;background:#fff">
       <div style="background:#111;color:#fff;padding:12px">
         <div style="font-size:22px;font-weight:700">{r['ticker']}</div>
-        <div style="font-size:14px;opacity:.85;margin-top:2px">נכון ל-{r['date']} · סגירה {r['close']} · עוצמה יחסית {r['rsi']}</div>
+        <div style="font-size:14px;opacity:.85;margin-top:2px">נכון ל-{r['date']} · סגירה {r['close']} · RSI {r['rsi']}</div>
       </div>
       <div style="background:{banner_bg};color:#fff;padding:12px;font-size:17px;font-weight:700;line-height:1.45">
         {banner_txt}
@@ -882,7 +882,7 @@ def build_html(results, mode_he):
     from zoneinfo import ZoneInfo
     _il = datetime.now(ZoneInfo("Asia/Jerusalem"))
     stamp = f"{_il.day}.{_il.month}.{_il.year} {_il:%H:%M} (שעון ישראל)"
-    regime_line = ("נדרש שמדד ס&amp;פ 500 יהיה מעל ממוצע 200 יום שלו, אחרת הטריגר נחסם"
+    regime_line = ("נדרש שמדד SPY יהיה מעל MA200 יום שלו, אחרת הטריגר נחסם"
                    if REQUIRE_MARKET_REGIME else "לא נבדק מצב השוק הכללי")
     HE = build_he()
     params_legend = "".join(f"<li><b>{label}:</b> {expl}</li>" for label, expl in HE.values())
@@ -892,10 +892,10 @@ def build_html(results, mode_he):
       <ul style="margin:0;padding-right:18px">
         <li><b>סף כניסה:</b> לפחות {MIN_SIGNALS} מתוך 6 פרמטרים, וחובה שיעברו מבנה מחיר ומחזור.</li>
         {params_legend}
-        <li><b>ממוצע 5 ימים (לעיון בלבד):</b> מחזור 5 הימים האחרונים לעומת 50 הימים שלפניהם. לא משפיע על הבדיקה. מעל 1 עם מחזור יומי נמוך = כנראה רק יום שקט בתוך תנועה פעילה.</li>
+        <li><b>RVOL 5 ימים (לעיון בלבד):</b> מחזור 5 הימים האחרונים לעומת 50 הימים שלפניהם. לא משפיע על הבדיקה. מעל 1 עם מחזור יומי נמוך = כנראה רק יום שקט בתוך תנועה פעילה.</li>
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
         <li><b>תזמון כניסה:</b> <b>בזמן</b> = עד {LATE_THRESHOLD_PCT:g}% מעל השפל של {LOW_LOOKBACK} הימים האחרונים. <b>מאוחרת</b> = יותר מזה: העצירה רחוקה יותר והסיכון גבוה יותר, וכדאי לשקול כניסה בתיקון או בכמות קטנה. בבדיקה על 5 שנים, טריגרים בזמן הצליחו ב-61% אחרי 20 יום, לעומת 56% לכל הטריגרים.</li>
-        <li><b>🔵 התראה מוקדמת:</b> מזהה את תחילת ההיפוך לפני האישור המלא: ירידה חדה, תיקון של 10% עד 35% מהשיא, התכווצות תנודתיות, סגירה ראשונה מעל ממוצע 10 והיסטוגרמת מקד שעולה יומיים. בבדיקה: 62% הצלחה אחרי 20 יום, אבל העצירה נפגעה בכמחצית מהעסקאות. לכן כמות קטנה ועצירה במחיר שבכרטיס.</li>
+        <li><b>🔵 התראה מוקדמת:</b> מזהה את תחילת ההיפוך לפני האישור המלא: ירידה חדה, תיקון של 10% עד 35% מהשיא, התכווצות תנודתיות, סגירה ראשונה מעל MA10 והיסטוגרמת MACD שעולה יומיים. בבדיקה: 62% הצלחה אחרי 20 יום, אבל העצירה נפגעה בכמחצית מהעסקאות. לכן כמות קטנה ועצירה במחיר שבכרטיס.</li>
         <li><b>📅 דוח כספי:</b> פס אדום אם הדוח בתוך {EARNINGS_WARN_DAYS} ימים, בתוך חלון העסקה. "משוער" = התאריך עוד לא אושר.</li>
         <li><b>אמינות היסטורית:</b> תוצאות האות במניה עצמה בבדיקה של 5 שנים אחורה. פחות מ-5 עסקאות = לא לסמוך.</li>
         <li><b>חדשות מהותיות:</b> רק למניות עם טריגר או התראה מוקדמת. מוצגות רק ידיעות מהותיות מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים (דוחות, רכישות, רגולציה, חוזים, הנפקות, הנהלה, משפט, אנליסטים), עד {MAX_NEWS_ITEMS}, בתרגום אוטומטי.</li>
