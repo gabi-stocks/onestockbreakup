@@ -422,8 +422,18 @@ def to_hebrew(text):
             break
         except Exception as e:
             if attempt == 3 or "429" not in str(e):
-                note_fail("תרגום אוטומטי", e)
                 break
+    if not he:
+        # Fallback: MyMemory free endpoint (no key; text only is sent).
+        try:
+            url2 = "https://api.mymemory.translated.net/get?" + urllib.parse.urlencode(
+                {"q": text[:480], "langpair": "en|he"})
+            data = json.loads(http_get(url2, timeout=10).decode("utf-8"))
+            cand = (data.get("responseData") or {}).get("translatedText") or ""
+            if data.get("responseStatus") == 200 and re.search(r"[\u0590-\u05FF]", cand):
+                he = html.unescape(cand).strip()
+        except Exception as e:
+            note_fail("תרגום אוטומטי", e)
     _TR_CACHE[text] = he
     return he
 
