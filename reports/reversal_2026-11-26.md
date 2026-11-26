@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-26 07:53 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-26 07:55 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 6/73 tickers)
 
 ## IBM  (2026-11-25)  close=243.47  RSI=53.8  [today so far: open 233.51 -> 243.42 (+4.24%) | DELAYED]
@@ -6,8 +6,6 @@
   [התראה מוקדמת 🔵] תחילת היפוך, לפני שהטבלה מאשרת. המניה ירדה בתיקון בריא (-28.6% מהשיא של חצי השנה), נרגעה (התנודתיות התכווצה), והיום סגרה לראשונה מעל ממוצע 10 עם מומנטום מקד שמתחיל לעלות. בגלל שזה מוקדם, רוב הפרמטרים בטבלה עדיין ייכשלו, וזה צפוי. עצירה מוצעת: 220.51 (1% מתחת לשפל של 10 הימים, סיכון של 10.4%). בבדיקה על 5 שנים: 62% הצלחה אחרי 20 יום, תשואה חציונית של ‎+3.3%, אבל העצירה נפגעה בכמחצית מהעסקאות, ולכן מתאים לפוזיציה קטנה מהרגיל.
   [תזמון כניסה: בזמן ✅] המחיר רק 9.3% מעל השפל של 20 הימים האחרונים (222.74). ההיפוך התחיל והמניה עוד לא ברחה, ולכן פקודת העצירה קרובה. בבדיקה על 5 שנים, אותות כאלה הצליחו ב-61% מהמקרים אחרי 20 יום.
   [דוח כספי] דוח כספי הבא: 2027-01-27, בעוד 62 ימים. מחוץ לחלון העסקה של כ-20 ימי מסחר.
-  [חדשות אחרונות, מהחדש לישן]
-         - 2026-11-24 18:18 UTC What Would A Short Seller Say About IBM Stock? (Trefis)
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=249.31)
   [----] 2. Moving averages
@@ -29,8 +27,6 @@
   [תזמון כניסה: מאוחרת ⚠️] המחיר כבר 11.5% מעל השפל של 20 הימים האחרונים (32.89), ולכן הכניסה מאוחרת: פקודת העצירה רחוקה יותר והסיכון גבוה יותר. זה לא אומר שהעלייה נגמרה, אבל בבדיקה על 5 שנים אותות מאוחרים הצליחו בפחות מקרים מאותות שנכנסו קרוב לשפל. כדאי לשקול כניסה בתיקון אל 36.18 ומטה (עד 10% מעל השפל), או בכמות קטנה יותר.
   [⚠️ דוח כספי] דוח כספי בעוד 21 ימים: 2026-12-17. זה בתוך חלון העסקה של כ-20 ימי מסחר. דוח יכול להזיז את המניה יותר מכל אות טכני, לשני הכיוונים, והבדיקה ההיסטורית לא הפרידה מקרים כאלה. שקול לחכות לאחרי הדוח, או להקטין את המנה.
   [חדשות אחרונות, מהחדש לישן]
-         - 2026-11-25 21:24 UTC Walmart Quivers As Trump Doubles Down On Tariffs; Its Dow Peers Shrug (Investor's Business Daily)
-         - 2026-11-24 21:13 UTC Dow Brushes Off Tech Rout, Tariff Worries to Add 423 Points: Stock Market Today (Kiplinger)
          - 2026-11-24 21:00 UTC Dick’s Chairman Says Nike ‘Made the Right Decision’ on Jordan Even Though It Will Be ‘Painful’ in the Near-term (Footwear News)
   [----] 1. Price structure (HL+HH)
          HigherLow=False, brokeSwingHigh=False (last swing high=40.68)

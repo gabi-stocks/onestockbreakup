@@ -84,7 +84,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 45.91 -> 46.09 (+0.39%) | DELAYED]",
+    "context": "  [today so far: open 45.46 -> 46.09 (+1.40%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -826,20 +826,7 @@
       "days": 62,
       "estimated": false
     },
-    "headlines": [
-      {
-        "title_he": "What Would A Short Seller Say About IBM Stock?",
-        "cat_he": "\u05de\u05e9\u05e4\u05d8 \u05d5\u05d7\u05e7\u05d9\u05e8\u05d5\u05ea",
-        "prio": 7,
-        "date_il": "24.11.2026 20:18",
-        "impact": "\u05e9\u05dc\u05d9\u05dc\u05d9\u05ea",
-        "forward": false,
-        "n_sources": 1,
-        "title": "What Would A Short Seller Say About IBM Stock?",
-        "publisher": "Trefis",
-        "date": "2026-11-24 18:18 UTC"
-      }
-    ]
+    "headlines": []
   },
   {
     "ticker": "MRVL",
@@ -1151,30 +1138,6 @@
       "estimated": false
     },
     "headlines": [
-      {
-        "title_he": "Walmart Quivers As Trump Doubles Down On Tariffs; Its Dow Peers Shrug",
-        "cat_he": "\u05e8\u05d2\u05d5\u05dc\u05e6\u05d9\u05d4",
-        "prio": 9,
-        "date_il": "25.11.2026 23:24",
-        "impact": "\u05dc\u05d0 \u05d1\u05e8\u05d5\u05e8\u05d4",
-        "forward": false,
-        "n_sources": 1,
-        "title": "Walmart Quivers As Trump Doubles Down On Tariffs; Its Dow Peers Shrug",
-        "publisher": "Investor's Business Daily",
-        "date": "2026-11-25 21:24 UTC"
-      },
-      {
-        "title_he": "Dow Brushes Off Tech Rout, Tariff Worries to Add 423 Points: Stock Market Today",
-        "cat_he": "\u05e8\u05d2\u05d5\u05dc\u05e6\u05d9\u05d4",
-        "prio": 9,
-        "date_il": "24.11.2026 23:13",
-        "impact": "\u05dc\u05d0 \u05d1\u05e8\u05d5\u05e8\u05d4",
-        "forward": false,
-        "n_sources": 1,
-        "title": "Dow Brushes Off Tech Rout, Tariff Worries to Add 423 Points: Stock Market Today",
-        "publisher": "Kiplinger",
-        "date": "2026-11-24 21:13 UTC"
-      },
       {
         "title_he": "Dick\u2019s Chairman Says Nike \u2018Made the Right Decision\u2019 on Jordan Even Though It Will Be \u2018Painful\u2019 in the Near-term",
         "cat_he": "\u05d4\u05e0\u05d4\u05dc\u05d4",
@@ -1970,7 +1933,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 265.25 -> 272.95 (+2.90%) | DELAYED]",
+    "context": "  [today so far: open 265.25 -> 272.98 (+2.91%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2274,7 +2237,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 99.00 -> 106.77 (+7.85%) | DELAYED]",
+    "context": "  [today so far: open 98.97 -> 106.75 (+7.86%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2502,7 +2465,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 144.02 -> 149.29 (+3.66%) | DELAYED]",
+    "context": "  [today so far: open 144.02 -> 149.27 (+3.65%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -2730,7 +2693,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 118.46 -> 127.32 (+7.48%) | DELAYED]",
+    "context": "  [today so far: open 118.50 -> 127.32 (+7.44%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -4014,7 +3977,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 338.96 -> 356.19 (+5.08%) | DELAYED]",
+    "context": "  [today so far: open 338.96 -> 356.18 (+5.08%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": true,
@@ -4166,7 +4129,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 114.46 -> 121.54 (+6.19%) | DELAYED]",
+    "context": "  [today so far: open 114.44 -> 121.54 (+6.20%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
@@ -5155,7 +5118,7 @@
     "mandatory_met": false,
     "market_regime_ok": false,
     "BUY_TRIGGER": false,
-    "context": "  [today so far: open 286.62 -> 300.49 (+4.84%) | DELAYED]",
+    "context": "  [today so far: open 286.62 -> 300.55 (+4.86%) | DELAYED]",
     "checks": {
       "1_price_structure": false,
       "2_moving_averages": false,
