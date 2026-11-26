@@ -463,7 +463,14 @@ def analyze(ticker, morning=False, market_ok=True):
         (latest_up and rvol_today > RVOL_THRESHOLD)
         or (latest_up_or_flat and up_gt_down and rvol_today > RVOL_SOFT_FLOOR)
     )
-    detail["5_volume"] = f"day up={latest_up}, RVOL={rvol_today:.2f}, up>downVol={up_gt_down}"
+    # Info only (does NOT affect the check): 5-day RVOL = avg volume of the last
+    # 5 days vs the 50 days before them. Shows whether a weak single-day RVOL is
+    # just one quiet day inside a steadily active move. Backtest (Nov 2026)
+    # showed using it as the gate didn't improve results, so it stays display-only.
+    base5 = vol.shift(5).rolling(50).mean().iloc[-1]
+    rvol5 = float(vol.tail(5).mean() / base5) if base5 and not np.isnan(base5) else float("nan")
+    detail["5_volume"] = (f"day up={latest_up}, RVOL={rvol_today:.2f}, up>downVol={up_gt_down}, "
+                          f"RVOL5d={rvol5:.2f} (info only)")
 
     # 6) Volume Profile POC (rolling window if POC_WINDOW is set, else full history)
     poc_close = close.tail(POC_WINDOW) if POC_WINDOW else close
@@ -820,6 +827,7 @@ def build_html(results, mode_he):
         <li><b>סף כניסה:</b> לפחות {MIN_SIGNALS} מתוך 6 פרמטרים, וחובה שיעברו מבנה מחיר (#1) ונפח (#5).</li>
         <li><b>סף RSI:</b> {RSI_THRESHOLD:g} (ולא 50 — הועלה כדי לצמצם אותות חלשים, ראו backtest).</li>
         <li><b>סף RVOL:</b> {RVOL_THRESHOLD:g} ליום היפוך בנפח גבוה; רצפת פעילות {RVOL_SOFT_FLOOR:g} לענף החלופי.</li>
+        <li><b>RVOL5d (לעיון בלבד):</b> ממוצע המחזור של 5 הימים האחרונים לעומת 50 הימים שלפניהם. לא משפיע על הבדיקה — עוזר לראות אם מחזור נמוך ביום בודד הוא רק יום שקט בתוך תנועה פעילה.</li>
         <li><b>חלון פרופיל נפח (POC):</b> {poc_desc}.</li>
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
         <li><b>תזמון כניסה (בזמן / מאוחרת):</b> כמה המחיר כבר עלה מהשפל של {LOW_LOOKBACK} הימים האחרונים.
