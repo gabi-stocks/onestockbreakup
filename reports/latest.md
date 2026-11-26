@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-25 23:18 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-26 00:49 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 2/73 tickers)
 
 ## CHKP  (2026-11-24)  close=159.34  RSI=68.8  [today so far: open 158.22 -> 163.83 (+3.55%) | DELAYED]
