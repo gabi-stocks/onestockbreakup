@@ -222,6 +222,55 @@ def fetch_recent_headlines(ticker, max_items=MAX_NEWS_ITEMS, lookback_days=NEWS_
     return items[:max_items]
 
 
+def material_news(ticker, max_items=MAX_NEWS_ITEMS):
+    """Only material news, in Hebrew, no links. Reuses news_digest.py's keyword
+    rules (earnings, M&A, regulation, contracts, capital, management, legal,
+    analysts) so both emails judge materiality the same way. Same-story items
+    from several publishers are merged and counted as corroboration."""
+    try:
+        import news_digest as nd  # lazy: news_digest imports this module
+    except Exception as e:
+        print(f"WARNING: news_digest import failed ({e}); no news shown.")
+        return []
+    raw = fetch_recent_headlines(ticker, max_items=40)
+    items = []
+    for h in raw:
+        cat = nd.classify(h["title"])
+        if not cat:
+            continue
+        try:
+            dt = datetime.strptime(h["date"], "%Y-%m-%d %H:%M UTC").replace(tzinfo=timezone.utc)
+        except Exception:
+            continue  # undated items can't be judged for relevance -> skip
+        items.append({"title": h["title"], "publisher": h["publisher"], "link": h["link"],
+                      "dt": dt, "cat": cat})
+    out = []
+    for c in nd.cluster(items):
+        f = c["first"]
+        text = " ".join(i["title"] for i in c["items"])
+        out.append({
+            "title_he": nd.to_hebrew(f["title"]) or f["title"],
+            "cat_he": nd.CAT[c["cat"]][1],
+            "prio": nd.CAT[c["cat"]][2],
+            "date_il": nd.fmt_il(f["dt"]),
+            "_dt": f["dt"],
+            "impact": nd.impact(text),
+            "forward": bool(nd.FORWARD.search(text)),
+            "n_sources": len(c["publishers"]),
+            "title": f["title"], "publisher": f["publisher"], "date": h_date(f["dt"]),
+        })
+    out.sort(key=lambda x: (x["prio"], x["_dt"]), reverse=True)
+    out = out[:max_items]
+    out.sort(key=lambda x: x["_dt"], reverse=True)
+    for o in out:
+        del o["_dt"]
+    return out
+
+
+def h_date(dt):
+    return dt.strftime("%Y-%m-%d %H:%M UTC")
+
+
 def _as_date(x):
     """Best-effort conversion of a date / datetime / Timestamp / string to a date."""
     try:
@@ -315,24 +364,24 @@ def reliability_label(row):
     Always names the actual n and win rate behind the label -- never just a bare
     tier -- so the reader can judge the label's own reliability too."""
     if not row or not row.get("n_triggers"):
-        return ("אין נתוני בקטסט",
-                "לא נמצאה עבור המניה הזו היסטוריית בקטסט (תריץ את workflow ה-Backtest כדי לקבל נתונים).")
+        return ("אין נתונים",
+                "לא נמצאו נתוני בדיקה היסטורית למניה הזו.")
     n = row["n_triggers"]
     win20 = row.get("winrate_20d_%")
     avg20 = row.get("avg_fwd_20d_%")
     if n < 5:
         return (f"מדגם קטן מדי ({n} עסקאות)",
-                f"רק {n} טריגרים היסטוריים נמצאו בבקטסט — מעט מדי כדי לשפוט אמינות. התייחס לטריגר בזהירות כפולה.")
+                f"רק {n} טריגרים היסטוריים, מעט מדי כדי לשפוט. להתייחס בזהירות כפולה.")
     if win20 is None:
-        return (f"נתונים חלקיים ({n} עסקאות)", "לא היה מספיק דאטה קדימה כדי לחשב win rate.")
+        return (f"נתונים חלקיים ({n} עסקאות)", "לא היו מספיק נתונים כדי לחשב אחוז הצלחה.")
     if win20 >= 55 and n >= 10:
         tier = "אמינות גבוהה יחסית"
     elif win20 >= 50:
         tier = "אמינות בינונית"
     else:
         tier = "אמינות נמוכה"
-    detail = (f"בבקטסט (5 שנים אחורה): {n} עסקאות בלתי-תלויות, "
-              f"win rate ל-20 יום={win20}%, תשואה ממוצעת ל-20 יום={avg20}%.")
+    detail = (f"ב-5 שנים אחורה: {n} עסקאות, הצלחה אחרי 20 יום {win20}%, "
+              f"תשואה ממוצעת {avg20}%.")
     return (tier, detail)
 
 
@@ -479,6 +528,26 @@ def analyze(ticker, morning=False, market_ok=True):
     checks["6_volume_profile"] = bool(last_close > poc)
     detail["6_volume_profile"] = f"close={last_close:.2f} vs POC={poc:.2f} (above={last_close > poc})"
 
+    # Plain-Hebrew values for the email (the English `detail` stays for the .md report)
+    yn = lambda b: "כן" if b else "לא"
+    poc_gap = (last_close / poc - 1) * 100 if poc else 0.0
+    he_values = {
+        "1_price_structure": (f"שפל אחרון גבוה מהקודם: {yn(higher_low)}<br>"
+                              f"פריצת הפסגה האחרונה ({last_swing_high:.2f}): {yn(broke_high)}"),
+        "2_moving_averages": (f"סגירה {last_close:.2f}<br>ממוצע 10: {ma10.iloc[-1]:.2f} · ממוצע 20: {ma20.iloc[-1]:.2f}<br>"
+                              f"ממוצע 10 עולה: {yn(ma10_rising)} · ממוצע 10 מעל ממוצע 50: {yn(golden_short)}"),
+        "3_macd": (f"קו מקד {macd_line.iloc[-1]:.2f} מול קו האות {sig_line.iloc[-1]:.2f} (מעליו: {yn(macd_above)})<br>"
+                   f"היסטוגרמה {hist.iloc[-1]:.2f}, עולה יומיים ברציפות: {yn(hist_rising)}"),
+        "4_rsi": (f"ערך {rsi_now:.1f}, עולה: {yn(rsi_rising)}<br>"
+                  f"התבדרות חיובית (שפל מחיר נמוך יותר עם מדד גבוה יותר): {yn(bull_div)}"),
+        "5_volume": (f"יום עלייה: {yn(latest_up)} · מחזור עליות גובר על ירידות: {yn(up_gt_down)}<br>"
+                     f"מחזור יחסי היום: <b>{rvol_today:.2f}</b> (סף {RVOL_THRESHOLD:g}, רצפה {RVOL_SOFT_FLOOR:g})<br>"
+                     f"ממוצע 5 ימים: {rvol5:.2f} (לעיון בלבד)"),
+        "6_volume_profile": (f"נקודת השליטה: <b>{poc:.2f}</b><br>"
+                             f"סגירה {last_close:.2f}, "
+                             f"{abs(poc_gap):.1f}% {'מעליה' if last_close > poc else 'מתחתיה'}"),
+    }
+
     n_conf = sum(checks.values())
     mandatory = checks["1_price_structure"] and checks["5_volume"]
     buy = n_conf >= MIN_SIGNALS and mandatory and market_ok
@@ -524,6 +593,8 @@ def analyze(ticker, morning=False, market_ok=True):
         "context": ctx,
         "checks": checks,
         "detail": detail,
+        "he_values": he_values,
+        "poc": round(poc, 2),
         "progress": progress,
         "closest": closest,
         "low20": round(low20, 2),
@@ -655,216 +726,178 @@ def render(r):
     return "\n".join(lines)
 
 
-# ---- Hebrew labels + explanations for the HTML email table ----
-# Built dynamically (not a static dict) so the explanation text always matches
-# the thresholds actually in effect (RSI_THRESHOLD etc.), even if you tune them
-# via env vars later without touching this file.
+# ---- Hebrew labels + explanations for the HTML email ----
+# Built dynamically so the explanation text always matches the thresholds in
+# effect (RSI_THRESHOLD etc.), even if tuned via env vars.
 def build_he():
     poc_desc = f"{POC_WINDOW} הימים האחרונים" if POC_WINDOW else "כל ההיסטוריה הזמינה"
     return {
-        "1_price_structure": ("מבנה מחיר (שפל/פסגה עולים)",
-            "עובר רק כשנוצר שפל גבוה מהקודם ונשברת פסגה קודמת. זה הסימן היחיד להיפוך אמיתי — חובה."),
-        "2_moving_averages": ("ממוצעים נעים 10/20/50",
-            "עובר כשהמחיר סוגר מעל MA10 ו-MA20 וה-MA10 מתחיל לעלות (ביטול המבנה היורד)."),
-        "3_macd": ("MACD (12,26,9)",
-            "עובר כש-MACD חוצה מעל הסיגנל וההיסטוגרמה עולה. היסטוגרמה שעולה לבדה = האטה בלבד, לא אישור."),
-        "4_rsi": ("RSI (14)",
-            f"עובר כש-RSI מעל {RSI_THRESHOLD:g} או שיש דיברגנס שורי. RSI נמוך (oversold) לבדו אינו אות קנייה."),
-        "5_volume": ("נפח / RVOL",
-            f"עובר ביום היפוך במחזור גבוה (RVOL מעל {RVOL_THRESHOLD:g}), או כשמחזור העליות גובר על הירידות "
-            f"וה-RVOL מעל {RVOL_SOFT_FLOOR:g} (רצפת פעילות מינימלית — שבוע שקט לא מספיק). חובה."),
-        "6_volume_profile": ("פרופיל נפח (POC)",
-            f"עובר כשהמחיר מחזיק מעל אזור הנפח הכבד, מחושב על {poc_desc} — כלומר יש תמיכה טרייה מתחת לרגליים."),
+        "1_price_structure": ("מבנה מחיר",
+            "עובר כשנוצר שפל גבוה מהקודם והמחיר שובר את הפסגה האחרונה. הסימן העיקרי להיפוך אמיתי. חובה."),
+        "2_moving_averages": ("ממוצעים נעים",
+            "עובר כשהמחיר סוגר מעל ממוצע 10 ומעל ממוצע 20, וממוצע 10 מתחיל לעלות."),
+        "3_macd": ("מקד",
+            "עובר כשקו המקד מעל קו האות וההיסטוגרמה עולה יומיים ברציפות. היסטוגרמה שעולה לבדה היא רק האטה של הירידה."),
+        "4_rsi": ("עוצמה יחסית",
+            f"עובר כשהמדד מעל {RSI_THRESHOLD:g}, או כשיש התבדרות חיובית והמדד עולה. מדד נמוך לבדו אינו אות קנייה."),
+        "5_volume": ("מחזור",
+            f"עובר ביום עלייה עם מחזור יחסי מעל {RVOL_THRESHOLD:g}, או כשמחזור העליות גובר על הירידות "
+            f"והמחזור היחסי מעל {RVOL_SOFT_FLOOR:g}. מחזור יחסי = מחזור היום חלקי ממוצע 20 הימים. חובה."),
+        "6_volume_profile": ("פרופיל מחזור",
+            f"נקודת השליטה = המחיר שבו נסחר הכי הרבה מחזור ב-{poc_desc}. "
+            f"עובר כשהמחיר מעליה: רוב מי שסחר במניה ברווח, והרמה משמשת תמיכה."),
     }
+
 
 # Short "what to watch next" hint for the closest-to-passing parameter
 def build_closest_hint():
     return {
-        "1_price_structure": "המבנה היורד עדיין שולט — צריך שפל גבוה יותר ושבירת פסגה קודמת.",
-        "2_moving_averages": "המחיר מתחת לממוצעים — צריך סגירה מעל MA10 ואז MA20.",
-        "3_macd": "ההיסטוגרמה מתחילה להאט — האזהרה המוקדמת. עקוב אחר חציית MACD מעל הסיגנל.",
-        "4_rsi": f"ה-RSI עוד לא מתאושש — צריך עלייה מעל {RSI_THRESHOLD:g} או דיברגנס שורי.",
-        "5_volume": f"הנפח כמעט מספיק — צריך יום עלייה במחזור גבוה (RVOL מעל {RVOL_THRESHOLD:g}).",
-        "6_volume_profile": "המחיר מתקרב לאזור הנפח הכבד — צריך סגירה מעליו כדי לקבל תמיכה.",
+        "1_price_structure": "המבנה היורד עדיין שולט. צריך שפל גבוה יותר ושבירת הפסגה האחרונה.",
+        "2_moving_averages": "המחיר מתחת לממוצעים. צריך סגירה מעל ממוצע 10 ואז מעל ממוצע 20.",
+        "3_macd": "ההיסטוגרמה מתחילה להשתפר. לעקוב אחרי חציית קו המקד מעל קו האות.",
+        "4_rsi": f"מדד העוצמה היחסית עוד לא התאושש. צריך עלייה מעל {RSI_THRESHOLD:g}.",
+        "5_volume": f"המחזור כמעט מספיק. צריך יום עלייה עם מחזור יחסי מעל {RVOL_THRESHOLD:g}.",
+        "6_volume_profile": "המחיר מתקרב לנקודת השליטה. צריך סגירה מעליה.",
     }
+
+
+# Mobile-first styles (≈6.3" phone, ~390px wide). Inline only: Gmail drops <style>.
+_STRIP = "padding:10px 12px;font-size:15px;line-height:1.55;border-bottom:1px solid {b};background:{bg};color:{c}"
+
+
+def _strip(bg, border, color, inner):
+    return f'<div style="{_STRIP.format(b=border, bg=bg, c=color)}">{inner}</div>'
 
 
 def render_html(r):
     if "error" in r:
-        return f"<h3>{r['ticker']}</h3><p style='color:#b00'>שגיאה: {r['error']}</p>"
+        return f"<div style='font-size:15px;margin:10px 0'><b>{r['ticker']}</b>: <span style='color:#b00'>שגיאה: {r['error']}</span></div>"
 
     HE = build_he()
-    rows = ""
-    for k, (label, expl) in HE.items():
-        ok = r["checks"][k]
-        pill_bg = "#0a7d33" if ok else "#b02a2a"
-        pill_txt = "עבר ✓" if ok else "נכשל ✗"
-        rows += (
-            "<tr>"
-            f"<td style='padding:10px;border-bottom:1px solid #eee;font-weight:600'>{label}</td>"
-            f"<td style='padding:10px;border-bottom:1px solid #eee;text-align:center;white-space:nowrap'>"
-            f"<span style='background:{pill_bg};color:#fff;border-radius:12px;padding:3px 10px;font-size:13px'>{pill_txt}</span></td>"
-            f"<td style='padding:10px;border-bottom:1px solid #eee;direction:ltr;text-align:left;"
-            f"font-family:monospace;font-size:12px;color:#333'>{r['detail'][k]}</td>"
-            f"<td style='padding:10px;border-bottom:1px solid #eee;color:#444;font-size:13px'>{expl}</td>"
-            "</tr>"
-        )
-
     buy = r["BUY_TRIGGER"]
     late = r.get("timing") == "late"
     if buy and late:
         banner_bg = "#c76a00"
-        banner_txt = (f"טריגר כניסה, אבל מאוחר ({r['confirmed']}/6) — לא לרדוף, "
+        banner_txt = (f"טריגר כניסה, אבל מאוחר ({r['confirmed']}/6). לא לרדוף: "
                       f"לחכות לתיקון אל {r['max_entry']} ומטה")
     elif buy:
         banner_bg = "#0a7d33"
-        banner_txt = f"טריגר כניסה בזמן — ההיפוך אושר ({r['confirmed']}/6)"
+        banner_txt = f"טריגר כניסה בזמן: ההיפוך אושר ({r['confirmed']}/6)"
     elif r.get("early_alert"):
         banner_bg = "#1f4fb8"
-        banner_txt = (f"התראה מוקדמת — ההיפוך מתחיל, עוד לא מאושר. "
+        banner_txt = (f"התראה מוקדמת: ההיפוך מתחיל, עוד לא מאושר. "
                       f"עצירה מוצעת {r['early']['stop']} (סיכון {r['early']['risk_pct']}%)")
     else:
         banner_bg = "#b02a2a"
-        banner_txt = f"אין כניסה — להמתין לאישור ({r['confirmed']}/6 בלבד)"
+        banner_txt = f"אין כניסה: להמתין לאישור ({r['confirmed']}/6 בלבד)"
 
-    timing_html = ""
-    tt = timing_text(r)
-    if tt:
-        t_bg, t_border, t_color = (("#fff1e0", "#f3d3a8", "#7a3e00") if late
-                                   else ("#e8f6ec", "#c6e8d0", "#0a5a26"))
-        timing_html = f"""
-      <div style="background:{t_bg};border-bottom:1px solid {t_border};padding:10px 16px;font-size:13px;color:{t_color}">
-        ⏱️ <b>תזמון כניסה: {tt[0]}</b> — {tt[1]}
-      </div>"""
+    strips = ""
     et = early_text(r)
     if et:
-        timing_html = f"""
-      <div style="background:#e8efff;border-bottom:1px solid #c5d4f7;padding:10px 16px;font-size:13px;color:#16357a">
-        🔵 <b>התראה מוקדמת:</b> {et}
-      </div>""" + timing_html
+        strips += _strip("#e8efff", "#c5d4f7", "#16357a", f"🔵 <b>התראה מוקדמת:</b> {et}")
+    tt = timing_text(r)
+    if tt:
+        colors = ("#fff1e0", "#f3d3a8", "#7a3e00") if late else ("#e8f6ec", "#c6e8d0", "#0a5a26")
+        strips += _strip(*colors, f"⏱️ <b>תזמון כניסה: {tt[0]}.</b> {tt[1]}")
     ert = earnings_text(r)
     if ert:
         warn, line = ert
-        e_bg, e_border, e_color, icon = (("#fdecea", "#f5c2bd", "#8a1c12", "⚠️") if warn
-                                         else ("#f4f4f4", "#e2e2e2", "#444", "📅"))
-        timing_html += f"""
-      <div style="background:{e_bg};border-bottom:1px solid {e_border};padding:10px 16px;font-size:13px;color:{e_color}">
-        {icon} {line}
-      </div>"""
+        colors = ("#fdecea", "#f5c2bd", "#8a1c12") if warn else ("#f4f4f4", "#e2e2e2", "#444")
+        strips += _strip(*colors, f"{'⚠️' if warn else '📅'} {line}")
+    tier, rel_detail = reliability_label(r.get("reliability"))
+    strips += _strip("#eef2ff", "#dde3fb", "#333", f"📊 <b>אמינות היסטורית: {tier}.</b> {rel_detail}")
 
-    # "closest to passing" strip
+    # Material news only, Hebrew, no links
+    if r.get("headlines"):
+        items = ""
+        for h in r["headlines"]:
+            imp_color = {"חיובית": "#1a7f37", "שלילית": "#c62828"}.get(h["impact"], "#555")
+            verify = (f"<span style='color:#1a7f37'>אומת ב-{h['n_sources']} מקורות</span>" if h["n_sources"] > 1
+                      else "<span style='color:#b54708'>מקור יחיד, לא אומת</span>")
+            fwd = ("<br><span style='color:#b54708'>⏳ צופה פני עתיד, הסטטוס עשוי להשתנות</span>"
+                   if h["forward"] else "")
+            items += (f"<div style='margin-top:8px;padding:8px 10px;background:#fff;border-right:3px solid #9fd09f'>"
+                      f"<span style='font-size:13px;background:#e3f2e3;border-radius:4px;padding:1px 6px'>{h['cat_he']}</span> "
+                      f"<b>{h['title_he']}</b>"
+                      f"<div style='font-size:13px;color:#555;margin-top:3px'>📅 {h['date_il']} · "
+                      f"השפעה: <b style='color:{imp_color}'>{h['impact']}</b> · {verify}{fwd}</div></div>")
+        strips += _strip("#f0f9f0", "#dceedc", "#1a4d1a", f"📰 <b>חדשות מהותיות</b>{items}")
+
+    # closest-to-passing hint
     blocked_by_regime = (not r.get("market_regime_ok", True)) and r["mandatory_met"] and r["confirmed"] >= MIN_SIGNALS
     if buy:
-        strip = "<b>כל הפרמטרים תומכים בהיפוך.</b>"
+        hint = "<b>כל הפרמטרים תומכים בהיפוך.</b>"
     elif blocked_by_regime:
-        strip = "⚠️ <b>כל הפרמטרים עברו, אך החסימה היא מצב השוק</b> — מדד ה-SPY מתחת לממוצע 200 יום, אז הטריגר נחסם."
+        hint = "⚠️ <b>כל הפרמטרים עברו, אבל השוק הכללי חלש</b> (מדד ס&amp;פ 500 מתחת לממוצע 200 יום), ולכן הטריגר נחסם."
     elif r.get("closest"):
         ck = r["closest"]
         pct = int(round(r["progress"][ck] * 100))
-        strip = (f"🔎 <b>הכי קרוב לעבור:</b> {HE[ck][0]} "
-                 f"(~{pct}%) — {build_closest_hint()[ck]}")
+        hint = f"🔎 <b>הכי קרוב לעבור: {HE[ck][0]}</b> (כ-{pct}%). {build_closest_hint()[ck]}"
     else:
-        strip = "אף פרמטר עדיין לא קרוב — הטרנד היורד חזק."
+        hint = "אף פרמטר עדיין לא קרוב לעבור. המגמה היורדת חזקה."
+    strips += _strip("#fff7e6", "#f1e3c4", "#7a5900", hint)
 
-    tier, rel_detail = reliability_label(r.get("reliability"))
-    news_html = ""
-    if r.get("headlines"):
-        items_html = "".join(
-            f"<li style='margin-bottom:4px'>"
-            f"<span style='color:#888;font-size:11px'>{h['date']}</span> "
-            + (f"<a href='{h['link']}' style='color:#1a4d1a;text-decoration:underline'>{h['title']}</a>"
-               if h["link"] else h["title"])
-            + f" <span style='color:#888;font-size:11px'>({h['publisher']})</span></li>"
-            for h in r["headlines"]
-        )
-        news_html = f"""
-      <div style="background:#f0f9f0;border-bottom:1px solid #dceedc;padding:8px 16px;font-size:12px;color:#1a4d1a">
-        📰 <b>חדשות אחרונות (Yahoo Finance, מהחדש לישן):</b>
-        <ul style="margin:4px 0 0;padding-right:18px">{items_html}</ul>
-      </div>"""
+    params = ""
+    for k, (label, _expl) in HE.items():
+        ok = r["checks"][k]
+        pill = (f"<span style='display:inline-block;min-width:26px;text-align:center;border-radius:12px;"
+                f"padding:2px 8px;font-size:14px;color:#fff;background:{'#0a7d33' if ok else '#b02a2a'}'>"
+                f"{'✓' if ok else '✗'}</span>")
+        params += (f"<div style='padding:10px 12px;border-bottom:1px solid #eee'>"
+                   f"<div style='font-size:16px;font-weight:700;color:#111'>{pill}&nbsp; {label}</div>"
+                   f"<div style='font-size:14px;color:#444;margin-top:4px;line-height:1.6'>{r['he_values'][k]}</div>"
+                   f"</div>")
 
     return f"""
-    <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:18px">
-      <div style="background:#111;color:#fff;padding:14px 16px">
-        <span style="font-size:20px;font-weight:700">{r['ticker']}</span>
-        <span style="opacity:.8;font-size:13px">&nbsp;·&nbsp;נכון ל-{r['date']}</span>
-        <span style="float:left;direction:ltr;font-family:monospace">close {r['close']} | RSI {r['rsi']}</span>
+    <div style="border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:16px;background:#fff">
+      <div style="background:#111;color:#fff;padding:12px">
+        <div style="font-size:22px;font-weight:700">{r['ticker']}</div>
+        <div style="font-size:14px;opacity:.85;margin-top:2px">נכון ל-{r['date']} · סגירה {r['close']} · עוצמה יחסית {r['rsi']}</div>
       </div>
-      <div style="background:#eef2ff;border-bottom:1px solid #dde3fb;padding:8px 16px;font-size:12px;color:#333">
-        📊 <b>אמינות היסטורית של האות במניה זו:</b> {tier}. {rel_detail}
-      </div>{timing_html}{news_html}
-      <div style="background:#fff7e6;border-bottom:1px solid #eee;padding:10px 16px;font-size:13px;color:#7a5900">
-        {strip}
-      </div>
-      <table style="border-collapse:collapse;width:100%;background:#fff">
-        <thead>
-          <tr style="background:#f4f4f4;font-size:13px;color:#555">
-            <th style="padding:8px 10px;text-align:right">פרמטר</th>
-            <th style="padding:8px 10px;text-align:center">סטטוס</th>
-            <th style="padding:8px 10px;text-align:right">ערכים בפועל</th>
-            <th style="padding:8px 10px;text-align:right">מה זה אומר</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-      <div style="background:{banner_bg};color:#fff;padding:12px 16px;font-size:16px;font-weight:700;text-align:center">
+      <div style="background:{banner_bg};color:#fff;padding:12px;font-size:17px;font-weight:700;line-height:1.45">
         {banner_txt}
-      </div>
+      </div>{strips}
+      {params}
     </div>
     """
 
 
 def build_html(results, mode_he):
     body = "".join(render_html(r) for r in results)
-    stamp = f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC"
-    regime_line = ("נדרש: מדד SPY מעל ממוצע 200 יום שלו (אחרת הטריגר נחסם)"
-                    if REQUIRE_MARKET_REGIME else "לא נבדק מצב שוק כללי")
-    poc_desc = f"{POC_WINDOW} הימים האחרונים" if POC_WINDOW else "כל ההיסטוריה הזמינה"
+    from zoneinfo import ZoneInfo
+    _il = datetime.now(ZoneInfo("Asia/Jerusalem"))
+    stamp = f"{_il.day}.{_il.month}.{_il.year} {_il:%H:%M} (שעון ישראל)"
+    regime_line = ("נדרש שמדד ס&amp;פ 500 יהיה מעל ממוצע 200 יום שלו, אחרת הטריגר נחסם"
+                   if REQUIRE_MARKET_REGIME else "לא נבדק מצב השוק הכללי")
+    HE = build_he()
+    params_legend = "".join(f"<li><b>{label}:</b> {expl}</li>" for label, expl in HE.values())
     legend = f"""
-    <div style="border:1px solid #dde3fb;background:#f7f9ff;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#333">
-      <b>מקרא ההגדרות של הריצה הזו</b> (לחישוב מדויק ראה detail בכל שורה למטה):
-      <ul style="margin:8px 0 0;padding-right:18px;line-height:1.7">
-        <li><b>סף כניסה:</b> לפחות {MIN_SIGNALS} מתוך 6 פרמטרים, וחובה שיעברו מבנה מחיר (#1) ונפח (#5).</li>
-        <li><b>סף RSI:</b> {RSI_THRESHOLD:g} (ולא 50 — הועלה כדי לצמצם אותות חלשים, ראו backtest).</li>
-        <li><b>סף RVOL:</b> {RVOL_THRESHOLD:g} ליום היפוך בנפח גבוה; רצפת פעילות {RVOL_SOFT_FLOOR:g} לענף החלופי.</li>
-        <li><b>RVOL5d (לעיון בלבד):</b> ממוצע המחזור של 5 הימים האחרונים לעומת 50 הימים שלפניהם. לא משפיע על הבדיקה — עוזר לראות אם מחזור נמוך ביום בודד הוא רק יום שקט בתוך תנועה פעילה.</li>
-        <li><b>חלון פרופיל נפח (POC):</b> {poc_desc}.</li>
+    <div style="border:1px solid #dde3fb;background:#f7f9ff;border-radius:10px;padding:12px;margin-top:8px;font-size:14px;line-height:1.65;color:#333">
+      <div style="font-size:16px;font-weight:700;margin-bottom:6px">מקרא</div>
+      <ul style="margin:0;padding-right:18px">
+        <li><b>סף כניסה:</b> לפחות {MIN_SIGNALS} מתוך 6 פרמטרים, וחובה שיעברו מבנה מחיר ומחזור.</li>
+        {params_legend}
+        <li><b>ממוצע 5 ימים (לעיון בלבד):</b> מחזור 5 הימים האחרונים לעומת 50 הימים שלפניהם. לא משפיע על הבדיקה. מעל 1 עם מחזור יומי נמוך = כנראה רק יום שקט בתוך תנועה פעילה.</li>
         <li><b>מצב שוק כללי:</b> {regime_line}.</li>
-        <li><b>תזמון כניסה (בזמן / מאוחרת):</b> כמה המחיר כבר עלה מהשפל של {LOW_LOOKBACK} הימים האחרונים.
-          <b>בזמן</b> = עד {LATE_THRESHOLD_PCT:g}% מעל השפל: ההיפוך אושר והמניה עוד לא ברחה.
-          <b>מאוחרת</b> = יותר מזה: הכניסה מאוחרת, פקודת העצירה רחוקה יותר והסיכון גבוה יותר. זה לא אומר שהעלייה נגמרה. כדאי לשקול כניסה בתיקון אל המחיר שמצוין בכרטיס, או בכמות קטנה יותר.
-          למה: בבדיקה על 5 שנים ו-70 מניות, הטריגר בדרך כלל מגיע כ-16% מעל השפל. טריגרים "בזמן" הצליחו
-          ב-61% מהמקרים אחרי 20 יום (לעומת 56% לכל הטריגרים), ופקודת העצירה הייתה רחוקה פי שניים פחות
-          (כ-6.5% במקום כ-12%). המחיר: פחות אותות, ומפספסים חלק מהמניות שממשיכות לטפס.</li>
-        <li><b>🔵 התראה מוקדמת:</b> מזהה את <b>תחילת</b> ההיפוך, עוד לפני שטבלת ששת הפרמטרים מאשרת אותו.
-          היא קופצת רק כשחמישה תנאים מתקיימים יחד: ירידה חדה בעשרת הימים האחרונים; תיקון בריא של 10% עד 35%
-          מהשיא של חצי השנה (לא קריסה); התכווצות תנודתיות (המניה "נרגעה"); סגירה ראשונה מעל ממוצע 10;
-          והיסטוגרמת מקד שעולה יומיים. בבדיקה על 5 שנים ו-68 מניות: 313 עסקאות, 62% הצלחה אחרי 20 יום,
-          תשואה חציונית של ‎+3.3%, כניסה בממוצע כ-6.5% מעל השפל, ותוצאה דומה גם ב-2022 עד 2024 וגם ב-2025 עד 2026.
-          המחיר: העצירה נפגעה בכמחצית מהעסקאות. לכן: פוזיציה קטנה מהרגיל, עצירה במחיר שמצוין בכרטיס,
-          והגדלה רק אם הטריגר המלא מגיע אחר כך. בכרטיס כזה רוב הפרמטרים בטבלה ייכשלו, וזה צפוי.</li>
-        <li><b>📅 דוח כספי הבא:</b> מופיע בכל כרטיס, לפי יאהו פייננס. אם הדוח צפוי בתוך {EARNINGS_WARN_DAYS} ימים
-          (בערך 20 ימי מסחר, אורך העסקה שנבדקה) הפס אדום: הבדיקות ההיסטוריות לא הפרידו בין עסקאות עם דוח לעסקאות בלעדיו,
-          ודוח יכול להזיז את המניה יותר מכל אות טכני. "משוער" = יאהו מכירה רק טווח תאריכים ולא תאריך מאושר.</li>
-        <li><b>אמינות היסטורית:</b> מבוססת על backtest.py שרץ בעבר על כל טיקר בנפרד — win rate ותשואה ממוצעת ל-20 יום, מתוקנים לעסקאות בלתי-תלויות. מספר עסקאות קטן (&lt;5) = לא לסמוך.</li>
-        <li><b>חדשות אחרונות:</b> מופיע רק למניות עם טריגר או התראה מוקדמת היום — עד {MAX_NEWS_ITEMS} כותרות חדשות מ-Yahoo Finance מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים, מהחדש לישן (חינמי, בלי סיכום AI).</li>
-        <li><b>סינון תצוגה:</b> המייל מציג רק מניות עם טריגר קנייה מלא (ירוק), התראה מוקדמת (כחול) או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים שעברו — מניות חלשות יותר מחושבות אך לא מוצגות כאן.</li>
+        <li><b>תזמון כניסה:</b> <b>בזמן</b> = עד {LATE_THRESHOLD_PCT:g}% מעל השפל של {LOW_LOOKBACK} הימים האחרונים. <b>מאוחרת</b> = יותר מזה: העצירה רחוקה יותר והסיכון גבוה יותר, וכדאי לשקול כניסה בתיקון או בכמות קטנה. בבדיקה על 5 שנים, טריגרים בזמן הצליחו ב-61% אחרי 20 יום, לעומת 56% לכל הטריגרים.</li>
+        <li><b>🔵 התראה מוקדמת:</b> מזהה את תחילת ההיפוך לפני האישור המלא: ירידה חדה, תיקון של 10% עד 35% מהשיא, התכווצות תנודתיות, סגירה ראשונה מעל ממוצע 10 והיסטוגרמת מקד שעולה יומיים. בבדיקה: 62% הצלחה אחרי 20 יום, אבל העצירה נפגעה בכמחצית מהעסקאות. לכן כמות קטנה ועצירה במחיר שבכרטיס.</li>
+        <li><b>📅 דוח כספי:</b> פס אדום אם הדוח בתוך {EARNINGS_WARN_DAYS} ימים, בתוך חלון העסקה. "משוער" = התאריך עוד לא אושר.</li>
+        <li><b>אמינות היסטורית:</b> תוצאות האות במניה עצמה בבדיקה של 5 שנים אחורה. פחות מ-5 עסקאות = לא לסמוך.</li>
+        <li><b>חדשות מהותיות:</b> רק למניות עם טריגר או התראה מוקדמת. מוצגות רק ידיעות מהותיות מ-{NEWS_LOOKBACK_DAYS} הימים האחרונים (דוחות, רכישות, רגולציה, חוזים, הנפקות, הנהלה, משפט, אנליסטים), עד {MAX_NEWS_ITEMS}, בתרגום אוטומטי.</li>
+        <li><b>סינון תצוגה:</b> מוצגות רק מניות עם טריגר, התראה מוקדמת או לפחות {EMAIL_MIN_CONFIRMED}/6 פרמטרים.</li>
       </ul>
     </div>
     """
     return f"""<!DOCTYPE html>
-<html dir="rtl" lang="he"><head><meta charset="utf-8"></head>
-<body style="font-family:Arial,Helvetica,sans-serif;background:#fafafa;margin:0;padding:18px;direction:rtl;text-align:right">
-  <div style="max-width:760px;margin:0 auto">
-    <h2 style="margin:0 0 4px">דוח בודק היפוך מגמה</h2>
-    <p style="color:#666;margin:0 0 16px;font-size:13px">
-      {stamp} · מצב: {mode_he}
-    </p>
-    {legend}
+<html dir="rtl" lang="he"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="font-family:Arial,Helvetica,sans-serif;background:#f2f2f2;margin:0;padding:8px;direction:rtl;text-align:right;-webkit-text-size-adjust:100%">
+  <div style="max-width:600px;margin:0 auto">
+    <div style="font-size:21px;font-weight:700;margin:4px 0 2px">דוח בודק היפוך מגמה</div>
+    <div style="color:#666;margin:0 0 12px;font-size:14px">{stamp} · {mode_he}</div>
     {body}
-    <p style="color:#999;font-size:11px;margin-top:16px">
-      כלי ניתוח אוטומטי, אינו ייעוץ השקעות. ✓=הפרמטר תומך בהיפוך, ✗=עדיין לא.
-    </p>
+    {legend}
+    <div style="color:#999;font-size:12px;margin:12px 0">כלי ניתוח אוטומטי. ✓ = הפרמטר תומך בהיפוך, ✗ = עדיין לא.</div>
   </div>
 </body></html>"""
 
@@ -910,7 +943,7 @@ def main():
     news_calls = 0
     for r in shown:
         if (r.get("BUY_TRIGGER") or r.get("early_alert")) and news_calls < 10:
-            r["headlines"] = fetch_recent_headlines(r["ticker"])
+            r["headlines"] = material_news(r["ticker"])
             news_calls += 1
 
     mode = "MORNING (through last completed close)" if MORNING_MODE else "END-OF-DAY"
