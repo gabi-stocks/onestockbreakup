@@ -573,8 +573,10 @@ def main():
         (funds if info.get("quoteType") in ("ETF", "MUTUALFUND") else companies).append(t)
 
     with_news, quiet, earnings = [], [], []
-    for t in companies:
+    for n, t in enumerate(companies, 1):
+        t0 = time.time()
         name, clusters = collect_ticker(t, infos[t], since)
+        print(f"[{n}/{len(companies)}] {t}: {len(clusters)} items, {time.time() - t0:.1f}s, failures so far={FAILURES}")
         if clusters:
             with_news.append((t, name or t, clusters))
         else:
@@ -675,4 +677,5 @@ def main():
 
 
 if __name__ == "__main__":
+    sys.stdout.reconfigure(line_buffering=True)  # show progress live in the Actions log
     sys.exit(main())

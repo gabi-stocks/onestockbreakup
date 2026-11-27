@@ -38,6 +38,7 @@ jobs:
       - name: Build and email the news digest (+ JSON for the dashboard)
         env:
           SCHEDULE: ${{ github.event.schedule }}
+          PYTHONUNBUFFERED: '1'
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
