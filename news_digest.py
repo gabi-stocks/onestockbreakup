@@ -402,6 +402,12 @@ def corroborate_with_sec(clusters):
 
 # ---------------- Translation (free, best effort) ----------------
 _TR_CACHE = {}
+# Limits so translation can never push the run past the job timeout:
+# a total time budget for all translations, and once Google rate-limits
+# several titles in a row it is skipped for the rest of the run (MyMemory only).
+TRANSLATE_BUDGET_S = int(os.environ.get("TRANSLATE_BUDGET_S", "240"))
+_TR = {"start": None, "google_429_streak": 0, "google_off": False, "over_budget": 0,
+       "google": 0, "mymemory": 0, "none": 0}
 
 
 def to_hebrew(text):
@@ -409,22 +415,36 @@ def to_hebrew(text):
         return None
     if text in _TR_CACHE:
         return _TR_CACHE[text]
-    url = "https://translate.googleapis.com/translate_a/single?" + urllib.parse.urlencode(
-        {"client": "gtx", "sl": "en", "tl": "iw", "dt": "t", "q": text})
+    if _TR["start"] is None:
+        _TR["start"] = time.time()
+    if time.time() - _TR["start"] > TRANSLATE_BUDGET_S:
+        _TR["over_budget"] += 1
+        _TR_CACHE[text] = None
+        return None  # out of time: the English title is shown instead
     he = None
-    # The free endpoint rate-limits bursts (HTTP 429): back off and retry
-    # instead of falling back to the English title.
-    for attempt, wait in enumerate((0, 2, 5, 10)):
-        if wait:
-            time.sleep(wait)
-        try:
-            data = json.loads(http_get(url, timeout=10).decode("utf-8"))
-            he = "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
-            time.sleep(0.5)
-            break
-        except Exception as e:
-            if attempt == 3 or "429" not in str(e):
+    if not _TR["google_off"]:
+        url = "https://translate.googleapis.com/translate_a/single?" + urllib.parse.urlencode(
+            {"client": "gtx", "sl": "en", "tl": "iw", "dt": "t", "q": text})
+        # Short back-off on HTTP 429 (at most ~3s per title, was ~17s).
+        for attempt, wait in enumerate((0, 1, 2)):
+            if wait:
+                time.sleep(wait)
+            try:
+                data = json.loads(http_get(url, timeout=10).decode("utf-8"))
+                he = "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
+                _TR["google_429_streak"] = 0
+                time.sleep(0.3)
                 break
+            except Exception as e:
+                if "429" not in str(e) or attempt == 2:
+                    break
+        if not he:
+            _TR["google_429_streak"] += 1
+            if _TR["google_429_streak"] >= 3:
+                _TR["google_off"] = True
+                print("Translation: Google rate-limited 3 titles in a row -- using MyMemory only from now on.")
+        else:
+            _TR["google"] += 1
     if not he:
         # Fallback: MyMemory free endpoint (no key; text only is sent).
         try:
@@ -434,8 +454,11 @@ def to_hebrew(text):
             cand = (data.get("responseData") or {}).get("translatedText") or ""
             if data.get("responseStatus") == 200 and re.search(r"[\u0590-\u05FF]", cand):
                 he = html.unescape(cand).strip()
+                _TR["mymemory"] += 1
         except Exception as e:
             note_fail("תרגום אוטומטי", e)
+    if not he:
+        _TR["none"] += 1
     _TR_CACHE[text] = he
     return he
 
@@ -588,6 +611,7 @@ def main():
         except Exception as ex:
             note_fail("לוח דוחות", ex)
 
+    print(f"Stocks done at {datetime.now(IL):%H:%M:%S}; starting sector news and rendering")
     # Sector / macro: only corroborated stories (>= 2 publishers), max 2 per sector.
     present = set(tickers)
     sector_html = []
@@ -672,6 +696,9 @@ def main():
     os.makedirs("reports", exist_ok=True)
     with open(os.path.join("reports", "news_latest.html"), "w", encoding="utf-8") as fh:
         fh.write(body_html)
+    tr_secs = time.time() - _TR["start"] if _TR["start"] else 0
+    print(f"Translation: {tr_secs:.0f}s, google={_TR['google']}, mymemory={_TR['mymemory']}, "
+          f"untranslated={_TR['none']}, skipped over budget={_TR['over_budget']}, google_off={_TR['google_off']}")
     send_email(subject, text_body, body_html)
     print(f"Done: {len(with_news)} tickers with news, {len(quiet)} quiet, {len(funds)} funds, failures={FAILURES}")
 
