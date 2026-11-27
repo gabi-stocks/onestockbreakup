@@ -1,4 +1,4 @@
-# Reversal Checker — 2026-11-26 23:17 UTC [MORNING (through last completed close)]
+# Reversal Checker — 2026-11-27 00:56 UTC [MORNING (through last completed close)]
 (needs >= 4/6 + mandatory structure & volume; showing only BUY_TRIGGER, EARLY ALERT or >= 5/6 confirmed, 6/73 tickers)
 
 ## IBM  (2026-11-25)  close=243.47  RSI=53.8  [today so far: open 233.51 -> 243.42 (+4.24%) | DELAYED]
